@@ -21,7 +21,7 @@ const Superhero = db.define("superhero", {
     allowNull: false,
   },
   availability: {
-    type: Sequelize.ARRAY,
+    type: Sequelize.ARRAY(Sequelize.DATE),
   },
   cost: {
     type: Sequelize.INTEGER,

@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Cart = db.define("cart", {
-  quantity: {
+  days: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },

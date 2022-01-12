@@ -7,9 +7,14 @@ const Superhero = require('./models/superhero')
 const Cart = require('./models/cart')
 
 Cart.belongsTo(User)
-User.hasOne(Cart)
-Cart.belongsToMany(Superhero, { through: "cart_superhero" })
-Superhero.belongsToMany(Cart, { through: "cart_superhero" })
+User.hasMany(Cart)
+// Superhero.belongsToMany(User, {through: Cart})
+// User.belongsToMany(Superhero, {through: Cart})
+
+// Cart.belongsTo(User)
+// User.hasOne(Cart)
+// Cart.belongsToMany(Superhero, { through: "cart_superhero" })
+// Superhero.belongsToMany(Cart, { through: "cart_superhero" })
 
 
 module.exports = {

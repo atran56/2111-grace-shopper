@@ -2,6 +2,8 @@
 
 const { db } = require("../server/db");
 const Superhero = require('../server/db/models/superhero');
+const User = require('../server/db/models/User')
+const Cart = require('../server/db/models/Cart')
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -12,12 +14,44 @@ const Superhero = require('../server/db/models/superhero');
     await Promise.all(superheroes.map(superhero => {
       return Superhero.create(superhero);
     }));
+    await Promise.all(users.map(user => {
+      return User.create(user);
+    }));
+    await Promise.all(carts.map(cart => {
+      return Cart.create(cart);
+    }));
   } catch (err) {
     console.log(err);
   }
 };
 
   // Creating Users
+
+  const users = [{
+    username: "test_user",
+    password: "password",
+    email: "test_user@email.com",
+    administator: false
+  }, {
+    username: "admin_user",
+    password: "password",
+    email: "admin_user@email.com",
+    administator: true
+  }
+]
+
+const carts = [{
+  days: 5,
+  checkOut: false,
+  total: 300,
+  userId: 1
+}, {
+  days: 3,
+  checkOut: false,
+  total: 500,
+  userId: 2
+}]
+
   const superheroes = [{
     name: "Captain Planet",
     bio: "",

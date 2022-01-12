@@ -11,6 +11,7 @@ User.hasOne(Cart)
 Cart.belongsToMany(Superhero, { through: "cart_superhero" })
 Superhero.belongsToMany(Cart, { through: "cart_superhero" })
 
+
 module.exports = {
   db,
   models: {

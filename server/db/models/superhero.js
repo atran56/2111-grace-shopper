@@ -7,6 +7,9 @@ const Superhero = db.define("superhero", {
     unique: true,
     allowNull: false,
   },
+  bio: {
+    type: Sequelize.TEXT,
+  },
   universe: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -16,7 +19,7 @@ const Superhero = db.define("superhero", {
     defaultValue:
       "https://thumbs.dreamstime.com/b/green-hero-sky-generic-superhero-figure-flying-layered-easy-to-edit-see-portfolio-similar-images-36834436.jpg",
   },
-  powerStats: {
+  strengths: {
     type: Sequelize.STRING,
     allowNull: false,
   },

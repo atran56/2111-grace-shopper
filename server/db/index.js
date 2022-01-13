@@ -4,17 +4,22 @@ const db = require('./db')
 
 const User = require('./models/User')
 const Superhero = require('./models/superhero')
-const Cart = require('./models/cart')
+const Order = require('./models/Order')
+const ItemizedOrder = require('./models/ItemizedOrder')
 
-Cart.belongsTo(User)
-User.hasMany(Cart)
+// Order.belongsTo(User)
+// User.hasMany(Order)
+
 // Superhero.belongsToMany(User, {through: Cart})
 // User.belongsToMany(Superhero, {through: Cart})
 
 // Cart.belongsTo(User)
 // User.hasOne(Cart)
-// Cart.belongsToMany(Superhero, { through: "cart_superhero" })
-// Superhero.belongsToMany(Cart, { through: "cart_superhero" })
+// Order.belongsToMany(Superhero, { through: "itemizedOrders" })
+
+User.hasMany(Order)
+Superhero.belongsToMany(Order, { through: "itemizedOrder" })
+Order.belongsToMany(Superhero, { through: "itemizedOrder" })
 
 
 module.exports = {
@@ -22,6 +27,7 @@ module.exports = {
   models: {
     User,
     Superhero,
-    Cart
+    Order,
+    ItemizedOrder
   },
 }

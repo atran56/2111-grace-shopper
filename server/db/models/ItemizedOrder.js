@@ -1,19 +1,15 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const Cart = db.define("cart", {
+const ItemizedOrder = db.define("itemizedOrder", {
   days: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-  checkOut: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
-  total: {
+  subtotal: {
     type: Sequelize.INTEGER,
-    allowNull: false,
+    allowNull: false
   },
 });
 
-module.exports = Cart;
+module.exports = ItemizedOrder;

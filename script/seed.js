@@ -3,7 +3,7 @@
 const { db } = require("../server/db");
 const Superhero = require('../server/db/models/superhero');
 const User = require('../server/db/models/User')
-const Cart = require('../server/db/models/Cart')
+const Order = require('../server/db/models/Order')
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -17,9 +17,13 @@ const Cart = require('../server/db/models/Cart')
     await Promise.all(users.map(user => {
       return User.create(user);
     }));
-    await Promise.all(carts.map(cart => {
-      return Cart.create(cart);
+    await Promise.all(orders.map(order => {
+      return Order.create(order);
     }));
+    // MAGIC METHODS TO POPULATE DUMMY DATA - NOT WORKING!!!
+    // await orders[0].addSuperhero(superheroes[0])
+    // await orders[1].addSuperhero(superheroes[1])
+    // await orders[0].addUser(users[0])
   } catch (err) {
     console.log(err);
   }
@@ -40,17 +44,20 @@ const Cart = require('../server/db/models/Cart')
   }
 ]
 
-const carts = [{
-  days: 5,
+const orders = [{
+  totalDays: 5,
   checkOut: false,
-  total: 300,
-  userId: 1
+  totalCost: 300,
 }, {
-  days: 3,
+  totalDays: 3,
   checkOut: false,
-  total: 500,
-  userId: 2
+  totalCost: 500,
+}, {
+  totalDays: 8,
+  checkOut: false,
+  totalCost: 800,
 }]
+
 
   const superheroes = [{
     name: "Captain Planet",

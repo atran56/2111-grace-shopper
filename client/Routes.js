@@ -4,6 +4,7 @@ import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import AllSuperheroes from "./components/AllSuperheroes";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
+import SingleSuperHero from "./components/SingleSuperHero";
 import { me } from "./store";
 
 /**
@@ -11,6 +12,8 @@ import { me } from "./store";
  */
 class Routes extends Component {
   componentDidMount() {
+    console.log(this.props);
+    //loadInitialData checks to see if user is logged in or not
     this.props.loadInitialData();
   }
 
@@ -23,14 +26,16 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
-            <Route path="/all" component={AllSuperheroes} />
+            <Route path="/superheroes" component={AllSuperheroes} />
+            <Route path="/superheroes/:id" component={SingleSuperHero} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/all" component={AllSuperheroes} />
+            <Route path="/superheroes" component={AllSuperheroes} />
+            <Route path="/superheroes/:id" component={SingleSuperHero} />
           </Switch>
         )}
       </div>
@@ -41,7 +46,7 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
@@ -49,7 +54,7 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());

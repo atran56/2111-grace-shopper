@@ -1,8 +1,9 @@
 import React from "react";
-
+import { fetchSuperhero } from "../store/single_superhero";
+import { connect } from "react-redux";
 export class SingleSuperHero extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       days: 0,
     };
@@ -10,20 +11,34 @@ export class SingleSuperHero extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange() {}
-  handleSubmit() {}
+  componentDidMount() {
+    console.log("single superhero->", this.props);
+    this.props.fetchSuperhero(this.props.match.params);
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleSubmit() {
+    //Should this be created and submitted in the cart table
+  }
 
   render() {
+    console.log("Single SuperHero Rendering PROPS-->", this.props);
     return (
       <div>
-        <h1>(SUPER HERO NAME HERE)</h1>
+        <h1>{this.props.superhero.name}</h1>
         <div>
           <img
             src="https://www.superherodb.com/pictures2/portraits/10/100/829.jpg"
             alt="SuperHero Angel"
           />
 
-          <p>(DESCRIPTION HERE)</p>
+          <p>{this.props.superhero.bio}</p>
+          <p>{this.props.superhero.cost}</p>
         </div>
         <form>
           <select value={this.state.days} onChange={this.handleChange}>
@@ -44,3 +59,13 @@ export class SingleSuperHero extends React.Component {
     );
   }
 }
+
+const mapState = (state) => ({
+  superhero: state.superhero,
+});
+
+const mapDispatch = (dispatch) => ({
+  fetchSuperhero: () => dispatch(fetchSuperhero()),
+});
+
+export default connect(mapState, mapDispatch)(SingleSuperHero);

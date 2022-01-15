@@ -7,11 +7,10 @@ class AllSuperheroes extends React.Component {
     this.props.superheroesData();
   }
   render() {
-    console.log(this.props);
     return (
       <div className="outer_container">
         <div className="container" style={{ width: 200, height: 350 }}>
-          {this.props.superheroes.map(superhero => {
+          {this.props.superheroes.map((superhero) => {
             return (
               <div key={superhero.id}>
                 <div className="col">
@@ -54,11 +53,11 @@ class AllSuperheroes extends React.Component {
   }
 }
 
-const mapState = state => ({
+const mapState = (state) => ({
   superheroes: state.superheroes,
 });
 
-const mapDispatch = dispatch => ({
+const mapDispatch = (dispatch) => ({
   superheroesData: () => dispatch(fetchSuperheroes()),
 });
 

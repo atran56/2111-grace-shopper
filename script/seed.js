@@ -1,25 +1,45 @@
 'use strict'
 
-const { db } = require("../server/db");
-const Superhero = require('../server/db/models/superhero');
-const User = require('../server/db/models/User')
-const Cart = require('../server/db/models/Cart')
+const { db, models: {User, Superhero, Order, ItemizedOrder} } = require("../server/db");
+// const Superhero = require("../server/db")
+// const User = require("../server/db")
+// const Order = require("../server/db")
+// const ItemizedOrder = require("../server/db")
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
  const seed = async () => {
   try {
+    // console.log(Superhero)
     await db.sync({ force: true });
     await Promise.all(superheroes.map(superhero => {
       return Superhero.create(superhero);
     }));
+    const batman = await Promise.all(
+      Superhero.create({
+        name: "Batman",
+        bio: "rich guy",
+        universe: "DC",
+        image: "https://thumbs.dreamstime.com/b/green-hero-sky-generic-superhero-figure-flying-layered-easy-to-edit-see-portfolio-similar-images-36834436.jpg",
+        strengths: "intelligence",
+        availability: {},
+        cost: 500
+      })
+    )
     await Promise.all(users.map(user => {
       return User.create(user);
     }));
-    await Promise.all(carts.map(cart => {
-      return Cart.create(cart);
+    await Promise.all(orders.map(order => {
+      return Order.create(order);
     }));
+    await Promise.all(itemizedOrders.map(itemizedOrder => {
+      return ItemizedOrder.create(itemizedOrder);
+    }));
+    // MAGIC METHODS TO POPULATE DUMMY DATA - NOT WORKING!!!
+    // await itemizedOrders[0].addSuperhero(superheroes[0])
+    await orders[0].addUser(users[0])
   } catch (err) {
     console.log(err);
   }
@@ -40,17 +60,33 @@ const Cart = require('../server/db/models/Cart')
   }
 ]
 
-const carts = [{
+const itemizedOrders = [{
   days: 5,
-  checkOut: false,
-  total: 300,
-  userId: 1
+  subtotal: 500,
+  superheroId: 1,
+  orderId: 1
 }, {
-  days: 3,
+  days: 5,
+  subtotal: 500,
+  superheroId: 5,
+  orderId: 3
+}
+]
+
+const orders = [{
+  totalDays: 5,
   checkOut: false,
-  total: 500,
-  userId: 2
+  totalCost: 300,
+}, {
+  totalDays: 3,
+  checkOut: false,
+  totalCost: 500,
+}, {
+  totalDays: 8,
+  checkOut: false,
+  totalCost: 800,
 }]
+
 
   const superheroes = [{
     name: "Captain Planet",

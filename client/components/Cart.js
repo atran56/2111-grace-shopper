@@ -1,6 +1,6 @@
 import React from "react";
+import Bootstrap from 'bootstrap';
 import { connect } from "react-redux";
-import bootstrap from 'bootstrap';
 
 
 class Cart extends React.Component {
@@ -13,49 +13,41 @@ class Cart extends React.Component {
           </div>
         </div>
           <div className="cart-table"> 
-          <table className="table table-hover">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">Superhero</th>
-                <th scope="col">Price per Day</th>
-                <th scope="col">Number of Days Booked</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
+            <table className="table table-hover">
+              <thead className="thead-dark">
+                <tr>
+                  <th scope="col" className="col-sm-4">Superhero</th>
+                  <th scope="col" className="col-sm-3">Price per Day</th>
+                  <th scope="col" className="col-sm-3">Number of Days Booked</th>
+                  <th scope="col" className="col-sm-2">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Spiderman</th>
+                  <td>$100.00</td>
+                  <td>
+                    <div className="counter">
+                    <input width="50px" type="number" className="form-control" id="input" value="0" min="0" max="14"/>
+                    </div>
+                  </td>
+                  <td>$100.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div className="col-md-12">
-            <div className="float-right">
-              <button type="button" class="btn btn-light">Update Cart</button>
-            </div>
             <div className="float-left">
-              <button type="button" class="btn btn-light">Continue Shopping</button>
-            </div>
+              <button type="button" className="btn btn-light">Continue Shopping</button></div>
+            <div className="float-right">
+              <h5>SUBTOTAL: $$$</h5>
+              </div>
           </div>
           <div className="col-md-12">
             <div className="float-right">
-              <button type="button" class="btn btn-success">Checkout</button>
+              <button type="button" className="btn btn-light">Update Cart</button>
+              <button type="button" className="btn btn-success">Checkout</button>
             </div>
-          </div>
           </div>
       </div>
       

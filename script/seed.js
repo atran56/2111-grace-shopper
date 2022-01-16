@@ -1,25 +1,45 @@
 'use strict'
 
-const { db } = require("../server/db");
-const Superhero = require('../server/db/models/superhero');
-const User = require('../server/db/models/User')
-const Cart = require('../server/db/models/Cart')
+const { db, models: {User, Superhero, Order, ItemizedOrder} } = require("../server/db");
+// const Superhero = require("../server/db")
+// const User = require("../server/db")
+// const Order = require("../server/db")
+// const ItemizedOrder = require("../server/db")
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
  */
  const seed = async () => {
   try {
+    // console.log(Superhero)
     await db.sync({ force: true });
     await Promise.all(superheroes.map(superhero => {
       return Superhero.create(superhero);
     }));
+    const batman = await Promise.all(
+      Superhero.create({
+        name: "Batman",
+        bio: "rich guy",
+        universe: "DC",
+        image: "https://thumbs.dreamstime.com/b/green-hero-sky-generic-superhero-figure-flying-layered-easy-to-edit-see-portfolio-similar-images-36834436.jpg",
+        strengths: "intelligence",
+        availability: {},
+        cost: 500
+      })
+    )
     await Promise.all(users.map(user => {
       return User.create(user);
     }));
-    await Promise.all(carts.map(cart => {
-      return Cart.create(cart);
+    await Promise.all(orders.map(order => {
+      return Order.create(order);
     }));
+    await Promise.all(itemizedOrders.map(itemizedOrder => {
+      return ItemizedOrder.create(itemizedOrder);
+    }));
+    // MAGIC METHODS TO POPULATE DUMMY DATA - NOT WORKING!!!
+    // await itemizedOrders[0].addSuperhero(superheroes[0])
+    await orders[0].addUser(users[0])
   } catch (err) {
     console.log(err);
   }
@@ -40,18 +60,34 @@ const users = [{
   }
 ]
 
-const carts = [{
+const itemizedOrders = [{
   days: 5,
-  checkOut: false,
-  total: 300,
-  userId: 1
+  subtotal: 500,
+  superheroId: 1,
+  orderId: 1
 }, {
-  days: 3,
+  days: 5,
+  subtotal: 500,
+  superheroId: 5,
+  orderId: 3
+}
+]
+
+const orders = [{
+  totalDays: 5,
   checkOut: false,
-  total: 500,
-  userId: 2
+  totalCost: 300,
+}, {
+  totalDays: 3,
+  checkOut: false,
+  totalCost: 500,
+}, {
+  totalDays: 8,
+  checkOut: false,
+  totalCost: 800,
 }]
 
+<<<<<<< HEAD
 const superheroes = [{
   name: "Captain Planet",
   bio: "Captain Planet was the main hero of the cartoon series of the same name, he was an environmental-themed hero who was born as part of Mother Earth's quest to stop humanity from destroying itself and the environment",
@@ -60,6 +96,17 @@ const superheroes = [{
   strengths: "Power, Strength",
   availability: [],
   cost: 400
+=======
+
+  const superheroes = [{
+    name: "Captain Planet",
+    bio: "Captain Planet was the main hero of the cartoon series of the same name, he was an environmental-themed hero who was born as part of Mother Earth's quest to stop humanity from destroying itself and the environment",
+    universe: "Marvel Comics",
+    image: "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
+    strengths: "Power, Strength",
+    availability: [],
+    cost: 400
+>>>>>>> main
 }, {
   name: "Harry Potter",
   bio: "Harry Potter is the Boy Who Lived, the Chosen One, the hero of the Wizarding world. He grew up with Muggles, and then came to Hogwarts where he faced dangers and terrors beyond his years.",

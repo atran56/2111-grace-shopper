@@ -33,21 +33,22 @@ class Cart extends React.Component {
                   </td>
                   <td>$100.00</td>
                 </tr>
+                <tr>
+                  <th scope="row"></th>
+                  <td></td>
+                  <td></td>
+                  <td>SUBTOTAL: $$$</td>
+                </tr>
               </tbody>
             </table>
           </div>
-          <div className="col-md-12">
-            <div className="float-left">
-              <button type="button" className="btn btn-light">Continue Shopping</button></div>
-            <div className="float-right">
-              <h5>SUBTOTAL: $$$</h5>
-              </div>
-          </div>
-          <div className="col-md-12">
+          <div>
             <div className="float-right">
               <button type="button" className="btn btn-light">Update Cart</button>
               <button type="button" className="btn btn-success">Checkout</button>
             </div>
+            <div className="float-left">
+              <button type="button" className="btn btn-light">Continue Shopping</button></div>
           </div>
       </div>
       

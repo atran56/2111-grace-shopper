@@ -12,9 +12,8 @@ import { me } from "./store";
  */
 class Routes extends Component {
   componentDidMount() {
-    console.log(this.props);
-    //loadInitialData checks to see if user is logged in or not
     this.props.loadInitialData();
+    //Checks to see if user is logged in or not
   }
 
   render() {
@@ -26,15 +25,15 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
-            <Route path="/superheroes" component={AllSuperheroes} />
-            <Route path="/superheroes/:id" component={SingleSuperHero} />
+            <Route path="/superheroes" exact component={AllSuperheroes} />
+            <Route path="/superheroes/:id" exact component={SingleSuperHero} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/superheroes" component={AllSuperheroes} />
+            <Route path="/superheroes" exact component={AllSuperheroes} />
             <Route path="/superheroes/:id" component={SingleSuperHero} />
           </Switch>
         )}

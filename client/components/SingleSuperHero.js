@@ -6,19 +6,20 @@ export class SingleSuperHero extends React.Component {
     super(props);
     this.state = {
       days: 0,
+      total: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    console.log("single superhero->", this.props);
-    this.props.fetchSuperhero(this.props.match.params);
+    this.props.fetchSuperhero(this.props.match.params.id);
   }
 
   handleChange(e) {
     this.setState({
-      [e.target.name]: e.target.value,
+      days: e.target.value,
+      total: e.target.value * this.props.superhero.cost,
     });
   }
 
@@ -27,32 +28,37 @@ export class SingleSuperHero extends React.Component {
   }
 
   render() {
-    console.log("Single SuperHero Rendering PROPS-->", this.props);
     return (
       <div>
-        <h1>{this.props.superhero.name}</h1>
+        <h1>
+          {this.props.superhero.name} ({this.props.superhero.universe})
+        </h1>
         <div>
           <img
-            src="https://www.superherodb.com/pictures2/portraits/10/100/829.jpg"
-            alt="SuperHero Angel"
+            src={this.props.superhero.image}
+            alt={this.props.superhero.name}
           />
 
           <p>{this.props.superhero.bio}</p>
-          <p>{this.props.superhero.cost}</p>
+          <p>STRENGTHS: {this.props.superhero.strengths}</p>
+          <p>COST: {this.props.superhero.cost}</p>
+          <p>TOTAL: {this.state.total}</p>
         </div>
         <form>
           <select value={this.state.days} onChange={this.handleChange}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+            <option value="0">-SELECT DAY(S)-</option>
+            <option value="1">1 day</option>
+            <option value="2">2 days</option>
+            <option value="3">3 days</option>
+            <option value="4">4 days</option>
+            <option value="5">5 days</option>
+            <option value="6">6 days</option>
+            <option value="7">7 days</option>
+            <option value="8">8 days</option>
+            <option value="9">9 days</option>
+            <option value="10">10 days</option>
           </select>
+
           <input type="submit" value="BOOK" />
         </form>
       </div>
@@ -61,11 +67,11 @@ export class SingleSuperHero extends React.Component {
 }
 
 const mapState = (state) => ({
-  superhero: state.superhero,
+  superhero: state.singleSuperHero,
 });
 
 const mapDispatch = (dispatch) => ({
-  fetchSuperhero: () => dispatch(fetchSuperhero()),
+  fetchSuperhero: (id) => dispatch(fetchSuperhero(id)),
 });
 
 export default connect(mapState, mapDispatch)(SingleSuperHero);

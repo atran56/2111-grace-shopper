@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const Superhero = require("../db/models/superhero");
+const {
+  models: { Superhero },
+} = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -13,7 +15,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    console.log("HELLO, ROUTE FOR SINGLE SUPERHERO TEST!!!!");
+    console.log("HELLO, ROUTE FOR SINGLE SUPERHERO TEST!!!!!!!!!!!!!!");
     const superhero = await Superhero.findByPk(req.params.id);
     console.log("In Router for single ->", superhero);
     res.json(superhero);

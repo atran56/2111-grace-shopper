@@ -6,6 +6,7 @@ import EditSuperhero from "./components/EditSuperhero";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
+import Confirmation from "./components/Confirmation";
 
 /**
  * COMPONENT
@@ -30,6 +31,7 @@ class Routes extends Component {
               path="/superheroes/:id/edit"
               component={EditSuperhero}
             />
+            <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         ) : (
           <Switch>
@@ -42,6 +44,7 @@ class Routes extends Component {
               path="/superheroes/:id/edit"
               component={EditSuperhero}
             />
+            <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         )}
       </div>

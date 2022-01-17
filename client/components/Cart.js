@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-//itemizedOrders, superhero to populate cart
+//itemizedOrders and superheroes to populate cart
 
 const dummyItemizedOrder = [
   {
@@ -29,8 +29,6 @@ const dummySuperHero = {
     image: "https://www.superherodb.com/pictures2/portraits/10/100/10560.jpg"
   }
 }
-
-
 class Cart extends React.Component {
   constructor(props) {
     super(props)

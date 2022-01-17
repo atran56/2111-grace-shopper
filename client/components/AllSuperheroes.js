@@ -2,6 +2,7 @@ import React from "react";
 import { fetchSuperheroes } from "../store/superheroes";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+// import Rating from './Rating';
 
 class AllSuperheroes extends React.Component {
   componentDidMount() {
@@ -26,6 +27,9 @@ class AllSuperheroes extends React.Component {
                       <span style={{ fontSize: "10px" }}>
                         Rental Price: ${superhero.cost} / per day
                       </span>
+
+                      {/* If we want to add Rating starts to each Superhero  */}
+                      {/* < Rating rating={this.props.superheroes.rating} /> */}
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
                           <Link to={`/superheroes/${superhero.id}`}>
@@ -36,6 +40,7 @@ class AllSuperheroes extends React.Component {
                               View
                             </button>
                           </Link>
+
                           <Link to={`/superheroes/${superhero.id}/edit`}>
                             <button
                               type="button"

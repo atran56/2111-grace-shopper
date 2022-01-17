@@ -24,17 +24,24 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
-            <Route path="/superheroes" component={AllSuperheroes} />
-            <Route path="/:id" component={AllSuperheroes} />
-            <Route path="/superheroes/:id/edit" component={EditSuperhero} />
+            <Route exact path="/superheroes" component={AllSuperheroes} />
+            <Route
+              exact
+              path="/superheroes/:id/edit"
+              component={EditSuperhero}
+            />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/superheroes" component={AllSuperheroes} />
-            <Route path="/superheroes/:id/edit" component={EditSuperhero} />
+            <Route exact path="/superheroes" component={AllSuperheroes} />
+            <Route
+              exact
+              path="/superheroes/:id/edit"
+              component={EditSuperhero}
+            />
           </Switch>
         )}
       </div>

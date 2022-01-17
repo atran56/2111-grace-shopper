@@ -87,17 +87,6 @@ const orders = [{
   totalCost: 800,
 }]
 
-<<<<<<< HEAD
-const superheroes = [{
-  name: "Captain Planet",
-  bio: "Captain Planet was the main hero of the cartoon series of the same name, he was an environmental-themed hero who was born as part of Mother Earth's quest to stop humanity from destroying itself and the environment",
-  universe: "Marvel Comics",
-  image: "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
-  strengths: "Power, Strength",
-  availability: [],
-  cost: 400
-=======
-
   const superheroes = [{
     name: "Captain Planet",
     bio: "Captain Planet was the main hero of the cartoon series of the same name, he was an environmental-themed hero who was born as part of Mother Earth's quest to stop humanity from destroying itself and the environment",
@@ -106,7 +95,6 @@ const superheroes = [{
     strengths: "Power, Strength",
     availability: [],
     cost: 400
->>>>>>> main
 }, {
   name: "Harry Potter",
   bio: "Harry Potter is the Boy Who Lived, the Chosen One, the hero of the Wizarding world. He grew up with Muggles, and then came to Hogwarts where he faced dangers and terrors beyond his years.",

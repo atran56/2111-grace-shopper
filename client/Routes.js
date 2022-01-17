@@ -2,9 +2,11 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { withRouter, Route, Switch, Redirect } from "react-router-dom";
 import AllSuperheroes from "./components/AllSuperheroes";
+import EditSuperhero from "./components/EditSuperhero";
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
 import { me } from "./store";
+import Confirmation from "./components/Confirmation";
 
 /**
  * COMPONENT
@@ -23,14 +25,26 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
-            <Route path="/all" component={AllSuperheroes} />
+            <Route exact path="/superheroes" component={AllSuperheroes} />
+            <Route
+              exact
+              path="/superheroes/:id/edit"
+              component={EditSuperhero}
+            />
+            <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/all" component={AllSuperheroes} />
+            <Route exact path="/superheroes" component={AllSuperheroes} />
+            <Route
+              exact
+              path="/superheroes/:id/edit"
+              component={EditSuperhero}
+            />
+            <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         )}
       </div>

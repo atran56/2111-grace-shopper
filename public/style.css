@@ -20,6 +20,15 @@ form div {
   display: inline-block;
 }
 
-.outer_container {
-  display: flex;
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.navbar {
+  height: 50px;
 }

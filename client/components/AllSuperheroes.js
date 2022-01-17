@@ -1,6 +1,8 @@
 import React from "react";
 import { fetchSuperheroes } from "../store/superheroes";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+// import Rating from './Rating';
 
 class AllSuperheroes extends React.Component {
   componentDidMount() {
@@ -8,45 +10,53 @@ class AllSuperheroes extends React.Component {
   }
   render() {
     return (
-      <div className="outer_container">
-        <div className="container" style={{ width: 200, height: 350 }}>
-          {this.props.superheroes.map((superhero) => {
-            return (
-              <div key={superhero.id}>
-                <div className="col">
-                  <div className="card shadow-sm">
-                    <img
-                      className="bd-placeholder-img card-img-top"
-                      style={{ width: 150, height: 225 }}
-                      src={superhero.image}
-                    ></img>
+      <div className="album py-5 bg-light">
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {this.props.superheroes.map((superhero) => {
+              return (
+                <div className="col" key={superhero.id}>
+                  <div className="card shadow-sm" style={{ padding: "10px" }}>
+                    <img className="center-block" src={superhero.image}></img>
 
                     <div className="card-body">
                       <span>{superhero.name}</span>
-                      <p className="card-text">{superhero.bio}</p>
+                      <p className="card-text" style={{ fontSize: "9px" }}>
+                        {superhero.bio}
+                      </p>
+                      <span style={{ fontSize: "10px" }}>
+                        Rental Price: ${superhero.cost} / per day
+                      </span>
+
+                      {/* If we want to add Rating starts to each Superhero  */}
+                      {/* < Rating rating={this.props.superheroes.rating} /> */}
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-secondary"
-                          >
-                            View
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-secondary"
-                          >
-                            Edit
-                          </button>
+                          <Link to={`/superheroes/${superhero.id}`}>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-secondary"
+                            >
+                              View
+                            </button>
+                          </Link>
+
+                          <Link to={`/superheroes/${superhero.id}/edit`}>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-secondary"
+                            >
+                              Edit
+                            </button>
+                          </Link>
                         </div>
-                        <small className="text-muted">9 mins</small>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     );

@@ -15,9 +15,7 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    console.log("HELLO, ROUTE FOR SINGLE SUPERHERO TEST!!!!!!!!!!!!!!");
     const superhero = await Superhero.findByPk(req.params.id);
-    console.log("In Router for single ->", superhero);
     res.json(superhero);
   } catch (error) {
     next(error);

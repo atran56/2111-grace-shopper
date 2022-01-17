@@ -2,18 +2,17 @@ import React from "react";
 import { fetchSuperheroes } from "../store/superheroes";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import SingleSuperHero from "./SingleSuperHero";
+// import Rating from './Rating';
 
 class AllSuperheroes extends React.Component {
   componentDidMount() {
     this.props.superheroesData();
   }
   render() {
-    console.log(this.props);
     return (
-      <div class="album py-5 bg-light">
-        <div class="container">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div className="album py-5 bg-light">
+        <div className="container">
+          <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {this.props.superheroes.map(superhero => {
               return (
                 <div className="col" key={superhero.id}>
@@ -28,9 +27,12 @@ class AllSuperheroes extends React.Component {
                       <span style={{ fontSize: "10px" }}>
                         Rental Price: ${superhero.cost} / per day
                       </span>
+
+                      {/* If we want to add Rating starts to each Superhero  */}
+                      {/* < Rating rating={this.props.superheroes.rating} /> */}
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
-                          <Link to={`/all/${superhero.id}`}>
+                          <Link to={`/superheroes/${superhero.id}`}>
                             <button
                               type="button"
                               className="btn btn-sm btn-outline-secondary"
@@ -38,12 +40,15 @@ class AllSuperheroes extends React.Component {
                               View
                             </button>
                           </Link>
-                          <button
-                            type="button"
-                            className="btn btn-sm btn-outline-secondary"
-                          >
-                            Edit
-                          </button>
+
+                          <Link to={`/superheroes/${superhero.id}/edit`}>
+                            <button
+                              type="button"
+                              className="btn btn-sm btn-outline-secondary"
+                            >
+                              Edit
+                            </button>
+                          </Link>
                         </div>
                       </div>
                     </div>

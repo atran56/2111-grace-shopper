@@ -2,31 +2,67 @@ import axios from "axios";
 
 // Action Type
 const GOT_SUPERHEROES = "GOT_SUPERHEROES";
+const UPATE_SUPERHERO = "UPATE_SUPERHERO";
+const DELETE_SUPERHERO = "DELETE_SUPERHERO";
 
 // Action Creator
-const gotSuperheroes = superheroes => ({
+const _gotSuperheroes = superheroes => ({
   type: GOT_SUPERHEROES,
   superheroes,
+});
+
+const _updateSuperhero = superhero => ({
+  type: UPATE_SUPERHERO,
+  superhero,
+});
+
+const _deleteSuperhero = superhero => ({
+  type: DELETE_SUPERHERO,
+  superhero,
 });
 
 // Thunks
 export const fetchSuperheroes = dispatch => {
   return async dispatch => {
     const { data: superheroes } = await axios.get("/api/superheroes");
-    dispatch(gotSuperheroes(superheroes));
+    dispatch(_gotSuperheroes(superheroes));
   };
 };
 
+export const updateSuperhero = (superhero, history) => {
+  return async dispatch => {
+    const { data: updated } = await axios.put(
+      `/api/superheroes/${superhero.id}`,
+      superhero
+    );
+    dispatch(_updateSuperhero(updated));
+    history.push("/");
+  };
+};
+
+export const deleteSuperhero = (id, history) => {
+  return async dispatch => {
+    const { data: superhero } = await axios.delete(`/api/superheroes/${id}`);
+    dispatch(_deleteSuperhero(superhero));
+    history.push("/superheroes");
+  };
+};
 // Sub-Reducer
 const initialState = [];
 
-const superheroesReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case GOT_SUPERHEROES:
       return action.superheroes;
+
+    case UPATE_SUPERHERO:
+      return state.map(superhero =>
+        superhero.id === action.superhero.id ? action.superhero : superhero
+      );
+
+    case DELETE_SUPERHERO:
+      return state.filter(superhero => superhero.id !== action.superhero.id);
     default:
       return state;
   }
 };
-
-export default superheroesReducer;

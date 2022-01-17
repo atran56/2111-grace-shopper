@@ -21,9 +21,13 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+//STILL WORKING ON THIS, HAVENT TESTED IT OUT YET
 // router.put("/:id", async (req, res, next) => {
 //     try {
-
+//         const updatedCartItem = await ItemizedOrder.findByPk(req.params.id);
+//         await updatedCartItem.set(req.body);
+//         await updatedCartItem.save();
+//         res.status(200).send(updatedCartItem);
 //     }
 //     catch (error) {
 //         next(error);

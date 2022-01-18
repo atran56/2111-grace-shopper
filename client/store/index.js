@@ -5,10 +5,11 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import superheroes from "./superheroes";
 import cart from "./cart";
-import superhero from "./singleSuperhero";
+import singleSuperHero from "./singleSuperhero";
 import users from "./users"
 
-const reducer = combineReducers({ auth, superheroes, superhero, cart, users });
+const reducer = combineReducers({ auth, superheroes, singleSuperHero, cart, users });
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );

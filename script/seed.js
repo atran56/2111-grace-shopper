@@ -65,6 +65,11 @@ function createItemizedOrders(heroes, orders){
       subtotal: 500,
       superheroId: heroes[1].id,
       orderId: orders[1].id
+    }, {
+      days: 8,
+      subtotal: 800,
+      superheroId: heroes[3].id,
+      orderId: orders[2].id
     }
   ];
 }

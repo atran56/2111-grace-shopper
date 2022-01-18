@@ -7,6 +7,7 @@ import EditSuperhero from "./components/EditSuperhero";
 
 import { Login, Signup } from "./components/AuthForm";
 import Home from "./components/Home";
+import SingleSuperHero from "./components/SingleSuperHero";
 import { me } from "./store";
 import Confirmation from "./components/Confirmation";
 import AddSuperhero from "./components/AddSuperhero";
@@ -17,6 +18,7 @@ import AddSuperhero from "./components/AddSuperhero";
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
+    //Checks to see if user is logged in or not
   }
 
   render() {
@@ -28,8 +30,9 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={Home} />
             <Redirect to="/home" />
+            <Route path="/superheroes/:id" component={SingleSuperHero} />
             <Route path="/cart" component={Cart} />
-            <Route exact path="/superheroes" component={AllSuperheroes} />
+            <Route exact path="/superheroes" exact component={AllSuperheroes} />
             <Route
               exact
               path="/superheroes/:id/edit"
@@ -43,10 +46,13 @@ class Routes extends Component {
             <Route path="/" exact component={Login} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+            <Route path="/superheroes/:id" component={SingleSuperHero} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/superheroes" component={AllSuperheroes} />
+
             <Route exact path="/add" component={AddSuperhero} />
             <Route exact path="/confirmation" component={Confirmation} />
+
           </Switch>
         )}
       </div>
@@ -57,7 +63,7 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
@@ -65,7 +71,7 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(me());

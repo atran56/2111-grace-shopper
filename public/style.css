@@ -24,11 +24,36 @@ form div {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
-  height: 200px;
+  width: 60%;
   border-radius: 50%;
 }
 
+.img-single {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  border-radius: 50%;
+}
+
+.book {
+  margin-top: 20px;
+}
+
+.singleSH {
+  margin-top: 100px;
+}
 .navbar {
   height: 50px;
+}
+
+
+.add_btn {
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
 }

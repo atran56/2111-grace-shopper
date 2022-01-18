@@ -4,6 +4,7 @@ import axios from "axios";
 const GOT_SUPERHEROES = "GOT_SUPERHEROES";
 const UPATE_SUPERHERO = "UPATE_SUPERHERO";
 const DELETE_SUPERHERO = "DELETE_SUPERHERO";
+const ADD_SUPERHERO = "ADD_SUPERHERO";
 
 // Action Creator
 const _gotSuperheroes = superheroes => ({
@@ -21,11 +22,28 @@ const _deleteSuperhero = superhero => ({
   superhero,
 });
 
+const _addSuperhero = superhero => ({
+  type: ADD_SUPERHERO,
+  superhero,
+});
+
 // Thunks
 export const fetchSuperheroes = dispatch => {
   return async dispatch => {
     const { data: superheroes } = await axios.get("/api/superheroes");
     dispatch(_gotSuperheroes(superheroes));
+  };
+};
+
+export const addSuperhero = (superhero, history) => {
+  return async dispatch => {
+    const { data: newSuperhero } = await axios.post(
+      "/api/superheroes",
+      superhero
+    );
+
+    dispatch(_addSuperhero(newSuperhero));
+    history.push("/");
   };
 };
 
@@ -47,6 +65,7 @@ export const deleteSuperhero = (id, history) => {
     history.push("/superheroes");
   };
 };
+
 // Sub-Reducer
 const initialState = [];
 
@@ -59,9 +78,10 @@ export default (state = initialState, action) => {
       return state.map(superhero =>
         superhero.id === action.superhero.id ? action.superhero : superhero
       );
-
     case DELETE_SUPERHERO:
       return state.filter(superhero => superhero.id !== action.superhero.id);
+    case ADD_SUPERHERO:
+      return [...state, action.superhero];
     default:
       return state;
   }

@@ -1,10 +1,22 @@
 const router = require("express").Router();
-const Superhero = require("../db/models/superhero");
+const {
+  models: { Superhero },
+} = require("../db");
 
 router.get("/", async (req, res, next) => {
   try {
+    console.log("FROM ROUTE all SUPERHEROES");
     const superheroes = await Superhero.findAll();
-    res.json(superheroes);
+    res.send(superheroes);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    const newSuperhero = await Superhero.create(req.body);
+    res.json(newSuperhero);
   } catch (error) {
     next(error);
   }
@@ -12,8 +24,8 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const singleSuperhero = await Superhero.findByPk(req.params.id);
-    res.send(singleSuperhero);
+    const superhero = await Superhero.findByPk(req.params.id);
+    res.json(superhero);
   } catch (error) {
     next(error);
   }
@@ -21,8 +33,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.put("/:id", async (req, res, next) => {
   try {
-    const superhero = await Superhero.findByPk(req.params.id);
-    res.send(await superhero.update(req.body));
+    const updatedSuperhero = await Superhero.findByPk(req.params.id);
+    res.send(await updatedSuperhero.update(req.body));
   } catch (error) {
     next(error);
   }

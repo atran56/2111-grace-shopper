@@ -10,8 +10,12 @@ export const Home = props => {
 
   return (
     <div className="container mt-3">
-      <h5>Welcome! You are logged in as: {email}.</h5>
-      <Carousel />
+      <div className="row mt-1">
+        <h5>Welcome! You are logged in as: {email}.</h5>
+      </div>
+      <div className="row mt-1">
+        <Carousel />
+      </div>
     </div>
   )
 }

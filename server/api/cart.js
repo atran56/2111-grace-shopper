@@ -30,9 +30,9 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     //finding the open cart that matches up to the userID (we will need to change this when we get the JWT token) 
-    const cart = Order.findOne({ where: {userId: req.body.userId, checkOut: false}}); 
+    const cart = await Order.findOne({ where: {userId: req.body.userId, checkOut: false}}); 
     //finding the right superhero
-    const hero = Superhero.findByPk(req.body.superheroId);  
+    const hero = await Superhero.findByPk(req.body.superheroId);  
     //creating the new ItemizedOrder instance (new cart item)
     const newCartItem = await ItemizedOrder.create({
       days: req.body.days, subtotal: req.body.days * hero.cost, orderId: cart.id, superheroId: hero.id
@@ -86,7 +86,7 @@ async function updateOrder(orderId) {
       {model: ItemizedOrder, as: "itemizedOrders"}
     ]
   });
-  const newTotalDays = order.itemizedOrders.reduce((acc, currVal) => acc + currVal.days);
-  order.update({totalDays: newTotalDays});
+  const newTotalDays = order.itemizedOrders.reduce((acc, currVal) => acc + currVal.days, 0);
+  await order.update({totalDays: newTotalDays});
 }
 module.exports = router;

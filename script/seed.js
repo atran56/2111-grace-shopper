@@ -57,7 +57,7 @@ function createUsers() {
 function createItemizedOrders(heroes, orders){
   return [{
       days: 5,
-      subtotal: 500,
+      subtotal: 300,
       superheroId: heroes[0].id,
       orderId: orders[0].id
     }, {
@@ -65,6 +65,17 @@ function createItemizedOrders(heroes, orders){
       subtotal: 500,
       superheroId: heroes[1].id,
       orderId: orders[1].id
+    }, {
+      days: 8,
+      subtotal: 800,
+      superheroId: heroes[3].id,
+      orderId: orders[2].id
+    },
+    {
+      days: 1,
+      subtotal: 100,
+      superheroId: heroes[2].id,
+      orderId: orders[2].id
     }
   ];
 }
@@ -78,13 +89,13 @@ function createOrders(users) {
   }, {
     userId: users[0].id,
     totalDays: 3,
-    checkOut: false,
+    checkOut: true,
     totalCost: 500,
   }, {
     userId: users[1].id,
-    totalDays: 8,
+    totalDays: 9,
     checkOut: false,
-    totalCost: 800,
+    totalCost: 900,
   }];
 }
 

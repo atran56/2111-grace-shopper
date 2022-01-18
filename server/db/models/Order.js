@@ -10,12 +10,7 @@ const Order = db.define("order", {
   checkOut: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  },
-  totalCost: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
-  },
+  }
 });
 
 module.exports = Order;

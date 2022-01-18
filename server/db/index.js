@@ -12,10 +12,8 @@ User.hasMany(Order)
 Order.belongsTo(User)
 ItemizedOrder.belongsTo(Order)
 Order.hasMany(ItemizedOrder)
-ItemizedOrder.belongsTo(Superhero)
-Superhero.hasMany(ItemizedOrder)
-// Superhero.belongsToMany(Order, { through: ItemizedOrder })
-// Order.belongsToMany(Superhero, { through: ItemizedOrder })
+Superhero.belongsToMany(Order, { through: ItemizedOrder })
+Order.belongsToMany(Superhero, { through: ItemizedOrder })
 
 
 module.exports = {

@@ -45,10 +45,10 @@ router.post("/", async (req, res, next) => {
 })
 
 //deleting an item from the cart
-router.delete("/:id", async (req, res, next) => {
+router.delete("/", async (req, res, next) => {
   try {
-    //finds the cart item by the ID
-    const cartItemToDelete = await ItemizedOrder.findByPk(req.params.id);
+    //finds the cart item by the userId and superheroId
+    const cartItemToDelete = await ItemizedOrder.findOne({ where: {orderId: req.body.orderId, superheroId: req.body.superheroId} }); 
     const orderId = cartItemToDelete.orderId; 
     //delete item 
     await cartItemToDelete.destroy();
@@ -62,10 +62,10 @@ router.delete("/:id", async (req, res, next) => {
 })
 
 //update item (num of days booked) in cart
-router.patch("/:id", async (req, res, next) => {
+router.patch("/", async (req, res, next) => {
     try {
-      //finds the cart item by the ID
-        const updatedCartItem = await ItemizedOrder.findByPk(req.params.id); 
+      //finds the cart item by the userId and superheroId
+        const updatedCartItem = await ItemizedOrder.findOne({ where: {orderId: req.body.orderId, superheroId: req.body.superheroId} }); 
         //updates the cart item days 
         await updatedCartItem.update({
           days: req.body.days

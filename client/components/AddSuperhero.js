@@ -9,8 +9,8 @@ class AddSuperhero extends Component {
     this.state = {
       name: "",
       universe: "",
+      availability: [],
       strengths: "",
-      availability: "",
       bio: "",
       cost: "",
       image: "",
@@ -27,7 +27,7 @@ class AddSuperhero extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addSuperhero({ ...this.state });
+    this.props.createSuperhero({ ...this.state });
   }
 
   render() {
@@ -77,6 +77,7 @@ class AddSuperhero extends Component {
             Biography
           </label>
           <textarea
+            name="bio"
             className="form-control"
             id="exampleFormControlTextarea1"
             rows="3"
@@ -121,7 +122,7 @@ class AddSuperhero extends Component {
 }
 
 const mapDispatch = (dispatch, { history }) => ({
-  addSuperhero: superhero => dispatch(addSuperhero(superhero, history)),
+  createSuperhero: superhero => dispatch(addSuperhero(superhero, history)),
 });
 
 export default connect(null, mapDispatch)(AddSuperhero);

@@ -13,7 +13,7 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     const newSuperhero = await Superhero.create(req.body);
-    console.log(newSuperhero);
+    res.json(newSuperhero);
   } catch (error) {
     next(error);
   }

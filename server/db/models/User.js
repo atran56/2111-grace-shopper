@@ -21,11 +21,11 @@ const User = db.define("user", {
     validate: {
       isEmail: true,
     },
+  },
   administrator: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
-    defaultValue: false
-  }
+    defaultValue: false,
   },
 });
 

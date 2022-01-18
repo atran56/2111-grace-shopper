@@ -57,7 +57,9 @@ class AllSuperheroes extends React.Component {
               );
             })}
             <Link to={"/add"}>
-              <button className="add_btn">+</button>
+              <button type="submit" className="add_btn">
+                +
+              </button>
             </Link>
           </div>
         </div>

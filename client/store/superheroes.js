@@ -35,6 +35,18 @@ export const fetchSuperheroes = dispatch => {
   };
 };
 
+export const addSuperhero = (superhero, history) => {
+  return async dispatch => {
+    const { data: newSuperhero } = await axios.post(
+      "/api/superheroes",
+      superhero
+    );
+
+    dispatch(_addSuperhero(newSuperhero));
+    history.push("/");
+  };
+};
+
 export const updateSuperhero = (superhero, history) => {
   return async dispatch => {
     const { data: updated } = await axios.put(
@@ -54,16 +66,6 @@ export const deleteSuperhero = (id, history) => {
   };
 };
 
-export const addSuperhero = (superhero, history) => {
-  return async dispatch => {
-    const { data: newSuperhero } = await axios.post(
-      "/api/superheroes",
-      superhero
-    );
-    dispatch(_addSuperhero(newSuperhero));
-    history.push("/superheroes");
-  };
-};
 // Sub-Reducer
 const initialState = [];
 

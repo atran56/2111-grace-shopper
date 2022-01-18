@@ -1,10 +1,10 @@
 const path = require("path");
 const express = require("express");
-const dotenv = require("dotenv");
+
 const morgan = require("morgan");
 const app = express();
 
-dotenv.config();
+
 
 module.exports = app;
 

@@ -4,7 +4,16 @@ const Superhero = require("../db/models/superhero");
 router.get("/", async (req, res, next) => {
   try {
     const superheroes = await Superhero.findAll();
-    res.json(superheroes);
+    res.send(superheroes);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    const newSuperhero = await Superhero.create(req.body);
+    console.log(newSuperhero);
   } catch (error) {
     next(error);
   }

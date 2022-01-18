@@ -56,6 +56,9 @@ class AllSuperheroes extends React.Component {
                 </div>
               );
             })}
+            <Link to={"/add"}>
+              <button className="add_btn">+</button>
+            </Link>
           </div>
         </div>
       </div>

@@ -10,15 +10,20 @@ const gotCartItems = cart => ({
   });
 
 // Thunks
-export const fetchCart = dispatch => {
-    return async dispatch => {
-      const { data: cart } = await axios.get("/api/cart");
-      dispatch(gotCartItems(cart));
-    };
-  };
+export const fetchCart = (userId) => {
+  return async dispatch => {
+    try {
+        const { data: cart } = await axios.get('/api/cart', userId);
+        dispatch(gotCartItems(cart));
+    }
+    catch (error) {
+      console.log('error when fetching cart items:', error)
+    } 
+  }
+};
 
 // Sub-Reducer
-const initialState = [];
+const initialState = {};
 
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {

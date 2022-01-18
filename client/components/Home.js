@@ -6,12 +6,16 @@ import Carousel from "./Carousel"
  * COMPONENT
  */
 export const Home = props => {
-  const {username} = props
+  const {email} = props
 
   return (
-    <div>
-      <h3>Welcome, {username}</h3>
-      <Carousel />
+    <div className="container mt-3">
+      <div className="row mt-1">
+        <h5>Welcome! You are logged in as: {email}.</h5>
+      </div>
+      <div className="row mt-1">
+        <Carousel />
+      </div>
     </div>
   )
 }
@@ -21,7 +25,7 @@ export const Home = props => {
  */
 const mapState = state => {
   return {
-    username: state.auth.username
+    email: state.auth.email
   }
 }
 

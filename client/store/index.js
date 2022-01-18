@@ -5,7 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import auth from "./auth";
 import superheroes from "./superheroes";
 import cart from "./cart";
-import singleSuperHero from "./single_superhero";
+import singleSuperHero from "./singleSuperhero";
 
 const reducer = combineReducers({ auth, superheroes, singleSuperHero, cart });
 

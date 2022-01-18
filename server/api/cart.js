@@ -25,10 +25,10 @@ router.get("/", async (req, res, next) => {
 //deleting an item from the cart
 router.delete("/:id", async (req, res, next) => {
   try {
-    const cartItemToDelete = await ItemizedOrder.findByPk(req.params.id); //finds the order item by the ID
-    const cartWithDeletedItem = await Order.findByPk(cartItemToDelete.orderId); //finds the order that contains this item
-    await cartWithDeletedItem.update({totalDays: cartWithDeletedItem.totalDays - cartItemToDelete.days}) //updates the totalDays in the order to subtract the item that we're going to delete
-    await cartItemToDelete.destroy(); //deletes the item
+    const cartItemToDelete = await ItemizedOrder.findByPk(req.params.id); //finds the cart item by the ID
+    const orderId = cartItemToDelete.orderId; 
+    await cartItemToDelete.destroy(); //delete item 
+    await updateOrder(orderId); //calling my helper function to update the cart totalDays
     res.status(204).send();
   }
   catch (error) {
@@ -36,17 +36,29 @@ router.delete("/:id", async (req, res, next) => {
   }
 })
 
-//update item days, item subtotal, then update order total days
+//update item (num of days booked) in cart
 router.patch("/:id", async (req, res, next) => {
     try {
-        const updatedCartItem = await ItemizedOrder.findByPk(req.params.id);
-        await updatedCartItem.set(req.body);
-        await updatedCartItem.save();
+        const updatedCartItem = await ItemizedOrder.findByPk(req.params.id); //finds the cart item by the ID
+        await updatedCartItem.update({ //updates the cart item days 
+          days: req.body.days
+        });
+        await updateOrder(updatedCartItem.orderId); //calling my helper function to update the cart totalDays
         res.status(200).send(updatedCartItem);
     }
     catch (error) {
         next(error);
     }
 })
-module.exports = router;
 
+//helper function to update the cart totalDays
+async function updateOrder(orderId) {
+  const order = await Order.findByPk(orderId, {
+    include: [
+      {model: ItemizedOrder, as: "itemizedOrders"}
+    ]
+  });
+  const newTotalDays = order.itemizedOrders.reduce((acc, currVal) => acc + currVal.days);
+  order.update({totalDays: newTotalDays});
+}
+module.exports = router;

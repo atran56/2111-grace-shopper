@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+
 const {
   models: { User },
 } = require("../db");
@@ -21,34 +20,4 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/signin", async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
-  if (user) {
-    if (bcrypt.compareSync(req.body.password, user.password)) {
-      res.send({
-        id: user.id,
-        name: user.username,
-        email: user.email,
-        isAdmin: user.administator,
-        toekn: generateToken(user),
-      });
-      return;
-    }
-  }
-  res.status(401).send({ message: "Invalid email or password" });
-});
 
-const generateToken = user => {
-  return jwt.sign(
-    {
-      id: user.id,
-      name: user.username,
-      email: user.email,
-      idAdmin: user.administrator,
-    },
-    process.env.JWT_SECRET,
-    {
-      expiresIn: "30d",
-    }
-  );
-};

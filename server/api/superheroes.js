@@ -7,7 +7,16 @@ router.get("/", async (req, res, next) => {
   try {
     console.log("FROM ROUTE all SUPERHEROES");
     const superheroes = await Superhero.findAll();
-    res.json(superheroes);
+    res.send(superheroes);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post("/", async (req, res, next) => {
+  try {
+    const newSuperhero = await Superhero.create(req.body);
+    res.json(newSuperhero);
   } catch (error) {
     next(error);
   }

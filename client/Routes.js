@@ -10,6 +10,7 @@ import Home from "./components/Home";
 import SingleSuperHero from "./components/SingleSuperHero";
 import { me } from "./store";
 import Confirmation from "./components/Confirmation";
+import AddSuperhero from "./components/AddSuperhero";
 
 /**
  * COMPONENT
@@ -37,6 +38,7 @@ class Routes extends Component {
               path="/superheroes/:id/edit"
               component={EditSuperhero}
             />
+            <Route exact path="/add" component={AddSuperhero} />
             <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         ) : (
@@ -47,7 +49,10 @@ class Routes extends Component {
             <Route path="/superheroes/:id" component={SingleSuperHero} />
             <Route path="/cart" component={Cart} />
             <Route exact path="/superheroes" component={AllSuperheroes} />
-            <Route path="/confirmation" component={Confirmation} />
+
+            <Route exact path="/add" component={AddSuperhero} />
+            <Route exact path="/confirmation" component={Confirmation} />
+
           </Switch>
         )}
       </div>

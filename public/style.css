@@ -47,7 +47,6 @@ form div {
   height: 50px;
 }
 
-
 .add_btn {
   font-size: 20px;
   width: 40px;
@@ -56,4 +55,14 @@ form div {
   position: fixed;
   right: 10px;
   bottom: 10px;
+}
+
+.title {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Permanent Marker", cursive;
+}
+
+h5 {
+  text-align: center;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchSuperhero } from "../store/singleSuperhero";
+import { fetchSuperhero, _setSuperhero } from "../store/singleSuperhero";
 import { deleteSuperhero, updateSuperhero } from "../store/superheroes";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -21,15 +21,25 @@ class EditSuperhero extends React.Component {
     this.props.fetchSuperhero(this.props.match.params.id);
   }
 
+  componentWillUnmount() {
+    this.props.clearSuperhero();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.superhero.id !== this.props.superhero.id) {
       this.setState({
         name: this.props.superhero.name || "",
         bio: this.props.superhero.bio || "",
         cost: this.props.superhero.cost || "",
-        image: this.props.superhero.image,
+        image: this.props.superhero.image || "",
       });
     }
+    console.log(
+      "prevProps:",
+      prevProps.superhero,
+      "this.props:",
+      this.props.superhero
+    );
   }
   handleChange(evt) {
     this.setState({
@@ -42,7 +52,8 @@ class EditSuperhero extends React.Component {
   }
 
   render() {
-    const { name, bio, cost } = this.state;
+    const { name, bio, cost, image } = this.state;
+    console.log(this.state);
     return (
       <form
         className="container"
@@ -86,8 +97,15 @@ class EditSuperhero extends React.Component {
         <label htmlFor="formFile" className="form-label">
           Superhero Image
         </label>
-        <input className="form-control" type="file" id="formFile" />
+        <input
+          className="form-control"
+          type="file"
+          id="formFile"
+          name="image"
+          value={image}
+        />
         <br />
+
         <button
           style={{ marginRight: "10px", marginLeft: "30%" }}
           type="submit"
@@ -95,6 +113,7 @@ class EditSuperhero extends React.Component {
         >
           Save Changes
         </button>
+
         <button
           style={{ marginRight: "10px" }}
           type="delete"
@@ -113,14 +132,17 @@ class EditSuperhero extends React.Component {
   }
 }
 
-const mapState = ({ superhero }) => ({
-  superhero,
-});
+const mapState = state => {
+  return {
+    superhero: state.singleSuperHero,
+  };
+};
 
 const mapDispatch = (dispatch, { history }) => ({
   fetchSuperhero: superheroId => dispatch(fetchSuperhero(superheroId)),
   updateSuperhero: superhero => dispatch(updateSuperhero(superhero, history)),
   deleteSuperhero: superhero => dispatch(deleteSuperhero(superhero, history)),
+  clearSuperhero: () => dispatch(_setSuperhero({})),
 });
 
 export default connect(mapState, mapDispatch)(EditSuperhero);

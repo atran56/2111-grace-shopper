@@ -1,5 +1,6 @@
 import React from "react";
 import { fetchSuperhero } from "../store/singleSuperhero";
+import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 export class SingleSuperHero extends React.Component {
   constructor(props) {
@@ -23,8 +24,17 @@ export class SingleSuperHero extends React.Component {
     });
   }
 
-  handleSubmit() {
-    //Should this be created and submitted in the cart table
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.props.addToCart({
+      userId: 1,
+      superheroId: this.props.superhero.id,
+      days: this.state.days,
+    });
+    this.setState({
+      days: 0,
+      total: 0,
+    });
   }
 
   render() {
@@ -53,7 +63,7 @@ export class SingleSuperHero extends React.Component {
               <b>TOTAL</b>: {this.state.total}
             </p>
 
-            <form className="form-control-sm">
+            <form className="form-control-sm" onSubmit={this.handleSubmit}>
               <select
                 className="form-select"
                 value={this.state.days}
@@ -91,6 +101,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   fetchSuperhero: (id) => dispatch(fetchSuperhero(id)),
+  addToCart: (item) => dispatch(addToCart(item)),
 });
 
 export default connect(mapState, mapDispatch)(SingleSuperHero);

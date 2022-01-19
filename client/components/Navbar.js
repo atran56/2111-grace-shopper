@@ -5,7 +5,7 @@ import { logout } from "../store";
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <div>
-    <h3>Rent A Superhero</h3>
+    <h3 className="title">Rent Your Superhero!</h3>
     {isLoggedIn ? (
       <div>
         {/* The navbar will show these links after you log in */}
@@ -22,7 +22,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarNav"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <a
@@ -70,7 +74,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarNav"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
               <ul className="navbar-nav">
                 <li className="nav-item">
                   <a
@@ -113,13 +121,13 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout());

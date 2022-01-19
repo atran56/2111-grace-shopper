@@ -43,7 +43,7 @@ export const addSuperhero = (superhero, history) => {
     );
 
     dispatch(_addSuperhero(newSuperhero));
-    history.push("/");
+    history.push("/superheroes");
   };
 };
 
@@ -54,7 +54,7 @@ export const updateSuperhero = (superhero, history) => {
       superhero
     );
     dispatch(_updateSuperhero(updated));
-    history.push("/");
+    history.push("/superheroes");
   };
 };
 

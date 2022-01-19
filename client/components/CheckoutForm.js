@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { fetchOrder } from "../store/order"
 import { createOrder } from "../store/orders"
 import { completeOrder } from "../store/order"
+import { Link } from "react-router-dom";
+import { fetchCart } from "../store/cart";
 
 class CheckoutForm extends React.Component {
   constructor() {
@@ -17,6 +19,7 @@ class CheckoutForm extends React.Component {
   componentDidMount() {
     console.log("CHECKOUT COMPONENT MOUNTING. this.props: ", this.props)
     this.props.fetchOrder(this.props.userId)
+    this.props.fetchCart();
   }
 
   handleSubmit(evt) {
@@ -37,9 +40,18 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-      console.log("**this.props.order", this.props.order)
+    if (this.props.cart.loading) {
+      return <p>Data is loading...</p>;
+    }
     return (
         <div className="container">
+          <div className="row mt-4">
+        <h4>Total items in cart: {this.props.cart.cart.itemizedOrders.length} </h4>
+        <h4>Total order cost: ${this.props.cart.cart.itemizedOrders.reduce((acc, item) => {
+      return acc + item.subtotal;
+    }, 0)}</h4>
+    </div>
+    <div className="row mt-4">
         <div className="col-md-8 order-md-1">
         <h4 className="mb-3">Billing address</h4>
         <form onSubmit={this.handleSubmit} className="needs-validation" noValidate>
@@ -143,10 +155,11 @@ class CheckoutForm extends React.Component {
             </div>
           </div>
           <hr className="mb-4" />
+          <Link to="/confirmation">
           <button className="btn btn-primary btn-lg btn-block">Complete Purchase</button>
-          {/* <button className="btn btn-primary btn-lg btn-block" type="submit">Complete Purchase</button> */}
+          </Link>
         </form>
-      </div></div>
+      </div></div></div>
     );
   }
 }
@@ -155,12 +168,16 @@ const mapState = state => {
   console.log("***STATE.AUTH:", state.auth)
   return {
     userId: state.auth.id,
-    order: state.order
+    order: state.order,
+      cart: state.cart,
+      loading: state.loading,
+      superheroes: state.superheroes,
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchCart: () => dispatch(fetchCart()),
     fetchOrder: (id) => dispatch(fetchOrder(id)),
     completeOrder: (order) => dispatch(completeOrder(order)),
     createOrder: (order) => dispatch(createOrder(order)),

@@ -2,6 +2,7 @@ import React from "react";
 import { fetchSuperheroes } from "../store/superheroes";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
 // import Rating from './Rating';
 
 class AllSuperheroes extends React.Component {
@@ -9,11 +10,12 @@ class AllSuperheroes extends React.Component {
     this.props.superheroesData();
   }
   render() {
+    const _isAdmin = this.props.isAdmin;
     return (
       <div className="album py-5 bg-light">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {this.props.superheroes.map((superhero) => {
+            {this.props.superheroes.map(superhero => {
               return (
                 <div className="col" key={superhero.id}>
                   <div className="card shadow-sm" style={{ padding: "10px" }}>
@@ -40,15 +42,16 @@ class AllSuperheroes extends React.Component {
                               View
                             </button>
                           </Link>
-
-                          <Link to={`/superheroes/${superhero.id}/edit`}>
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-outline-secondary"
-                            >
-                              Edit
-                            </button>
-                          </Link>
+                          {_isAdmin ? (
+                            <Link to={`/superheroes/${superhero.id}/edit`}>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-secondary"
+                              >
+                                Edit
+                              </button>
+                            </Link>
+                          ) : null}
                         </div>
                       </div>
                     </div>
@@ -56,11 +59,13 @@ class AllSuperheroes extends React.Component {
                 </div>
               );
             })}
-            <Link to={"/add"}>
-              <button type="submit" className="add_btn">
-                +
-              </button>
-            </Link>
+            {_isAdmin ? (
+              <Link to={"/add"}>
+                <button type="submit" className="add_btn">
+                  +
+                </button>
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>
@@ -68,11 +73,11 @@ class AllSuperheroes extends React.Component {
   }
 }
 
-const mapState = (state) => ({
-  superheroes: state.superheroes,
-});
+const mapState = state => {
+  return { superheroes: state.superheroes, isAdmin: state.auth.administrator };
+};
 
-const mapDispatch = (dispatch) => ({
+const mapDispatch = dispatch => ({
   superheroesData: () => dispatch(fetchSuperheroes()),
 });
 

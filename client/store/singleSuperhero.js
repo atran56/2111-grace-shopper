@@ -4,25 +4,25 @@ import axios from "axios";
 const SET_SUPERHERO = "SET_SUPERHERO";
 
 // Action Creators
-const _fetchSuperhero = (superhero) => ({
+export const _setSuperhero = superhero => ({
   type: SET_SUPERHERO,
   superhero,
 });
 
 // Thunks
-export const fetchSuperhero = (id) => {
-  return async (dispatch) => {
+export const fetchSuperhero = id => {
+  return async dispatch => {
     const { data: superhero } = await axios.get(`/api/superheroes/${id}`);
-    dispatch(_fetchSuperhero(superhero));
+    dispatch(_setSuperhero(superhero));
   };
 };
 
 // Subreducer
-export default function singleSuperHero(state = {}, action) {
+export default (state = {}, action) => {
   switch (action.type) {
     case SET_SUPERHERO:
       return action.superhero;
     default:
       return state;
   }
-}
+};

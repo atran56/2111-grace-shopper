@@ -95,13 +95,13 @@ class EditSuperhero extends React.Component {
         />
         <br />
         <label htmlFor="formFile" className="form-label">
-          Superhero Image
+          Superhero Image URL
         </label>
         <input
           className="form-control"
-          type="file"
-          id="formFile"
+          id="exampleFormControlInput1"
           name="image"
+          onChange={this.handleChange}
           value={image}
         />
         <br />

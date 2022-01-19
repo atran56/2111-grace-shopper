@@ -3,6 +3,7 @@ import axios from "axios";
 // Action Type
 const GOT_CART_ITEMS = "GOT_CART_ITEMS";
 const REMOVE_CART_ITEM = "REMOVE_CART_ITEMS";
+const ADD_CART_ITEM = "ADD_CART_ITEM";
 
 // Action Creator
 const gotCartItems = (cart, superheroes) => ({
@@ -14,6 +15,10 @@ const deleteCartItem = superheroId => ({
   type: REMOVE_CART_ITEM,
   superheroId,
 });
+const addCartItem = item => ({
+  type: ADD_CART_ITEM,
+  item
+})
 
 // Thunks
 //NEED TO EDIT FETCHCART LATER ONCE JWT IS FIGURED OUT
@@ -33,11 +38,16 @@ export const fetchCart = () => {
     } 
   }
 };
-
 export const deleteItem = (item) => {
   return async dispatch => {
     await axios.delete('/api/cart', {data: item});
     dispatch(deleteCartItem(item.superheroId));
+  };
+};
+export const addToCart = (item) => {
+  return async dispatch => {
+    const { data: newCartItem } = await axios.post("/api/superheroes", {data: item});
+    dispatch(addCartItem(newCartItem));
   };
 };
 
@@ -58,6 +68,16 @@ export default (state = initialState, action) => {
           cart: {
             ...state.cart, 
             itemizedOrders: state.cart.itemizedOrders.filter((item) => (item.superheroId !== action.superheroId))
+          },
+          loading: false,
+          superheroes: {...state.superheroes}
+        };
+      case ADD_CART_ITEM:
+        return {
+          ...state,
+          cart: {
+            ...state.cart,
+            itemizedOrders: state.cart.itemizedOrders.push(action.item)
           },
           loading: false,
           superheroes: {...state.superheroes}

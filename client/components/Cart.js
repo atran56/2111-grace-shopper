@@ -152,9 +152,11 @@ class Cart extends React.Component {
             >
               Update Cart
             </button>
+            <Link to="/checkout">
             <button type="button" className="btn btn-success">
               Checkout
             </button>
+            </Link>
           </div>
           <div className="float-start">
             <Link to="/superheroes">

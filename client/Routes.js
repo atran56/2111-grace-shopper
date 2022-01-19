@@ -12,6 +12,7 @@ import { me } from "./store";
 import Confirmation from "./components/Confirmation";
 import AddSuperhero from "./components/AddSuperhero";
 import CheckoutForm from "./components/CheckoutForm";
+import AllUsers from "./components/AllUsers";
 
 /**
  * COMPONENT
@@ -41,14 +42,14 @@ class Routes extends Component {
             />
             <Route exact path="/add" component={AddSuperhero} />
             <Route exact path="/checkout" component={CheckoutForm} />
+            <Route exact path="/users" component={AllUsers} />
             <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
 
+            <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/superheroes/:id" component={SingleSuperHero} />
             <Route path="/cart" component={Cart} />

@@ -1,5 +1,4 @@
 const router = require("express").Router();
-//const { redirect } = require("express/lib/response");
 const ItemizedOrder = require("../db/models/ItemizedOrder");
 const Order = require("../db/models/Order");
 const Superhero = require("../db/models/superhero");

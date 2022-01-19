@@ -36,7 +36,7 @@ class Cart extends React.Component {
     if (this.props.cart.loading) {
       return (<p>Data is loading...</p>)
     }
-    const subTotal = this.props.cart.cart.itemizedOrders.reduce((acc, currVal) => acc.subtotal + currVal.subtotal)
+    const subtotal = this.props.cart.cart.itemizedOrders.reduce((acc, item) => {return acc + item.subtotal;}, 0)
     return (
       <div className="container">
         <div className="row">
@@ -87,7 +87,7 @@ class Cart extends React.Component {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>SUBTOTAL: ${subTotal}</td>
+                  <td>SUBTOTAL: ${subtotal}</td>
                 </tr>
               </tbody>
             </table>

@@ -1,5 +1,6 @@
 import React from "react";
 import { fetchCart } from "../store/Cart";
+import { deleteItem } from "../store/Cart";
 import { fetchSuperheroes } from "../store/superheroes";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -36,17 +37,17 @@ class Cart extends React.Component {
               <tbody>
                 {this.props.cart.cart.itemizedOrders.map(item => (
                   <tr>
-                    <th scope="row">
-                      <img src={this.props.superheroes.filter(hero => {return (hero.id === item.superheroId)})[0].image} style={{ width: '150px', height: '150px', borderRadius: '50%'}}/>
-                    </th>
-                    <td>${this.props.superheroes.filter(hero => {return (hero.id === item.superheroId)})[0].cost}</td>
+                    {/* <th scope="row"> */}
+                      {/* <img src={this.props.superheroes.filter(hero => {return (hero.id === item.superheroId)})[0].image} style={{ width: '150px', height: '150px', borderRadius: '50%'}}/> */}
+                    {/* </th> */}
+                    {/* <td>${this.props.superheroes.filter(hero => {return (hero.id === item.superheroId)})[0].cost}</td> */}
                     <td>
                     <div className="counter">
                     <input width="50px" type="number" className="form-control" id="input" value={item.days} min="0" max="14"/>
                     </div>
                   </td>
                   <td>${item.subtotal}</td>
-                  <td><button type="button" class="btn btn-link">remove</button></td>
+                  <td><button type="button" onClick={() => this.props.deleteItem({orderId: item.orderId, superheroId: item.superheroId})} className="btn btn-link">remove</button></td>
                 </tr>
                 ))}
                 <tr>
@@ -84,7 +85,8 @@ const mapState = (state) => ({
   
   const mapDispatch = (dispatch) => ({
     fetchCart: () => dispatch(fetchCart()),
-    fetchSuperheroes: () => dispatch(fetchSuperheroes())
+    fetchSuperheroes: () => dispatch(fetchSuperheroes()),
+    deleteItem: (item) => dispatch(deleteItem(item))
   });
   
   export default connect(mapState, mapDispatch)(Cart);

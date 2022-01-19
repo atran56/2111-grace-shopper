@@ -50,6 +50,7 @@ router.post("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
   try {
     //finds the cart item by the userId and superheroId
+    console.log(req.body)
     const cartItemToDelete = await ItemizedOrder.findOne({ where: {orderId: req.body.orderId, superheroId: req.body.superheroId} }); 
     const orderId = cartItemToDelete.orderId; 
     //delete item 

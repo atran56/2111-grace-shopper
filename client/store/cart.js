@@ -32,13 +32,18 @@ const updateCartItem = (item) => {
 export const fetchCart = () => {
   return async dispatch => {
     try {
-        const { data: cart } = await axios.get('/api/cart');
-        const superheroes = {};
-        for(let i = 0; i < cart.itemizedOrders.length; i++){
-          const {data: superhero} = await axios.get(`/api/superheroes/${cart.itemizedOrders[i].superheroId}`);
-          superheroes[superhero.id] = superhero;
+      const token = window.localStorage.getItem('token');
+      const { data: cart } = await axios.get('/api/cart',{
+        headers: {
+          authorization: token
         }
-        dispatch(gotCartItems(cart, superheroes));
+      });
+      const superheroes = {};
+      for(let i = 0; i < cart.itemizedOrders.length; i++){
+        const {data: superhero} = await axios.get(`/api/superheroes/${cart.itemizedOrders[i].superheroId}`);
+        superheroes[superhero.id] = superhero;
+      }
+      dispatch(gotCartItems(cart, superheroes));
     }
     catch (error) {
       console.log('error when fetching cart items:', error)
@@ -47,19 +52,34 @@ export const fetchCart = () => {
 };
 export const deleteItem = (item) => {
   return async dispatch => {
-    await axios.delete('/api/cart', {data: item});
+    const token = window.localStorage.getItem('token');
+    await axios.delete('/api/cart', {data: item}, {
+      headers: {
+        authorization: token
+      }
+    });
     dispatch(deleteCartItem(item.superheroId));
   };
 };
 export const addToCart = (item) => {
   return async dispatch => {
-    const { data: newCartItem } = await axios.post("/api/cart", {data: item});
+    const token = window.localStorage.getItem('token');
+    const { data: newCartItem } = await axios.post("/api/cart", {data: item}, {
+      headers: {
+        authorization: token
+      }
+    });
     dispatch(addCartItem(newCartItem));
   };
 };
 export const editCartItem = (item) => {
   return async dispatch => {
-    const { data: updatedItem } = await axios.patch("/api/cart", {data: item});
+    const token = window.localStorage.getItem('token');
+    const { data: updatedItem } = await axios.patch("/api/cart", {data: item}, {
+      headers: {
+        authorization: token
+      }
+    });
     dispatch(updateCartItem(updatedItem));
   };
 };
@@ -90,7 +110,7 @@ export default (state = initialState, action) => {
           ...state,
           cart: {
             ...state.cart,
-            itemizedOrders: state.cart.itemizedOrders.push(action.item)
+            // itemizedOrders: state.cart.itemizedOrders.push(action.item)
           },
           loading: false,
           superheroes: {...state.superheroes}

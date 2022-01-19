@@ -3289,7 +3289,6 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addToCart({
-      userId: 1,
       superheroId: this.props.superhero.id,
       days: this.state.days
     });
@@ -3522,9 +3521,14 @@ const updateCartItem = item => {
 const fetchCart = () => {
   return async dispatch => {
     try {
+      const token = window.localStorage.getItem('token');
       const {
         data: cart
-      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/cart');
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/cart', {
+        headers: {
+          authorization: token
+        }
+      });
       const superheroes = {};
 
       for (let i = 0; i < cart.itemizedOrders.length; i++) {
@@ -3542,28 +3546,43 @@ const fetchCart = () => {
 };
 const deleteItem = item => {
   return async dispatch => {
+    const token = window.localStorage.getItem('token');
     await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/cart', {
       data: item
+    }, {
+      headers: {
+        authorization: token
+      }
     });
     dispatch(deleteCartItem(item.superheroId));
   };
 };
 const addToCart = item => {
   return async dispatch => {
+    const token = window.localStorage.getItem('token');
     const {
       data: newCartItem
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/cart", {
       data: item
+    }, {
+      headers: {
+        authorization: token
+      }
     });
     dispatch(addCartItem(newCartItem));
   };
 };
 const editCartItem = item => {
   return async dispatch => {
+    const token = window.localStorage.getItem('token');
     const {
       data: updatedItem
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/cart", {
       data: item
+    }, {
+      headers: {
+        authorization: token
+      }
     });
     dispatch(updateCartItem(updatedItem));
   };
@@ -3595,8 +3614,8 @@ const initialState = {
 
     case ADD_CART_ITEM:
       return { ...state,
-        cart: { ...state.cart,
-          itemizedOrders: state.cart.itemizedOrders.push(action.item)
+        cart: { ...state.cart // itemizedOrders: state.cart.itemizedOrders.push(action.item)
+
         },
         loading: false,
         superheroes: { ...state.superheroes

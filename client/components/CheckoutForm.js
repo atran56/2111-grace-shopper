@@ -155,9 +155,7 @@ class CheckoutForm extends React.Component {
             </div>
           </div>
           <hr className="mb-4" />
-          <Link to="/confirmation">
-          <button className="btn btn-primary btn-lg btn-block">Complete Purchase</button>
-          </Link>
+          <button className="btn btn-primary btn-lg btn-block" type="submit">Complete Purchase</button>
         </form>
       </div></div></div>
     );
@@ -175,11 +173,11 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = (dispatch, {history}) => {
   return {
     fetchCart: () => dispatch(fetchCart()),
     fetchOrder: (id) => dispatch(fetchOrder(id)),
-    completeOrder: (order) => dispatch(completeOrder(order)),
+    completeOrder: (order) => dispatch(completeOrder(order, history)),
     createOrder: (order) => dispatch(createOrder(order)),
   };
 };

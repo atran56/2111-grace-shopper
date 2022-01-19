@@ -14,7 +14,6 @@ export class AllUsers extends React.Component {
             <tr>
               <th scope="col">User ID</th>
               <th scope="col">Email</th>
-              <th scope="col">Is Admin?</th>
             </tr>
           </thead>
           <tbody>
@@ -23,7 +22,6 @@ export class AllUsers extends React.Component {
                 <tr key={user.id}>
                   <td scope="row">{user.id}</td>
                   <td>{user.email}</td>
-                  <td>{user.administrator}</td>
                 </tr>
               );
             })}

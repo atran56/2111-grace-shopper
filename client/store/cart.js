@@ -46,7 +46,8 @@ export const deleteItem = (item) => {
 };
 export const addToCart = (item) => {
   return async dispatch => {
-    const { data: newCartItem } = await axios.post("/api/superheroes", {data: item});
+    console.log(item)
+    const { data: newCartItem } = await axios.post("/api/cart", {data: item});
     dispatch(addCartItem(newCartItem));
   };
 };

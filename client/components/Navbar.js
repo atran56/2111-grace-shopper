@@ -32,7 +32,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                   <a
                     className="nav-link active"
                     aria-current="page"
-                    href="/home"
+                    href="/"
                   >
                     Home
                   </a>
@@ -91,7 +91,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                   <a
                     className="nav-link active"
                     aria-current="page"
-                    href="/home"
+                    href="/"
                   >
                     Home
                   </a>

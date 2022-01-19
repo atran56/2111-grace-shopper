@@ -34,6 +34,7 @@ export const authenticate = (email, password, method) => async dispatch => {
     console.log("*** items passed to authenticate:", email, password)
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(me())
+    history.push('/')
   } catch (authError) {
     return dispatch(setAuth({error: authError}))
   }
@@ -41,7 +42,7 @@ export const authenticate = (email, password, method) => async dispatch => {
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
-  history.push('/login')
+  history.push('/')
   return {
     type: SET_AUTH,
     auth: {}

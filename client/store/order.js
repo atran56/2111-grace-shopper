@@ -31,10 +31,11 @@ export const fetchOrder = (id) => {
   };
 };
 
-export const completeOrder = (order) => {
+export const completeOrder = (order, history) => {
     console.log("**ORDER submitted to thunk: ", order)
     return async (dispatch) => {
       const { data } = await axios.put("/api/orders", order);
+      history.push("/confirmation")
       dispatch(_completedOrder(data));
     };
   };

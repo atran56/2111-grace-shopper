@@ -5,9 +5,10 @@ const GOT_CART_ITEMS = "GOT_CART_ITEMS";
 const REMOVE_CART_ITEM = "REMOVE_CART_ITEMS";
 
 // Action Creator
-const gotCartItems = cart => ({
+const gotCartItems = (cart, superheroes) => ({
   type: GOT_CART_ITEMS,
-  cart
+  cart,
+  superheroes
 });
 const deleteCartItem = superheroId => ({
   type: REMOVE_CART_ITEM,
@@ -20,7 +21,12 @@ export const fetchCart = () => {
   return async dispatch => {
     try {
         const { data: cart } = await axios.get('/api/cart');
-        dispatch(gotCartItems(cart));
+        const superheroes = {};
+        for(let i = 0; i < cart.itemizedOrders.length; i++){
+          const {data: superhero} = await axios.get(`/api/superheroes/${cart.itemizedOrders[i].superheroId}`);
+          superheroes[superhero.id] = superhero;
+        }
+        dispatch(gotCartItems(cart, superheroes));
     }
     catch (error) {
       console.log('error when fetching cart items:', error)
@@ -38,22 +44,24 @@ export const deleteItem = (item) => {
 // Sub-Reducer
 const initialState = {
   loading: true,
-  cart: {}
+  cart: {},
+  superheroes: {}
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
       case GOT_CART_ITEMS:
-        return {loading: false, cart: action.cart}
+        return {loading: false, cart: action.cart, superheroes: action.superheroes}
       case REMOVE_CART_ITEM:
-        console.log("HERE!!!", state)
         return {
           ...state, 
           cart: {
             ...state.cart, 
             itemizedOrders: state.cart.itemizedOrders.filter((item) => (item.superheroId !== action.superheroId))
           },
-          loading: false};
+          loading: false,
+          superheroes: {...state.superheroes}
+        };
       default:
         return state;
     }

@@ -2509,7 +2509,7 @@ class AllUsers extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         key: user.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
         scope: "row"
-      }, user.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.administrator));
+      }, user.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.email));
     }))));
   }
 

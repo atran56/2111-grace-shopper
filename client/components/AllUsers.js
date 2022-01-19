@@ -23,7 +23,6 @@ export class AllUsers extends React.Component {
                 <tr key={user.id}>
                   <td scope="row">{user.id}</td>
                   <td>{user.email}</td>
-                  <td>{user.administrator}</td>
                 </tr>
               );
             })}

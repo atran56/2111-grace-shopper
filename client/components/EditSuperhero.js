@@ -99,9 +99,9 @@ class EditSuperhero extends React.Component {
         </label>
         <input
           className="form-control"
-          type="file"
-          id="formFile"
+          id="exampleFormControlInput1"
           name="image"
+          onChange={this.handleChange}
           value={image}
         />
         <br />

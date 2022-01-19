@@ -10,6 +10,7 @@ const requireToken = async (req, res, next) => {
 
     const user = await User.findByToken(token);
     req.user = user;
+    // maybe try next(req, res, next)
     next();
   } catch (error) {
     next(error);

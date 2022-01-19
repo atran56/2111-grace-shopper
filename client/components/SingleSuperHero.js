@@ -27,7 +27,6 @@ export class SingleSuperHero extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addToCart({
-      userId: 1,
       superheroId: this.props.superhero.id,
       days: this.state.days,
     });

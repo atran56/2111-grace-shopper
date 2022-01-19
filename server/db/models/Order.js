@@ -5,6 +5,7 @@ const Order = db.define("order", {
   totalDays: {
     type: Sequelize.INTEGER,
     allowNull: false,
+    defaultValue: 0
   },
   checkOut: {
     type: Sequelize.BOOLEAN,

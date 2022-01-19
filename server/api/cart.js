@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
         },
         where: {
           //this needs to change once we can get the JWT token from authentication header
-            userId: req.body.userId,
+            userId: 1,
             checkOut: false
         }
     });  

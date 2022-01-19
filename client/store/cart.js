@@ -6,14 +6,15 @@ const GOT_CART_ITEMS = "GOT_CART_ITEMS";
 // Action Creator
 const gotCartItems = cart => ({
     type: GOT_CART_ITEMS,
-    cart,
+    cart
   });
 
 // Thunks
-export const fetchCart = (userId) => {
+//NEED TO EDIT FETCHCART LATER ONCE JWT IS FIGURED OUT
+export const fetchCart = () => {
   return async dispatch => {
     try {
-        const { data: cart } = await axios.get('/api/cart', userId);
+        const { data: cart } = await axios.get('/api/cart');
         dispatch(gotCartItems(cart));
     }
     catch (error) {
@@ -23,15 +24,17 @@ export const fetchCart = (userId) => {
 };
 
 // Sub-Reducer
-const initialState = {};
+const initialState = {
+  loading: true,
+  cart: {}
+};
 
-const cartReducer = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
       case GOT_CART_ITEMS:
-        return action.cart;
+        return {loading: false, cart: action.cart}
       default:
         return state;
     }
   };
   
-  export default cartReducer;

@@ -5,9 +5,22 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      days: 0
+    }
+    this.handleChange = this.handleChange.bind(this);
+  }
   componentDidMount() {
     this.props.fetchCart()
   }
+  handleChange(e) {
+    this.setState({
+      days: e.target.value
+    });
+  }
+
   render() {
     if (this.props.cart.loading) {
       return (<p>Data is loading...</p>)
@@ -40,9 +53,19 @@ class Cart extends React.Component {
                     </th>
                     <td>${this.props.cart.superheroes[item.superheroId].cost}</td>
                     <td>
-                    <div className="counter">
-                    <input width="50px" type="number" className="form-control" id="input" value={item.days} min="0" max="14"/>
-                    </div>
+                    <select className="form-select"onChange={this.handleChange}>
+                <option value={item.days}>{item.days}</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                </select>
                   </td>
                   <td>${item.subtotal}</td>
                   <td><button type="button" onClick={() => this.props.deleteItem({orderId: item.orderId, superheroId: item.superheroId})} className="btn btn-link">remove</button></td>
@@ -74,7 +97,6 @@ class Cart extends React.Component {
     )
   }
 }
-
 const mapState = (state) => ({
     cart: state.cart,
     loading: state.loading,

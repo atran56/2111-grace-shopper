@@ -7,6 +7,7 @@ export class AllUsers extends React.Component {
     this.props.getUsers();
   }
   render() {
+    console.log(this.props.users);
     return (
       <div id="user-list">
         <table className="table">
@@ -14,7 +15,6 @@ export class AllUsers extends React.Component {
             <tr>
               <th scope="col">User ID</th>
               <th scope="col">Email</th>
-              <th scope="col">Is Admin?</th>
             </tr>
           </thead>
           <tbody>

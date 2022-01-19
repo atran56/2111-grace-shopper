@@ -27,7 +27,7 @@ export class Home extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
     email: state.auth.email,
   };

@@ -1,6 +1,6 @@
 import React from "react";
 import { fetchSuperhero } from "../store/singleSuperhero";
-import { addToCart } from "../store/Cart";
+import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 export class SingleSuperHero extends React.Component {
   constructor(props) {
@@ -26,12 +26,16 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addToCart({userId: 1, superheroId: this.props.superhero.id, days: this.state.days});
+    this.props.addToCart({
+      userId: 1,
+      superheroId: this.props.superhero.id,
+      days: this.state.days,
+    });
     this.setState({
       days: 0,
-      total: 0
+      total: 0,
     });
-}
+  }
 
   render() {
     return (
@@ -97,7 +101,7 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   fetchSuperhero: (id) => dispatch(fetchSuperhero(id)),
-  addToCart: (item) => dispatch(addToCart(item))
+  addToCart: (item) => dispatch(addToCart(item)),
 });
 
 export default connect(mapState, mapDispatch)(SingleSuperHero);

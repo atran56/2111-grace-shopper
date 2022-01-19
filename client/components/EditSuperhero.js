@@ -132,16 +132,16 @@ class EditSuperhero extends React.Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
     superhero: state.singleSuperHero,
   };
 };
 
 const mapDispatch = (dispatch, { history }) => ({
-  fetchSuperhero: superheroId => dispatch(fetchSuperhero(superheroId)),
-  updateSuperhero: superhero => dispatch(updateSuperhero(superhero, history)),
-  deleteSuperhero: superhero => dispatch(deleteSuperhero(superhero, history)),
+  fetchSuperhero: (superheroId) => dispatch(fetchSuperhero(superheroId)),
+  updateSuperhero: (superhero) => dispatch(updateSuperhero(superhero, history)),
+  deleteSuperhero: (superhero) => dispatch(deleteSuperhero(superhero, history)),
   clearSuperhero: () => dispatch(_setSuperhero({})),
 });
 

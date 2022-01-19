@@ -50,7 +50,6 @@ router.post("/", async (req, res, next) => {
 router.delete("/", async (req, res, next) => {
   try {
     //finds the cart item by the userId and superheroId
-    console.log(req.body)
     const cartItemToDelete = await ItemizedOrder.findOne({ where: {orderId: req.body.orderId, superheroId: req.body.superheroId} }); 
     const orderId = cartItemToDelete.orderId; 
     //delete item 
@@ -68,10 +67,12 @@ router.delete("/", async (req, res, next) => {
 router.patch("/", async (req, res, next) => {
     try {
       //finds the cart item by the userId and superheroId
-        const updatedCartItem = await ItemizedOrder.findOne({ where: {orderId: req.body.orderId, superheroId: req.body.superheroId} }); 
+      console.log(req.body.data)
+        const updatedCartItem = await ItemizedOrder.findOne({ where: {orderId: req.body.data.orderId, superheroId: req.body.data.superheroId} }); 
         //updates the cart item days 
         await updatedCartItem.update({
-          days: req.body.days
+          days: req.body.data.days,
+          // subtotal: PICK UP AGAIN HERE!
         });
         //calling my helper function to update the cart totalDays
         await updateOrder(updatedCartItem.orderId);

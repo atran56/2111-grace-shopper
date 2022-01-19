@@ -2092,7 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_AllSuperheroes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/AllSuperheroes */ "./client/components/AllSuperheroes.js");
 /* harmony import */ var _components_Cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js");
 /* harmony import */ var _components_EditSuperhero__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/EditSuperhero */ "./client/components/EditSuperhero.js");
@@ -2102,6 +2102,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
 /* harmony import */ var _components_Confirmation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Confirmation */ "./client/components/Confirmation.js");
 /* harmony import */ var _components_AddSuperhero__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/AddSuperhero */ "./client/components/AddSuperhero.js");
+/* harmony import */ var _components_CheckoutForm__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/CheckoutForm */ "./client/components/CheckoutForm.js");
+/* harmony import */ var _components_AllUsers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/AllUsers */ "./client/components/AllUsers.js");
+
+
 
 
 
@@ -2127,57 +2131,65 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const {
       isLoggedIn
     } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/home",
       component: _components_Home__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/superheroes/:id",
       component: _components_SingleSuperHero__WEBPACK_IMPORTED_MODULE_7__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/cart",
       component: _components_Cart__WEBPACK_IMPORTED_MODULE_3__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/superheroes",
       exact: true,
       component: _components_AllSuperheroes__WEBPACK_IMPORTED_MODULE_2__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/superheroes/:id/edit",
       component: _components_EditSuperhero__WEBPACK_IMPORTED_MODULE_4__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/add",
       component: _components_AddSuperhero__WEBPACK_IMPORTED_MODULE_10__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      exact: true,
+      path: "/checkout",
+      component: _components_CheckoutForm__WEBPACK_IMPORTED_MODULE_11__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      exact: true,
+      path: "/users",
+      component: _components_AllUsers__WEBPACK_IMPORTED_MODULE_12__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/confirmation",
       component: _components_Confirmation__WEBPACK_IMPORTED_MODULE_9__["default"]
-    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/home",
       component: _components_Home__WEBPACK_IMPORTED_MODULE_6__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-      path: "/",
-      exact: true,
-      component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_5__.Login
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/login",
       component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_5__.Login
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/signup",
       component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_5__.Signup
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/superheroes/:id",
       component: _components_SingleSuperHero__WEBPACK_IMPORTED_MODULE_7__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/cart",
       component: _components_Cart__WEBPACK_IMPORTED_MODULE_3__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/superheroes",
       component: _components_AllSuperheroes__WEBPACK_IMPORTED_MODULE_2__["default"]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
+      exact: true,
+      path: "/checkout",
+      component: _components_CheckoutForm__WEBPACK_IMPORTED_MODULE_11__["default"]
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/confirmation",
       component: _components_Confirmation__WEBPACK_IMPORTED_MODULE_9__["default"]
@@ -2209,7 +2221,7 @@ const mapDispatch = dispatch => {
 // when the url changes
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_11__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Routes)));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_13__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(Routes)));
 
 /***/ }),
 
@@ -2325,10 +2337,12 @@ class AddSuperhero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
       htmlFor: "formFile",
       className: "form-label"
-    }, "Superhero Image"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    }, "Superhero Image URL"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       className: "form-control",
-      type: "file",
-      id: "formFile"
+      id: "exampleFormControlInput1",
+      name: "image",
+      onChange: this.handleChange,
+      value: image
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       style: {
         marginRight: "10px",
@@ -2449,6 +2463,67 @@ const mapDispatch = dispatch => ({
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(AllSuperheroes));
+
+/***/ }),
+
+/***/ "./client/components/AllUsers.js":
+/*!***************************************!*\
+  !*** ./client/components/AllUsers.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AllUsers": () => (/* binding */ AllUsers),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_users__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/users */ "./client/store/users.js");
+
+
+
+class AllUsers extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  componentDidMount() {
+    this.props.getUsers();
+  }
+
+  render() {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      id: "user-list"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
+      className: "table"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+      scope: "col"
+    }, "User ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+      scope: "col"
+    }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+      scope: "col"
+    }, "Is Admin?"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.users.map(user => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
+        key: user.id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
+        scope: "row"
+      }, user.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.administrator));
+    }))));
+  }
+
+}
+
+const mapState = state => {
+  return {
+    users: state.users
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    getUsers: () => dispatch((0,_store_users__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)())
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(AllUsers));
 
 /***/ }),
 
@@ -2741,6 +2816,8 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
     if (this.props.cart.loading) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
+    } else if (this.props.cart.cart.itemizedOrders.length === 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "0 Superheroes in your cart");
     }
 
     const subtotal = this.props.cart.cart.itemizedOrders.reduce((acc, item) => {
@@ -2752,7 +2829,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "col-md-12"
-    }, this.props.cart.cart.itemizedOrders.length <= 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.cart.cart.itemizedOrders.length, " Superhero in your cart") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.cart.cart.itemizedOrders.length, " Superheroes in your cart"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, this.props.cart.cart.itemizedOrders.length === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "1 Superhero in your cart") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.cart.cart.itemizedOrders.length, " Superheroes in your cart"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "cart-table"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
       className: "table table-hover"
@@ -2823,10 +2900,12 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onClick: this.handleSubmit,
       type: "button",
       className: "btn btn-light"
-    }, "Update Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }, "Update Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/checkout"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "button",
       className: "btn btn-success"
-    }, "Checkout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, "Checkout"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "float-start"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: "/superheroes"
@@ -2851,6 +2930,334 @@ const mapDispatch = dispatch => ({
 });
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mapState, mapDispatch)(Cart));
+
+/***/ }),
+
+/***/ "./client/components/CheckoutForm.js":
+/*!*******************************************!*\
+  !*** ./client/components/CheckoutForm.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store_order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/order */ "./client/store/order.js");
+/* harmony import */ var _store_orders__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/orders */ "./client/store/orders.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
+
+
+
+
+
+
+
+
+class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor() {
+    super();
+    this.state = {
+      userId: 0,
+      checkOut: false
+    };
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    console.log("CHECKOUT COMPONENT MOUNTING. this.props: ", this.props);
+    this.props.fetchOrder(this.props.userId);
+    this.props.fetchCart();
+  }
+
+  handleSubmit(evt) {
+    evt.preventDefault();
+    console.log('THIS.PROPS.ORDER FROM HANDLESUBMIT: ', this.props.order);
+    this.props.completeOrder({
+      id: this.props.order.data.id,
+      userId: this.props.order.data.userId,
+      checkOut: true,
+      totalDays: this.props.order.data.totalDays
+    });
+    this.props.createOrder({
+      orderId: this.props.order.data.id,
+      totalDays: this.props.order.data.totalDays,
+      userId: this.props.userId,
+      checkOut: false
+    });
+  }
+
+  render() {
+    if (this.props.cart.loading) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "container"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "row mt-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Total items in cart: ", this.props.cart.cart.itemizedOrders.length, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "Total order cost: $", this.props.cart.cart.itemizedOrders.reduce((acc, item) => {
+      return acc + item.subtotal;
+    }, 0))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "row mt-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-8 order-md-1"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+      className: "mb-3"
+    }, "Billing address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      onSubmit: this.handleSubmit,
+      className: "needs-validation",
+      noValidate: true
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-6 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "firstName"
+    }, "First name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "firstName",
+      placeholder: "First Name",
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Valid first name is required. ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-6 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "lastName"
+    }, "Last name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "lastName",
+      placeholder: "Last Name",
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Valid last name is required. "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "email"
+    }, "Email ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      className: "text-muted"
+    }, "(Optional)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "email",
+      className: "form-control",
+      id: "email",
+      placeholder: "you@example.com"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Please enter a valid email address for shipping updates. ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "address"
+    }, "Address"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "address",
+      placeholder: "1234 Main St",
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Please enter your shipping address. ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "address2"
+    }, "Address 2 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+      className: "text-muted"
+    }, "(Optional)")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "address2",
+      placeholder: "Apartment or suite"
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-5 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "country"
+    }, "Country"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      className: "custom-select d-block w-100",
+      id: "country",
+      required: true
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: true
+    }, "Choose..."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "United States")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Please select a valid country. ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-4 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "state"
+    }, "State"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+      className: "custom-select d-block w-100",
+      id: "state",
+      required: true
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+      value: true
+    }, "Choose..."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "California")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Please provide a valid state. ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-3 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "zip"
+    }, "Zip"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "zip",
+      placeholder: true,
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Zip code required. "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
+      className: "mb-4"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "custom-control custom-checkbox"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "same-address"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "same-address"
+    }, "Shipping address is the same as my billing address")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "custom-control custom-checkbox"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "checkbox",
+      className: "custom-control-input",
+      id: "save-info"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "save-info"
+    }, "Save this information for next time")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
+      className: "mb-4"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", {
+      className: "mb-3"
+    }, "Payment"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "d-block my-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "custom-control custom-radio"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      id: "credit",
+      name: "paymentMethod",
+      type: "radio",
+      className: "custom-control-input",
+      defaultChecked: true,
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "credit"
+    }, "Credit card")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "custom-control custom-radio"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      id: "debit",
+      name: "paymentMethod",
+      type: "radio",
+      className: "custom-control-input",
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "debit"
+    }, "Debit card")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "custom-control custom-radio"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      id: "paypal",
+      name: "paymentMethod",
+      type: "radio",
+      className: "custom-control-input",
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      className: "custom-control-label",
+      htmlFor: "paypal"
+    }, "PayPal"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-6 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "cc-name"
+    }, "Name on card"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "cc-name",
+      placeholder: true,
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("small", {
+      className: "text-muted"
+    }, "Full name as displayed on card"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Name on card is required ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-6 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "cc-number"
+    }, "Credit card number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "cc-number",
+      placeholder: true,
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Credit card number is required "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-3 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "cc-expiration"
+    }, "Expiration"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "cc-expiration",
+      placeholder: true,
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Expiration date required ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "col-md-3 mb-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      htmlFor: "cc-cvv"
+    }, "CVV"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      type: "text",
+      className: "form-control",
+      id: "cc-cvv",
+      placeholder: true,
+      required: true
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      className: "invalid-feedback"
+    }, " Security code required "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
+      className: "mb-4"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+      to: "/confirmation"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: "btn btn-primary btn-lg btn-block"
+    }, "Complete Purchase"))))));
+  }
+
+}
+
+const mapState = state => {
+  console.log("***STATE.AUTH:", state.auth);
+  return {
+    userId: state.auth.id,
+    order: state.order,
+    cart: state.cart,
+    loading: state.loading,
+    superheroes: state.superheroes
+  };
+};
+
+const mapDispatch = dispatch => {
+  return {
+    fetchCart: () => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_4__.fetchCart)()),
+    fetchOrder: id => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.fetchOrder)(id)),
+    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order)),
+    createOrder: order => dispatch((0,_store_orders__WEBPACK_IMPORTED_MODULE_3__.createOrder)(order))
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState, mapDispatch)(CheckoutForm));
 
 /***/ }),
 
@@ -3122,7 +3529,8 @@ __webpack_require__.r(__webpack_exports__);
 
 const Navbar = ({
   handleClick,
-  isLoggedIn
+  isLoggedIn,
+  isAdmin
 }) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
   className: "title"
 }, "Rent Your Superhero!"), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
@@ -3170,7 +3578,12 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/cart"
-}, "Cart"))))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+}, "Cart")), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+  className: "nav-item"
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+  className: "nav-link",
+  href: "/users"
+}, "View Users")) : null))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
   className: "navbar navbar-expand-sm navbar-light bg-light"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
   className: "container-fluid"
@@ -3227,7 +3640,8 @@ const Navbar = ({
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.auth.id
+    isLoggedIn: !!state.auth.id,
+    isAdmin: state.auth.administrator
   };
 };
 
@@ -3651,16 +4065,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.logout),
 /* harmony export */   "me": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.me)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./client/store/auth.js");
 /* harmony import */ var _superheroes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./superheroes */ "./client/store/superheroes.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
 /* harmony import */ var _singleSuperhero__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./singleSuperhero */ "./client/store/singleSuperhero.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./users */ "./client/store/users.js");
+/* harmony import */ var _orders__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./orders */ "./client/store/orders.js");
+/* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./order */ "./client/store/order.js");
 
 
 
@@ -3670,19 +4086,141 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_7__.combineReducers)({
+
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_9__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
   superheroes: _superheroes__WEBPACK_IMPORTED_MODULE_3__["default"],
   singleSuperHero: _singleSuperhero__WEBPACK_IMPORTED_MODULE_5__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_4__["default"],
-  users: _users__WEBPACK_IMPORTED_MODULE_6__["default"]
+  users: _users__WEBPACK_IMPORTED_MODULE_6__["default"],
+  orders: _orders__WEBPACK_IMPORTED_MODULE_7__["default"],
+  order: _order__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
-const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_7__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_8__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_9__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_10__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_7__.createStore)(reducer, middleware);
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_9__.createStore)(reducer, middleware);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
+
+/***/ }),
+
+/***/ "./client/store/order.js":
+/*!*******************************!*\
+  !*** ./client/store/order.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "fetchOrder": () => (/* binding */ fetchOrder),
+/* harmony export */   "completeOrder": () => (/* binding */ completeOrder),
+/* harmony export */   "default": () => (/* binding */ order)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ //TYPES
+
+const GET_ORDER = "GET_ORDER";
+const COMPLETE_ORDER = "COMPLETE_ORDER"; //ACTIONS
+
+const _gotOrder = order => {
+  return {
+    type: GET_ORDER,
+    order
+  };
+};
+
+const _completedOrder = order => {
+  return {
+    type: COMPLETE_ORDER,
+    order
+  };
+}; //THUNKS
+
+
+const fetchOrder = id => {
+  return async dispatch => {
+    try {
+      console.log("FETCH ORDER THUNK");
+      const data = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/orders/${id}`);
+      dispatch(_gotOrder(data));
+    } catch (err) {
+      console.log("FETCHORDER THUNK ERROR: ", err);
+    }
+  };
+};
+const completeOrder = order => {
+  console.log("**ORDER submitted to thunk: ", order);
+  return async dispatch => {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders", order);
+    dispatch(_completedOrder(data));
+  };
+}; //REDUCER
+
+function order(state = {}, action) {
+  switch (action.type) {
+    case GET_ORDER:
+      return action.order;
+
+    case COMPLETE_ORDER:
+      return action.order;
+
+    default:
+      return state;
+  }
+}
+
+/***/ }),
+
+/***/ "./client/store/orders.js":
+/*!********************************!*\
+  !*** ./client/store/orders.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createOrder": () => (/* binding */ createOrder),
+/* harmony export */   "default": () => (/* binding */ orders)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ //TYPES
+
+const CREATE_ORDER = "CREATE_ORDER"; //ACTIONS
+
+const _createdOrder = order => {
+  return {
+    type: CREATE_ORDER,
+    order
+  };
+}; //THUNKS
+
+
+const createOrder = order => {
+  return async dispatch => {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/orders", order);
+    dispatch(_createdOrder(data));
+  };
+}; //REDUCER
+
+function orders(state = [], action) {
+  switch (action.type) {
+    case CREATE_ORDER:
+      return [...state, action.order];
+
+    default:
+      return state;
+  }
+}
 
 /***/ }),
 
@@ -3850,7 +4388,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
  // Action Type
 
-const GOT_USERS = "GOT_USERS"; // Action Creator
+const GOT_USERS = "GOT_USERS";
+const TOKEN = "token"; // Action Creator
 
 const _gotUsers = users => ({
   type: GOT_USERS,
@@ -3861,10 +4400,18 @@ const _gotUsers = users => ({
 const fetchUsers = () => {
   return async dispatch => {
     try {
-      const {
-        data: users
-      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/users");
-      dispatch(_gotUsers(users));
+      const token = window.localStorage.getItem(TOKEN);
+
+      if (token) {
+        const {
+          data: users
+        } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get("api/users", {
+          headers: {
+            authorization: token
+          }
+        });
+        dispatch(_gotUsers(users));
+      }
     } catch (err) {
       console.log(err);
     }

@@ -32,18 +32,18 @@ router.post("/", requireToken, async (req, res, next) => {
   try {
     //if(orderBelongsToUser(req.user, req.body.data.orderId)) {
       //finding the open cart that matches up to the userID (we will need to change this when we get the JWT token)
-      const cart = await Order.findOne({ where: { userId: req.user.id, checkOut: false } });
+      const cart = await Order.findOrCreate({ where: { userId: req.user.id, checkOut: false } });
       //finding the right superhero
       const hero = await Superhero.findByPk(req.body.data.superheroId);
       //creating the new ItemizedOrder instance (new cart item)
       const newCartItem = await ItemizedOrder.create({
         days: req.body.data.days,
         subtotal: req.body.data.days * hero.cost,
-        orderId: cart.id,
+        orderId: cart[0].id,
         superheroId: hero.id,
       });
       //update total days on order
-      await updateOrder(cart.id);
+      await updateOrder(cart[0].id);
       res.status(200).send(newCartItem);
     }
     //else {

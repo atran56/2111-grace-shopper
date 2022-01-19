@@ -40,6 +40,9 @@ class Cart extends React.Component {
     if (this.props.cart.loading) {
       return <p>Data is loading...</p>;
     }
+    else if (this.props.cart.cart.itemizedOrders.length === 0) {
+      return <h1>0 Superheroes in your cart</h1>
+    }
     const subtotal = this.props.cart.cart.itemizedOrders.reduce((acc, item) => {
       return acc + item.subtotal;
     }, 0);
@@ -47,12 +50,8 @@ class Cart extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            {this.props.cart.cart.itemizedOrders.length <= 1 ? (
-              <h4>
-                {this.props.cart.cart.itemizedOrders.length} Superhero in your
-                cart
-              </h4>
-            ) : (
+            {this.props.cart.cart.itemizedOrders.length === 1 ? (
+              <h4>1 Superhero in your cart</h4>) : (
               <h4>
                 {this.props.cart.cart.itemizedOrders.length} Superheroes in your
                 cart

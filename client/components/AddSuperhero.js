@@ -98,9 +98,15 @@ class AddSuperhero extends Component {
           />
           <br />
           <label htmlFor="formFile" className="form-label">
-            Superhero Image
+            Superhero Image URL
           </label>
-          <input className="form-control" type="file" id="formFile" />
+          <input
+            className="form-control"
+            id="exampleFormControlInput1"
+            name="image"
+            onChange={this.handleChange}
+            value={image}
+          />
           <br />
           <button
             style={{ marginRight: "10px", marginLeft: "45%" }}

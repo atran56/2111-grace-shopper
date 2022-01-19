@@ -11,6 +11,7 @@ import SingleSuperHero from "./components/SingleSuperHero";
 import { me } from "./store";
 import Confirmation from "./components/Confirmation";
 import AddSuperhero from "./components/AddSuperhero";
+import AllUsers from "./components/AllUsers";
 
 /**
  * COMPONENT
@@ -39,14 +40,14 @@ class Routes extends Component {
               component={EditSuperhero}
             />
             <Route exact path="/add" component={AddSuperhero} />
+            <Route exact path="/users" component={AllUsers} />
             <Route exact path="/confirmation" component={Confirmation} />
           </Switch>
         ) : (
           <Switch>
             <Route path="/home" component={Home} />
-            <Route path="/" exact component={Login} />
-            <Route path="/login" component={Login} />
 
+            <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/superheroes/:id" component={SingleSuperHero} />
             <Route path="/cart" component={Cart} />

@@ -1,5 +1,4 @@
 const router = require("express").Router();
-//const { redirect } = require("express/lib/response");
 const ItemizedOrder = require("../db/models/ItemizedOrder");
 const Order = require("../db/models/Order");
 const Superhero = require("../db/models/superhero");
@@ -30,12 +29,12 @@ router.get("/", async (req, res, next) => {
 router.post("/", async (req, res, next) => {
   try {
     //finding the open cart that matches up to the userID (we will need to change this when we get the JWT token) 
-    const cart = await Order.findOne({ where: {userId: req.body.userId, checkOut: false}}); 
+    const cart = await Order.findOne({ where: {userId: 1, checkOut: false}}); 
     //finding the right superhero
-    const hero = await Superhero.findByPk(req.body.superheroId);  
+    const hero = await Superhero.findByPk(req.body.data.superheroId);  
     //creating the new ItemizedOrder instance (new cart item)
     const newCartItem = await ItemizedOrder.create({
-      days: req.body.days, subtotal: req.body.days * hero.cost, orderId: cart.id, superheroId: hero.id
+      days: req.body.data.days, subtotal: (req.body.data.days * hero.cost), orderId: cart.id, superheroId: hero.id
     });
     //update total days on order
     await updateOrder(cart.id)
@@ -67,10 +66,12 @@ router.delete("/", async (req, res, next) => {
 router.patch("/", async (req, res, next) => {
     try {
       //finds the cart item by the userId and superheroId
-        const updatedCartItem = await ItemizedOrder.findOne({ where: {orderId: req.body.orderId, superheroId: req.body.superheroId} }); 
+        const hero = await Superhero.findByPk(req.body.data.superheroId); 
+        const updatedCartItem = await ItemizedOrder.findOne({ where: {orderId: req.body.data.orderId, superheroId: req.body.data.superheroId} }); 
         //updates the cart item days 
         await updatedCartItem.update({
-          days: req.body.days
+          days: req.body.data.days,
+          subtotal: req.body.data.days * hero.cost
         });
         //calling my helper function to update the cart totalDays
         await updateOrder(updatedCartItem.orderId);

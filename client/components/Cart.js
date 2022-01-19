@@ -1,19 +1,42 @@
 import React from "react";
 import { fetchCart } from "../store/Cart";
-import { fetchSuperheroes } from "../store/superheroes";
+import { deleteItem } from "../store/Cart";
 import { connect } from "react-redux";
+import { editCartItem } from "../store/Cart";
 import { Link } from "react-router-dom";
 
 class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      days: 0,
+      currHero: null
+    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   componentDidMount() {
     this.props.fetchCart()
-    this.props.fetchSuperheroes()
+  }
+  handleChange(e) {
+    this.setState({
+      days: e.target.value,
+      currHero: Number(e.target.className)
+    });
+  }
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.props.editCartItem({orderId: this.props.cart.cart.id, superheroId: this.state.currHero, days: this.state.days});
+    this.setState({
+      days: 0,
+      currHero: null
+    });
   }
   render() {
     if (this.props.cart.loading) {
       return (<p>Data is loading...</p>)
     }
-    const subTotal = this.props.cart.cart.itemizedOrders.reduce((acc, currVal) => acc.subtotal + currVal.subtotal)
+    const subtotal = this.props.cart.cart.itemizedOrders.reduce((acc, item) => {return acc + item.subtotal;}, 0)
     return (
       <div className="container">
         <div className="row">
@@ -37,16 +60,26 @@ class Cart extends React.Component {
                 {this.props.cart.cart.itemizedOrders.map(item => (
                   <tr>
                     <th scope="row">
-                      <img src={this.props.superheroes.filter(hero => {return (hero.id === item.superheroId)})[0].image} style={{ width: '150px', height: '150px', borderRadius: '50%'}}/>
+                      <img src={this.props.cart.superheroes[item.superheroId].image} style={{ width: '150px', height: '150px', borderRadius: '50%'}}/>
                     </th>
-                    <td>${this.props.superheroes.filter(hero => {return (hero.id === item.superheroId)})[0].cost}</td>
+                    <td>${this.props.cart.superheroes[item.superheroId].cost}</td>
                     <td>
-                    <div className="counter">
-                    <input width="50px" type="number" className="form-control" id="input" value={item.days} min="0" max="14"/>
-                    </div>
+                      <select className={this.props.cart.superheroes[item.superheroId].id}onChange={this.handleChange}>
+                        <option value={item.days} >{item.days}</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                  </select>
                   </td>
-                  <td>${item.subtotal}</td>
-                  <td><button type="button" class="btn btn-link">remove</button></td>
+                  <td>${parseFloat(item.subtotal).toFixed(2)}</td>
+                  <td><button type="button" onClick={() => this.props.deleteItem({orderId: item.orderId, superheroId: item.superheroId})} className="btn btn-link">remove</button></td>
                 </tr>
                 ))}
                 <tr>
@@ -54,14 +87,14 @@ class Cart extends React.Component {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>SUBTOTAL: ${subTotal}</td>
+                  <td>SUBTOTAL: ${parseFloat(subtotal).toFixed(2)}</td>
                 </tr>
               </tbody>
             </table>
           </div>
           <div>
             <div className="float-end">
-              <button type="button" className="btn btn-light">Update Cart</button>
+              <button type="submit" onClick={this.handleSubmit} type="button" className="btn btn-light">Update Cart</button>
               <button type="button" className="btn btn-success">Checkout</button>
             </div>
             <div className="float-start">
@@ -70,12 +103,10 @@ class Cart extends React.Component {
               </Link>
             </div>
           </div>
-      </div>
-      
+      </div>   
     )
   }
 }
-
 const mapState = (state) => ({
     cart: state.cart,
     loading: state.loading,
@@ -84,7 +115,8 @@ const mapState = (state) => ({
   
   const mapDispatch = (dispatch) => ({
     fetchCart: () => dispatch(fetchCart()),
-    fetchSuperheroes: () => dispatch(fetchSuperheroes())
+    deleteItem: (item) => dispatch(deleteItem(item)),
+    editCartItem: (item) => dispatch(editCartItem(item))
   });
   
   export default connect(mapState, mapDispatch)(Cart);

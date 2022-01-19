@@ -66,12 +66,12 @@ router.delete("/", async (req, res, next) => {
 router.patch("/", async (req, res, next) => {
     try {
       //finds the cart item by the userId and superheroId
-      console.log(req.body.data)
+        const hero = await Superhero.findByPk(req.body.data.superheroId); 
         const updatedCartItem = await ItemizedOrder.findOne({ where: {orderId: req.body.data.orderId, superheroId: req.body.data.superheroId} }); 
         //updates the cart item days 
         await updatedCartItem.update({
           days: req.body.data.days,
-          // subtotal: PICK UP AGAIN HERE!
+          subtotal: req.body.data.days * hero.cost
         });
         //calling my helper function to update the cart totalDays
         await updateOrder(updatedCartItem.orderId);

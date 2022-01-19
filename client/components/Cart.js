@@ -78,7 +78,7 @@ class Cart extends React.Component {
                         <option value="10">10</option>
                   </select>
                   </td>
-                  <td>${item.subtotal}</td>
+                  <td>${parseFloat(item.subtotal).toFixed(2)}</td>
                   <td><button type="button" onClick={() => this.props.deleteItem({orderId: item.orderId, superheroId: item.superheroId})} className="btn btn-link">remove</button></td>
                 </tr>
                 ))}
@@ -87,7 +87,7 @@ class Cart extends React.Component {
                   <td></td>
                   <td></td>
                   <td></td>
-                  <td>SUBTOTAL: ${subtotal}</td>
+                  <td>SUBTOTAL: ${parseFloat(subtotal).toFixed(2)}</td>
                 </tr>
               </tbody>
             </table>

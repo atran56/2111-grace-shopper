@@ -39,10 +39,16 @@ class Cart extends React.Component {
   render() {
     const token = window.localStorage.getItem('token');
     if(!token) {
-      return <h2>You must be logged in to create/view your cart!</h2>
+      return (
+      <div>
+      <h1>0 Superheroes in your cart</h1>
+      <div class="alert alert-warning" role="alert">
+      Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+      </div>
+      </div>)
     }
     if (this.props.cart.loading) {
-      return <p>Data is loading...</p>;
+      return <p>Data is loading...</p>
     }
     else if (this.props.cart.cart.itemizedOrders.length === 0) {
       return <h1>0 Superheroes in your cart</h1>

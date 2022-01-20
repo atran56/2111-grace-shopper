@@ -2817,7 +2817,14 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const token = window.localStorage.getItem('token');
 
     if (!token) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "You must be logged in to create/view your cart!");
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "0 Superheroes in your cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        class: "alert alert-warning",
+        role: "alert"
+      }, "Only members can book our Superheroes ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: "/login"
+      }, "Please log in"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: "/signup"
+      }, "Create an account")));
     }
 
     if (this.props.cart.loading) {
@@ -3737,7 +3744,10 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     let bookAlert;
 
     if (this.state.added) {
-      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.name, " has been added to your cart!");
+      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        class: "alert alert-success",
+        role: "alert"
+      }, this.props.superhero.name, " has been added to your cart!");
     } else if (!this.state.validUser) {
       bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         class: "alert alert-danger",

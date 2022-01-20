@@ -51,7 +51,10 @@ export class SingleSuperHero extends React.Component {
   render() {
     let bookAlert;
     if(this.state.added) {
-      bookAlert = <p>{this.props.superhero.name} has been added to your cart!</p>
+      bookAlert = 
+      <div class="alert alert-success" role="alert">
+        {this.props.superhero.name} has been added to your cart!
+      </div>
     }
     else if(!this.state.validUser) {
       bookAlert = <div class="alert alert-danger" role="alert">

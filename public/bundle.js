@@ -3682,6 +3682,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_singleSuperhero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/singleSuperhero */ "./client/store/singleSuperhero.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
 
 
 
@@ -3737,7 +3739,14 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     if (this.state.added) {
       bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.name, " has been added to your cart!");
     } else if (!this.state.validUser) {
-      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You must be logged in to book a Superhero!");
+      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        class: "alert alert-danger",
+        role: "alert"
+      }, "You must be logged in to book our Superheroes! ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+        to: "/login"
+      }, "Please log in"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+        to: "/signup"
+      }, "Create an account"));
     } else {
       bookAlert = null;
     }

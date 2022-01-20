@@ -2,6 +2,7 @@ import React from "react";
 import { fetchSuperhero } from "../store/singleSuperhero";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 export class SingleSuperHero extends React.Component {
   constructor(props) {
     super(props);
@@ -53,7 +54,9 @@ export class SingleSuperHero extends React.Component {
       bookAlert = <p>{this.props.superhero.name} has been added to your cart!</p>
     }
     else if(!this.state.validUser) {
-      bookAlert = <p>You must be logged in to book a Superhero!</p>
+      bookAlert = <div class="alert alert-danger" role="alert">
+      You must be logged in to book our Superheroes! <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+    </div>
     }
     else {
       bookAlert = null

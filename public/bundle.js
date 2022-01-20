@@ -2858,6 +2858,8 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "col-sm-1"
     }, "Remove"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.cart.cart.itemizedOrders.map(item => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
       scope: "row"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: `/superheroes/${this.props.cart.superheroes[item.superheroId].id}`
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       src: this.props.cart.superheroes[item.superheroId].image,
       style: {
@@ -2865,7 +2867,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         height: "150px",
         borderRadius: "50%"
       }
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", this.props.cart.superheroes[item.superheroId].cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+    }), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", this.props.cart.superheroes[item.superheroId].cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
       className: this.props.cart.superheroes[item.superheroId].id,
       onChange: this.handleChange
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {

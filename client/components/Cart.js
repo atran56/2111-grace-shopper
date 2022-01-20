@@ -88,6 +88,7 @@ class Cart extends React.Component {
               {this.props.cart.cart.itemizedOrders.map((item) => (
                 <tr>
                   <th scope="row">
+                    <Link to={`/superheroes/${this.props.cart.superheroes[item.superheroId].id}`}>
                     <img
                       src={this.props.cart.superheroes[item.superheroId].image}
                       style={{
@@ -95,7 +96,7 @@ class Cart extends React.Component {
                         height: "150px",
                         borderRadius: "50%",
                       }}
-                    />
+                    /> </Link >
                   </th>
                   <td>${this.props.cart.superheroes[item.superheroId].cost}</td>
                   <td>

@@ -3,6 +3,7 @@ const ItemizedOrder = require("../db/models/ItemizedOrder");
 const Order = require("../db/models/Order");
 const Superhero = require("../db/models/superhero");
 const { requireToken } = require("./gateKeepingMiddleware");
+const { updateOrder, orderBelongsToUser } = require("./helper");
 
 //getting the current cart with list of cart items (itemizedOrders)
 router.get("/", requireToken, async (req, res, next) => {
@@ -15,7 +16,6 @@ router.get("/", requireToken, async (req, res, next) => {
         as: "itemizedOrders",
       },
       where: {
-        //this needs to change once we can get the JWT token from authentication header
         userId: user.id,
         checkOut: false,
       },
@@ -30,7 +30,6 @@ router.get("/", requireToken, async (req, res, next) => {
 //add item to cart
 router.post("/", requireToken, async (req, res, next) => {
   try {
-    //if(orderBelongsToUser(req.user, req.body.data.orderId)) {
       //finding the open cart that matches up to the userID (we will need to change this when we get the JWT token)
       const cart = await Order.findOrCreate({ where: { userId: req.user.id, checkOut: false } });
       //finding the right superhero
@@ -46,9 +45,6 @@ router.post("/", requireToken, async (req, res, next) => {
       await updateOrder(cart[0].id);
       res.status(200).send(newCartItem);
     }
-    //else {
-     // throw 'UNAUTHORIZED!'
-    //}} 
     catch (error) {
     next(error);
   }
@@ -57,7 +53,7 @@ router.post("/", requireToken, async (req, res, next) => {
 //deleting an item from the cart
 router.delete("/", requireToken, async (req, res, next) => {
   try {
-    //if(orderBelongsToUser(req.user, req.body.data.orderId)) {
+    if(orderBelongsToUser(req.user, req.body.orderId)) {
       //finds the cart item by the userId and superheroId
       const cartItemToDelete = await ItemizedOrder.findOne({
         where: { orderId: req.body.orderId, superheroId: req.body.superheroId },
@@ -69,9 +65,9 @@ router.delete("/", requireToken, async (req, res, next) => {
       await updateOrder(orderId);
       res.status(204).send();
     }
-    // else {
-    //   throw 'UNAUTHORIZED!'
-    // }}
+    else {
+      throw 'UNAUTHORIZED!'
+    }}
     catch (error) {
     next(error);
   }
@@ -80,7 +76,7 @@ router.delete("/", requireToken, async (req, res, next) => {
 //update item (num of days booked) in cart
 router.patch("/", requireToken, async (req, res, next) => {
   try {
-    //if(orderBelongsToUser(req.user, req.body.data.orderId)) {
+    if(orderBelongsToUser(req.user, req.body.data.orderId)) {
       //finds the cart item by the userId and superheroId
       const hero = await Superhero.findByPk(req.body.data.superheroId);
       const updatedCartItem = await ItemizedOrder.findOne({
@@ -98,32 +94,12 @@ router.patch("/", requireToken, async (req, res, next) => {
       await updateOrder(updatedCartItem.orderId);
       res.status(200).send(updatedCartItem);
     }
-    // else {
-    //   throw 'UNAUTHORIZED'
-    // }}
+    else {
+      throw 'UNAUTHORIZED'
+    }}
     catch (error) {
     next(error);
   }
 });
 
-//helper function to update the cart totalDays
-async function updateOrder(orderId) {
-  const order = await Order.findByPk(orderId, {
-    include: [{ model: ItemizedOrder, as: "itemizedOrders" }],
-  });
-  const newTotalDays = order.itemizedOrders.reduce(
-    (acc, currVal) => acc + currVal.days,
-    0
-  );
-  await order.update({ totalDays: newTotalDays });
-}
-
-// async function orderBelongsToUser(user, orderId) {
-//   console.log(await Order.findAll())
-//   const correctOrder = await Order.findOne({ where: {userId: user.id, id: orderId}})
-//   if (correctOrder) {
-//     return true;
-//   }
-//   return false;
-// }
 module.exports = router;

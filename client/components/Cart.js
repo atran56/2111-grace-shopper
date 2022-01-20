@@ -37,8 +37,18 @@ class Cart extends React.Component {
     });
   }
   render() {
+    const token = window.localStorage.getItem('token');
+    if(!token) {
+      return (
+      <div>
+      <h1>0 Superheroes in your cart</h1>
+      <div class="alert alert-warning" role="alert">
+      Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+      </div>
+      </div>)
+    }
     if (this.props.cart.loading) {
-      return <p>Data is loading...</p>;
+      return <p>Data is loading...</p>
     }
     else if (this.props.cart.cart.itemizedOrders.length === 0) {
       return <h1>0 Superheroes in your cart</h1>
@@ -84,6 +94,7 @@ class Cart extends React.Component {
               {this.props.cart.cart.itemizedOrders.map((item) => (
                 <tr>
                   <th scope="row">
+                    <Link to={`/superheroes/${this.props.cart.superheroes[item.superheroId].id}`}>
                     <img
                       src={this.props.cart.superheroes[item.superheroId].image}
                       style={{
@@ -91,7 +102,7 @@ class Cart extends React.Component {
                         height: "150px",
                         borderRadius: "50%",
                       }}
-                    />
+                    /> </Link >
                   </th>
                   <td>${this.props.cart.superheroes[item.superheroId].cost}</td>
                   <td>

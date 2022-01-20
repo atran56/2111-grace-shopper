@@ -2,13 +2,15 @@ import React from "react";
 import { fetchSuperhero } from "../store/singleSuperhero";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 export class SingleSuperHero extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       days: 0,
       total: 0,
-      added: false
+      added: false,
+      validUser: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,18 +29,41 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addToCart({
-      superheroId: this.props.superhero.id,
-      days: this.state.days,
-    });
-    this.setState({
-      days: 0,
-      total: 0,
-      added: true
-    });
+    const token = window.localStorage.getItem('token');
+    if(!token){
+      this.setState({
+        validUser: false
+      })
+    }
+    else {
+      this.props.addToCart({
+        superheroId: this.props.superhero.id,
+        days: this.state.days,
+      });
+      this.setState({
+        days: 0,
+        total: 0,
+        added: true
+      });
+    }
   }
 
   render() {
+    let bookAlert;
+    if(this.state.added) {
+      bookAlert = 
+      <div class="alert alert-success" role="alert">
+        {this.props.superhero.name} has been added to your cart!
+      </div>
+    }
+    else if(!this.state.validUser) {
+      bookAlert = <div class="alert alert-danger" role="alert">
+      You must be logged in to book our Superheroes! <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+    </div>
+    }
+    else {
+      bookAlert = null
+    }
     return (
       <div className="container singleSH">
         <div className="row">
@@ -88,8 +113,7 @@ export class SingleSuperHero extends React.Component {
                 type="submit"
                 value="Book"
               />
-              {this.state.added ? <p>{this.props.superhero.name} has been added to your cart!</p> :
-              null}
+              {bookAlert}
             </form>
           </div>
         </div>

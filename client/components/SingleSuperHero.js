@@ -8,6 +8,7 @@ export class SingleSuperHero extends React.Component {
     this.state = {
       days: 0,
       total: 0,
+      added: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,6 +34,7 @@ export class SingleSuperHero extends React.Component {
     this.setState({
       days: 0,
       total: 0,
+      added: true
     });
   }
 
@@ -86,6 +88,8 @@ export class SingleSuperHero extends React.Component {
                 type="submit"
                 value="Book"
               />
+              {this.state.added ? <p>{this.props.superhero.name} has been added to your cart!</p> :
+              null}
             </form>
           </div>
         </div>

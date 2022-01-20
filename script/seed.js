@@ -81,18 +81,18 @@ function createItemizedOrders(heroes, orders) {
       superheroId: heroes[1].id,
       orderId: orders[1].id,
     },
-    // {
-    //   days: 8,
-    //   subtotal: 800,
-    //   superheroId: heroes[3].id,
-    //   orderId: orders[2].id,
-    // },
-    // {
-    //   days: 1,
-    //   subtotal: 100,
-    //   superheroId: heroes[2].id,
-    //   orderId: orders[2].id,
-    // },
+    {
+      days: 8,
+      subtotal: 800,
+      superheroId: heroes[3].id,
+      orderId: orders[2].id,
+    },
+    {
+      days: 1,
+      subtotal: 100,
+      superheroId: heroes[2].id,
+      orderId: orders[2].id,
+    }
   ];
 }
 

@@ -2132,7 +2132,8 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       isLoggedIn
     } = this.props;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-      path: "/home",
+      exact: true,
+      path: "/",
       component: _components_Home__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
@@ -2167,7 +2168,8 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       path: "/confirmation",
       component: _components_Confirmation__WEBPACK_IMPORTED_MODULE_9__["default"]
     })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
-      path: "/home",
+      exact: true,
+      path: "/",
       component: _components_Home__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/login",
@@ -2498,14 +2500,12 @@ class AllUsers extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       scope: "col"
     }, "User ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
       scope: "col"
-    }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
-      scope: "col"
-    }, "Is Admin?"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.users.map(user => {
+    }, "Email"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tbody", null, this.props.users.map(user => {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("tr", {
         key: user.id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", {
         scope: "row"
-      }, user.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.administrator));
+      }, user.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, user.email));
     }))));
   }
 
@@ -2948,7 +2948,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/order */ "./client/store/order.js");
 /* harmony import */ var _store_orders__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/orders */ "./client/store/orders.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 
 
@@ -3228,11 +3227,10 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "invalid-feedback"
     }, " Security code required "))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
       className: "mb-4"
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
-      to: "/confirmation"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-      className: "btn btn-primary btn-lg btn-block"
-    }, "Complete Purchase"))))));
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      className: "btn btn-primary btn-lg btn-block",
+      type: "submit"
+    }, "Complete Purchase")))));
   }
 
 }
@@ -3248,11 +3246,13 @@ const mapState = state => {
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch, {
+  history
+}) => {
   return {
     fetchCart: () => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_4__.fetchCart)()),
     fetchOrder: id => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.fetchOrder)(id)),
-    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order)),
+    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order, history)),
     createOrder: order => dispatch((0,_store_orders__WEBPACK_IMPORTED_MODULE_3__.createOrder)(order))
   };
 };
@@ -3561,7 +3561,7 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link active",
   "aria-current": "page",
-  href: "/home"
+  href: "/"
 }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -3611,7 +3611,7 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link active",
   "aria-current": "page",
-  href: "/home"
+  href: "/"
 }, "Home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -3683,7 +3683,8 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     super(props);
     this.state = {
       days: 0,
-      total: 0
+      total: 0,
+      added: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -3708,7 +3709,8 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
     this.setState({
       days: 0,
-      total: 0
+      total: 0,
+      added: true
     });
   }
 
@@ -3758,7 +3760,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "book btn btn-primary mb-3",
       type: "submit",
       value: "Book"
-    })))));
+    }), this.state.added ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.name, " has been added to your cart!") : null))));
   }
 
 }
@@ -3853,6 +3855,7 @@ const authenticate = (email, password, method) => async dispatch => {
     console.log("*** items passed to authenticate:", email, password);
     window.localStorage.setItem(TOKEN, res.data.token);
     dispatch(me());
+    _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/');
   } catch (authError) {
     return dispatch(setAuth({
       error: authError
@@ -3861,7 +3864,7 @@ const authenticate = (email, password, method) => async dispatch => {
 };
 const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/login');
+  _history__WEBPACK_IMPORTED_MODULE_1__["default"].push('/');
   return {
     type: SET_AUTH,
     auth: {}
@@ -4152,12 +4155,13 @@ const fetchOrder = id => {
     }
   };
 };
-const completeOrder = order => {
+const completeOrder = (order, history) => {
   console.log("**ORDER submitted to thunk: ", order);
   return async dispatch => {
     const {
       data
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders", order);
+    history.push("/confirmation");
     dispatch(_completedOrder(data));
   };
 }; //REDUCER

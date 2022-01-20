@@ -3965,11 +3965,10 @@ const deleteItem = item => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
     await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/cart', {
-      data: item
-    }, {
       headers: {
         authorization: token
-      }
+      },
+      data: item
     });
     dispatch(deleteCartItem(item.superheroId));
   };

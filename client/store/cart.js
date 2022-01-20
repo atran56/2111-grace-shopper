@@ -26,7 +26,6 @@ const updateCartItem = (item) => {
       item
   };
 };
-
 // Thunks
 //NEED TO EDIT FETCHCART LATER ONCE JWT IS FIGURED OUT
 export const fetchCart = () => {
@@ -53,10 +52,11 @@ export const fetchCart = () => {
 export const deleteItem = (item) => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    await axios.delete('/api/cart', {data: item}, {
+    await axios.delete('/api/cart', {
       headers: {
         authorization: token
-      }
+      },
+      data: item
     });
     dispatch(deleteCartItem(item.superheroId));
   };

@@ -37,6 +37,10 @@ class Cart extends React.Component {
     });
   }
   render() {
+    const token = window.localStorage.getItem('token');
+    if(!token) {
+      return <h2>You must be logged in to create/view your cart!</h2>
+    }
     if (this.props.cart.loading) {
       return <p>Data is loading...</p>;
     }

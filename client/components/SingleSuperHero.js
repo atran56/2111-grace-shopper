@@ -8,7 +8,8 @@ export class SingleSuperHero extends React.Component {
     this.state = {
       days: 0,
       total: 0,
-      added: false
+      added: false,
+      validUser: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,18 +28,36 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addToCart({
-      superheroId: this.props.superhero.id,
-      days: this.state.days,
-    });
-    this.setState({
-      days: 0,
-      total: 0,
-      added: true
-    });
+    const token = window.localStorage.getItem('token');
+    if(!token){
+      this.setState({
+        validUser: false
+      })
+    }
+    else {
+      this.props.addToCart({
+        superheroId: this.props.superhero.id,
+        days: this.state.days,
+      });
+      this.setState({
+        days: 0,
+        total: 0,
+        added: true
+      });
+    }
   }
 
   render() {
+    let bookAlert;
+    if(this.state.added) {
+      bookAlert = <p>{this.props.superhero.name} has been added to your cart!</p>
+    }
+    else if(!this.state.validUser) {
+      bookAlert = <p>You must be logged in to book a Superhero!</p>
+    }
+    else {
+      bookAlert = null
+    }
     return (
       <div className="container singleSH">
         <div className="row">
@@ -88,8 +107,7 @@ export class SingleSuperHero extends React.Component {
                 type="submit"
                 value="Book"
               />
-              {this.state.added ? <p>{this.props.superhero.name} has been added to your cart!</p> :
-              null}
+              {bookAlert}
             </form>
           </div>
         </div>

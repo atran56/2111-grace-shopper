@@ -27,7 +27,6 @@ const updateCartItem = (item) => {
   };
 };
 // Thunks
-//NEED TO EDIT FETCHCART LATER ONCE JWT IS FIGURED OUT
 export const fetchCart = () => {
   return async dispatch => {
     try {

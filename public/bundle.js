@@ -2814,6 +2814,12 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
+    const token = window.localStorage.getItem('token');
+
+    if (!token) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "You must be logged in to create/view your cart!");
+    }
+
     if (this.props.cart.loading) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     } else if (this.props.cart.cart.itemizedOrders.length === 0) {
@@ -3684,7 +3690,8 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.state = {
       days: 0,
       total: 0,
-      added: false
+      added: false,
+      validUser: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -3703,18 +3710,36 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.addToCart({
-      superheroId: this.props.superhero.id,
-      days: this.state.days
-    });
-    this.setState({
-      days: 0,
-      total: 0,
-      added: true
-    });
+    const token = window.localStorage.getItem('token');
+
+    if (!token) {
+      this.setState({
+        validUser: false
+      });
+    } else {
+      this.props.addToCart({
+        superheroId: this.props.superhero.id,
+        days: this.state.days
+      });
+      this.setState({
+        days: 0,
+        total: 0,
+        added: true
+      });
+    }
   }
 
   render() {
+    let bookAlert;
+
+    if (this.state.added) {
+      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.name, " has been added to your cart!");
+    } else if (!this.state.validUser) {
+      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "You must be logged in to book a Superhero!");
+    } else {
+      bookAlert = null;
+    }
+
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "container singleSH"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3760,7 +3785,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "book btn btn-primary mb-3",
       type: "submit",
       value: "Book"
-    }), this.state.added ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.name, " has been added to your cart!") : null))));
+    }), bookAlert))));
   }
 
 }
@@ -3932,7 +3957,6 @@ const updateCartItem = item => {
     item
   };
 }; // Thunks
-//NEED TO EDIT FETCHCART LATER ONCE JWT IS FIGURED OUT
 
 
 const fetchCart = () => {

@@ -2814,19 +2814,16 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
-    const token = window.localStorage.getItem('token');
-
-    if (!token) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, "0 Superheroes in your cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        class: "alert alert-warning",
-        role: "alert"
-      }, "Only members can book our Superheroes ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/login"
-      }, "Please log in"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
-        to: "/signup"
-      }, "Create an account")));
-    }
-
+    //const token = window.localStorage.getItem('token');
+    // if(!token) {
+    //   return (
+    //   <div>
+    //   <h1>0 Superheroes in your cart</h1>
+    //   <div class="alert alert-warning" role="alert">
+    //   Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+    //   </div>
+    //   </div>)
+    // }
     if (this.props.cart.loading) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     } else if (this.props.cart.cart.itemizedOrders.length === 0) {
@@ -3689,7 +3686,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_singleSuperhero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../store/singleSuperhero */ "./client/store/singleSuperhero.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
 
 
@@ -3720,24 +3716,23 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   handleSubmit(evt) {
-    evt.preventDefault();
-    const token = window.localStorage.getItem('token');
+    evt.preventDefault(); //const token = window.localStorage.getItem('token');
+    // if(!token){
+    //   this.setState({
+    //     validUser: false
+    //   })
+    // }
+    // else {
 
-    if (!token) {
-      this.setState({
-        validUser: false
-      });
-    } else {
-      this.props.addToCart({
-        superheroId: this.props.superhero.id,
-        days: this.state.days
-      });
-      this.setState({
-        days: 0,
-        total: 0,
-        added: true
-      });
-    }
+    this.props.addToCart({
+      superheroId: this.props.superhero.id,
+      days: this.state.days
+    });
+    this.setState({
+      days: 0,
+      total: 0,
+      added: true
+    }); //}
   }
 
   render() {
@@ -3748,16 +3743,12 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         class: "alert alert-success",
         role: "alert"
       }, this.props.superhero.name, " has been added to your cart!");
-    } else if (!this.state.validUser) {
-      bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        class: "alert alert-danger",
-        role: "alert"
-      }, "You must be logged in to book our Superheroes! ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        to: "/login"
-      }, "Please log in"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
-        to: "/signup"
-      }, "Create an account"));
-    } else {
+    } // else if(!this.state.validUser) {
+    //   bookAlert = <div class="alert alert-danger" role="alert">
+    //   You must be logged in to book our Superheroes! <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+    // </div>
+    // }
+    else {
       bookAlert = null;
     }
 
@@ -3977,20 +3968,31 @@ const updateCartItem = item => {
     type: UPDATE_CART_ITEM,
     item
   };
-}; // Thunks
+};
 
+const defaultCart = '{"totalDays":0, "checkOut":false, "itemizedOrders":[]}'; // Thunks
 
 const fetchCart = () => {
   return async dispatch => {
+    const token = window.localStorage.getItem('token');
+
     try {
-      const token = window.localStorage.getItem('token');
-      const {
-        data: cart
-      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/cart', {
-        headers: {
-          authorization: token
-        }
-      });
+      let cart;
+
+      if (!token) {
+        let localCart = window.localStorage.getItem("cart") || defaultCart;
+        cart = JSON.parse(localCart);
+      } else {
+        const {
+          data
+        } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/cart', {
+          headers: {
+            authorization: token
+          }
+        });
+        cart = data;
+      }
+
       const superheroes = {};
 
       for (let i = 0; i < cart.itemizedOrders.length; i++) {
@@ -4009,42 +4011,103 @@ const fetchCart = () => {
 const deleteItem = item => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/cart', {
-      headers: {
-        authorization: token
-      },
-      data: item
-    });
+
+    if (!token) {
+      let cart = JSON.parse(window.localStorage.getItem("cart") || defaultCart);
+      let filteredItemizedOrders = cart.itemizedOrders.filter(product => {
+        if (product.superheroId !== item.superheroId) {
+          return true;
+        } else {
+          cart.totalDays -= product.days;
+          return false;
+        }
+      });
+      cart.itemizedOrders = filteredItemizedOrders;
+      window.localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      await axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]('/api/cart', {
+        headers: {
+          authorization: token
+        },
+        data: item
+      });
+    }
+
     dispatch(deleteCartItem(item.superheroId));
   };
 };
 const addToCart = item => {
+  console.log("Adding to cart!!");
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    const {
-      data: newCartItem
-    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/cart", {
-      data: item
-    }, {
-      headers: {
-        authorization: token
-      }
-    });
-    dispatch(addCartItem(newCartItem));
+
+    if (!token) {
+      const {
+        data: superhero
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/superheroes/${item.superheroId}`);
+      const days = parseInt(item.days);
+      item.subtotal = superhero.cost * days;
+      item.days = days;
+      let localCart = window.localStorage.getItem("cart") || defaultCart;
+      localCart = JSON.parse(localCart);
+      localCart.itemizedOrders.push(item);
+      localCart.totalDays += days;
+      localCart = JSON.stringify(localCart);
+      window.localStorage.setItem("cart", localCart);
+      dispatch(addCartItem(item));
+    } else {
+      const {
+        data: newCartItem
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/cart", {
+        data: item
+      }, {
+        headers: {
+          authorization: token
+        }
+      });
+      dispatch(addCartItem(newCartItem));
+    }
   };
 };
 const editCartItem = item => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    const {
-      data: updatedItem
-    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/cart", {
-      data: item
-    }, {
-      headers: {
-        authorization: token
+    let updatedItem;
+
+    if (!token) {
+      const {
+        data: superhero
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/superheroes/${item.superheroId}`);
+      const days = parseInt(item.days);
+      let cart = JSON.parse(window.localStorage.getItem("cart") || defaultCart);
+
+      for (let i = 0; i < cart.itemizedOrders.length; i++) {
+        let itemizedOrder = cart.itemizedOrders[i];
+
+        if (itemizedOrder.superheroId === item.superheroId) {
+          cart.totalDays += item.days - itemizedOrder.days;
+          itemizedOrder.days = item.days;
+          itemizedOrder.subtotal = superhero.cost * days;
+          updatedItem = itemizedOrder;
+          cart.itemizedOrders[i] = itemizedOrder;
+          break;
+        }
       }
-    });
+
+      window.localStorage.setItem("cart", JSON.stringify(cart));
+    } else {
+      const {
+        data
+      } = await axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/cart", {
+        data: item
+      }, {
+        headers: {
+          authorization: token
+        }
+      });
+      updatedItem = data;
+    }
+
     dispatch(updateCartItem(updatedItem));
   };
 }; // Sub-Reducer

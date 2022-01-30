@@ -37,16 +37,16 @@ class Cart extends React.Component {
     });
   }
   render() {
-    const token = window.localStorage.getItem('token');
-    if(!token) {
-      return (
-      <div>
-      <h1>0 Superheroes in your cart</h1>
-      <div class="alert alert-warning" role="alert">
-      Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
-      </div>
-      </div>)
-    }
+    //const token = window.localStorage.getItem('token');
+    // if(!token) {
+    //   return (
+    //   <div>
+    //   <h1>0 Superheroes in your cart</h1>
+    //   <div class="alert alert-warning" role="alert">
+    //   Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+    //   </div>
+    //   </div>)
+    // }
     if (this.props.cart.loading) {
       return <p>Data is loading...</p>
     }

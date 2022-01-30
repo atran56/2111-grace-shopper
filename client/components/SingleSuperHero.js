@@ -29,13 +29,13 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    const token = window.localStorage.getItem('token');
-    if(!token){
-      this.setState({
-        validUser: false
-      })
-    }
-    else {
+    //const token = window.localStorage.getItem('token');
+    // if(!token){
+    //   this.setState({
+    //     validUser: false
+    //   })
+    // }
+    // else {
       this.props.addToCart({
         superheroId: this.props.superhero.id,
         days: this.state.days,
@@ -45,7 +45,7 @@ export class SingleSuperHero extends React.Component {
         total: 0,
         added: true
       });
-    }
+    //}
   }
 
   render() {
@@ -56,11 +56,11 @@ export class SingleSuperHero extends React.Component {
         {this.props.superhero.name} has been added to your cart!
       </div>
     }
-    else if(!this.state.validUser) {
-      bookAlert = <div class="alert alert-danger" role="alert">
-      You must be logged in to book our Superheroes! <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
-    </div>
-    }
+    // else if(!this.state.validUser) {
+    //   bookAlert = <div class="alert alert-danger" role="alert">
+    //   You must be logged in to book our Superheroes! <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
+    // </div>
+    // }
     else {
       bookAlert = null
     }

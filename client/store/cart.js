@@ -26,16 +26,26 @@ const updateCartItem = (item) => {
       item
   };
 };
+
+const defaultCart = '{"totalDays":0, "checkOut":false, "itemizedOrders":[]}';
+
 // Thunks
 export const fetchCart = () => {
   return async dispatch => {
+    const token = window.localStorage.getItem('token');
     try {
-      const token = window.localStorage.getItem('token');
-      const { data: cart } = await axios.get('/api/cart',{
-        headers: {
-          authorization: token
-        }
-      });
+      let cart;
+      if(!token) {
+        let localCart = window.localStorage.getItem("cart") || defaultCart;
+        cart = JSON.parse(localCart);
+      } else {
+        const { data } = await axios.get('/api/cart',{
+          headers: {
+            authorization: token
+          }
+        });
+        cart = data;
+      }
       const superheroes = {};
       for(let i = 0; i < cart.itemizedOrders.length; i++){
         const {data: superhero} = await axios.get(`/api/superheroes/${cart.itemizedOrders[i].superheroId}`);
@@ -51,34 +61,93 @@ export const fetchCart = () => {
 export const deleteItem = (item) => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    await axios.delete('/api/cart', {
-      headers: {
-        authorization: token
-      },
-      data: item
-    });
+    if(!token){
+      let cart = JSON.parse(window.localStorage.getItem("cart") || defaultCart);
+      let filteredItemizedOrders = cart.itemizedOrders.filter(product => {
+        if(product.superheroId !== item.superheroId) {
+          return true;
+        }
+        else {
+          cart.totalDays -= product.days;
+          return false;
+        }
+      });
+      cart.itemizedOrders = filteredItemizedOrders;
+      window.localStorage.setItem("cart",  JSON.stringify(cart));
+    }
+    else {
+      await axios.delete('/api/cart', {
+        headers: {
+          authorization: token
+        },
+        data: item
+      });
+    }
     dispatch(deleteCartItem(item.superheroId));
   };
 };
 export const addToCart = (item) => {
+  console.log("Adding to cart!!");
+
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    const { data: newCartItem } = await axios.post("/api/cart", {data: item}, {
-      headers: {
-        authorization: token
-      }
-    });
-    dispatch(addCartItem(newCartItem));
-  };
+    if (!token) {
+        const {data: superhero} = await axios.get(`/api/superheroes/${item.superheroId}`);
+        const days = parseInt(item.days)
+        item.subtotal = superhero.cost * days
+        item.days = days
+
+        let localCart = window.localStorage.getItem("cart") || defaultCart;
+        localCart = JSON.parse(localCart);
+        localCart.itemizedOrders.push(item);
+        localCart.totalDays += days;
+
+        localCart = JSON.stringify(localCart);
+        window.localStorage.setItem("cart",  localCart);
+
+        dispatch(addCartItem(item));
+    }
+    else {
+      const { data: newCartItem } = await axios.post("/api/cart", {data: item}, {
+        headers: {
+          authorization: token
+        }
+      });
+      dispatch(addCartItem(newCartItem));
+    }
+  }
 };
 export const editCartItem = (item) => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    const { data: updatedItem } = await axios.patch("/api/cart", {data: item}, {
-      headers: {
-        authorization: token
+
+    let updatedItem;
+    if(!token){
+      const {data: superhero} = await axios.get(`/api/superheroes/${item.superheroId}`);
+      const days = parseInt(item.days)
+      let cart = JSON.parse(window.localStorage.getItem("cart") || defaultCart);
+      for(let i = 0; i < cart.itemizedOrders.length; i ++){
+        let itemizedOrder = cart.itemizedOrders[i];
+        if(itemizedOrder.superheroId === item.superheroId){
+          cart.totalDays += (item.days - itemizedOrder.days);
+          itemizedOrder.days = item.days;
+          itemizedOrder.subtotal = superhero.cost * days;
+          updatedItem = itemizedOrder;
+          cart.itemizedOrders[i] = itemizedOrder
+          break;
+        }
       }
-    });
+      window.localStorage.setItem("cart",  JSON.stringify(cart));
+    }
+    else {
+      const { data } = await axios.patch("/api/cart", {data: item}, {
+        headers: {
+          authorization: token
+        }
+      });
+      updatedItem = data;
+    }
+    
     dispatch(updateCartItem(updatedItem));
   };
 };

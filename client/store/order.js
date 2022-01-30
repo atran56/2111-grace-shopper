@@ -22,7 +22,6 @@ const _completedOrder = (order) => {
 export const fetchOrder = (id) => {
   return async (dispatch) => {
       try {
-          console.log("FETCH ORDER THUNK")
     const data = await axios.get(`/api/orders/${id}`);
     dispatch(_gotOrder(data));
       } catch (err) {
@@ -32,7 +31,6 @@ export const fetchOrder = (id) => {
 };
 
 export const completeOrder = (order, history) => {
-    console.log("**ORDER submitted to thunk: ", order)
     return async (dispatch) => {
       const { data } = await axios.put("/api/orders", order);
       history.push("/confirmation")

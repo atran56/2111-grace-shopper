@@ -11,9 +11,11 @@ class Cart extends React.Component {
     this.state = {
       days: 0,
       currHero: null,
+      blockedCheckout: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheckout = this.handleCheckout.bind(this);
   }
   componentDidMount() {
     this.props.fetchCart();
@@ -36,17 +38,13 @@ class Cart extends React.Component {
       currHero: null,
     });
   }
+  handleCheckout() {
+    this.setState({
+      blockedCheckout: true
+    })
+  }
   render() {
-    //const token = window.localStorage.getItem('token');
-    // if(!token) {
-    //   return (
-    //   <div>
-    //   <h1>0 Superheroes in your cart</h1>
-    //   <div class="alert alert-warning" role="alert">
-    //   Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
-    //   </div>
-    //   </div>)
-    // }
+    const token = window.localStorage.getItem('token');
     if (this.props.cart.loading) {
       return <p>Data is loading...</p>
     }
@@ -67,6 +65,8 @@ class Cart extends React.Component {
                 cart
               </h4>
             )}
+            {this.state.blockedCheckout ? <div class="alert alert-warning" role="alert">Only members can book our Superheroes. <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link> </div> 
+            : null}
           </div>
         </div>
         <div className="cart-table">
@@ -162,11 +162,12 @@ class Cart extends React.Component {
             >
               Update Cart
             </button>
+            {token ? 
             <Link to="/checkout">
             <button type="button" className="btn btn-success">
               Checkout
             </button>
-            </Link>
+            </Link> : <button type="button" onClick={this.handleCheckout} className="btn btn-success">Checkout</button>}
           </div>
           <div className="float-start">
             <Link to="/superheroes">

@@ -2783,10 +2783,12 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     super(props);
     this.state = {
       days: 0,
-      currHero: null
+      currHero: null,
+      blockedCheckout: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCheckout = this.handleCheckout.bind(this);
   }
 
   componentDidMount() {
@@ -2813,9 +2815,14 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     });
   }
 
+  handleCheckout() {
+    this.setState({
+      blockedCheckout: true
+    });
+  }
+
   render() {
-    //const token = window.localStorage.getItem('token');
-    // if(!token) {
+    const token = window.localStorage.getItem('token'); // if(!token) {
     //   return (
     //   <div>
     //   <h1>0 Superheroes in your cart</h1>
@@ -2824,6 +2831,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     //   </div>
     //   </div>)
     // }
+
     if (this.props.cart.loading) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     } else if (this.props.cart.cart.itemizedOrders.length === 0) {
@@ -2839,7 +2847,14 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "col-md-12"
-    }, this.props.cart.cart.itemizedOrders.length === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "1 Superhero in your cart") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.cart.cart.itemizedOrders.length, " Superheroes in your cart"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, this.props.cart.cart.itemizedOrders.length === 1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, "1 Superhero in your cart") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h4", null, this.props.cart.cart.itemizedOrders.length, " Superheroes in your cart"), this.state.blockedCheckout ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      class: "alert alert-warning",
+      role: "alert"
+    }, "Only members can book our Superheroes. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/login"
+    }, "Please log in"), " or ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+      to: "/signup"
+    }, "Create an account"), " ") : null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "cart-table"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("table", {
       className: "table table-hover"
@@ -2912,12 +2927,16 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       onClick: this.handleSubmit,
       type: "button",
       className: "btn btn-light"
-    }, "Update Cart"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+    }, "Update Cart"), token ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: "/checkout"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "button",
       className: "btn btn-success"
-    }, "Checkout"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, "Checkout")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "button",
+      onClick: this.handleCheckout,
+      className: "btn btn-success"
+    }, "Checkout")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "float-start"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
       to: "/superheroes"
@@ -4254,7 +4273,6 @@ const _completedOrder = order => {
 const fetchOrder = id => {
   return async dispatch => {
     try {
-      console.log("FETCH ORDER THUNK");
       const data = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/orders/${id}`);
       dispatch(_gotOrder(data));
     } catch (err) {
@@ -4263,7 +4281,6 @@ const fetchOrder = id => {
   };
 };
 const completeOrder = (order, history) => {
-  console.log("**ORDER submitted to thunk: ", order);
   return async dispatch => {
     const {
       data

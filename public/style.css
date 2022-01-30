@@ -7,6 +7,10 @@ body {
   background-color: #a8dadc;
 }
 
+.py-5 .container {
+  background-color: #f1faee;
+}
+
 a {
   text-decoration: none;
 }
@@ -21,6 +25,7 @@ nav a {
 }
 
 .carousel-inner > .carousel-item > img {
+  align-items: center;
   width: 450px;
   height: 450px;
 }
@@ -36,6 +41,10 @@ form div {
   margin-right: auto;
   width: 60%;
   border-radius: 50%;
+}
+
+.card-body {
+  font-family: "Kalam", cursive;
 }
 
 .img-single {
@@ -56,7 +65,7 @@ form div {
 
 .nav-link {
   color: #f1faee;
-  font-family: "Sedgwick Ave", cursive;
+  font-family: "Kalam", cursive;
 }
 
 .nav-color {
@@ -80,12 +89,17 @@ form div {
 }
 
 .title {
-  text-align: left;
+  float: left;
+  margin-left: 20px;
   font-size: 50px;
   color: #f1faee;
   font-family: "Permanent Marker", cursive;
 }
 
-h5 {
-  text-align: center;
+.welcome {
+  margin-right: 20px;
+  margin-top: 35px;
+  float: right;
+  font-family: "Kalam", cursive;
+  color: #1d3557;
 }

@@ -3,9 +3,12 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin , email}) => (
   <div>
-    <h3 className="title">Rent-a-Superhero</h3>
+      <p className="title">Rent-a-Superhero</p>
+      {email ? (
+              <h6 className="welcome">Welcome! You are logged in as: {email}</h6>
+            ) : null}
     {isLoggedIn ? (
       <div className="nav-position">
         {/* The navbar will show these links after you log in */}
@@ -132,6 +135,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     isAdmin: state.auth.administrator,
+    email: state.auth.email
   };
 };
 

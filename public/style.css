@@ -1,5 +1,10 @@
 body {
   font-family: sans-serif;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  background-color: #a8dadc;
 }
 
 a {
@@ -13,6 +18,11 @@ label {
 nav a {
   display: inline-block;
   margin: 1em;
+}
+
+.carousel-inner > .carousel-item > img {
+  width: 450px;
+  height: 450px;
 }
 
 form div {
@@ -43,8 +53,20 @@ form div {
 .singleSH {
   margin-top: 100px;
 }
+
+.nav-link {
+  color: #f1faee;
+  font-family: "Sedgwick Ave", cursive;
+}
+
+.nav-color {
+  background-color: #457b9d;
+  opacity: 0.75;
+}
+
 .navbar {
   height: 50px;
+  width: 100%;
 }
 
 .add_btn {
@@ -58,8 +80,9 @@ form div {
 }
 
 .title {
-  text-align: center;
+  text-align: left;
   font-size: 50px;
+  color: #f1faee;
   font-family: "Permanent Marker", cursive;
 }
 

@@ -2822,15 +2822,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
-    const token = window.localStorage.getItem('token'); // if(!token) {
-    //   return (
-    //   <div>
-    //   <h1>0 Superheroes in your cart</h1>
-    //   <div class="alert alert-warning" role="alert">
-    //   Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
-    //   </div>
-    //   </div>)
-    // }
+    const token = window.localStorage.getItem('token');
 
     if (this.props.cart.loading) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
@@ -3564,8 +3556,10 @@ const Navbar = ({
   isAdmin
 }) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
   className: "title"
-}, "Rent Your Superhero!"), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-  className: "navbar navbar-expand-sm navbar-light bg-light"
+}, "Rent-a-Superhero"), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  className: "nav-position"
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+  className: "navbar navbar-expand-sm nav-color"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
   className: "container-fluid"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -3586,7 +3580,10 @@ const Navbar = ({
     justifyContent: "space-around"
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-  className: "navbar-nav"
+  className: "navbar-nav",
+  style: {
+    fontSize: '18px'
+  }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -3609,13 +3606,15 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/cart"
-}, "Cart")), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+  class: "bi bi-cart4"
+}))), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/users"
 }, "View Users")) : null))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-  className: "navbar navbar-expand-sm navbar-light bg-light"
+  className: "navbar navbar-expand-sm nav-color nav-position"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
   className: "container-fluid"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -3636,7 +3635,10 @@ const Navbar = ({
     justifyContent: "space-around"
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-  className: "navbar-nav"
+  className: "navbar-nav",
+  style: {
+    fontSize: '18px'
+  }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -3663,7 +3665,9 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/cart"
-}, "Cart"))))))));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+  class: "bi bi-cart4"
+})))))))));
 /**
  * CONTAINER
  */

@@ -1,14 +1,5 @@
 body {
   font-family: sans-serif;
-  height: 100vh;
-  padding: 0;
-  margin: 0;
-  width: 100vw;
-  background-color: #a8dadc;
-}
-
-.py-5 .container {
-  background-color: #f1faee;
 }
 
 a {
@@ -24,12 +15,6 @@ nav a {
   margin: 1em;
 }
 
-.carousel-inner > .carousel-item > img {
-  align-items: center;
-  width: 450px;
-  height: 450px;
-}
-
 form div {
   margin: 1em;
   display: inline-block;
@@ -41,10 +26,6 @@ form div {
   margin-right: auto;
   width: 60%;
   border-radius: 50%;
-}
-
-.card-body {
-  font-family: "Kalam", cursive;
 }
 
 .img-single {
@@ -62,20 +43,8 @@ form div {
 .singleSH {
   margin-top: 100px;
 }
-
-.nav-link {
-  color: #f1faee;
-  font-family: "Kalam", cursive;
-}
-
-.nav-color {
-  background-color: #457b9d;
-  opacity: 0.75;
-}
-
 .navbar {
   height: 50px;
-  width: 100%;
 }
 
 .add_btn {
@@ -89,17 +58,11 @@ form div {
 }
 
 .title {
-  float: left;
-  margin-left: 20px;
+  text-align: center;
   font-size: 50px;
-  color: #f1faee;
   font-family: "Permanent Marker", cursive;
 }
 
-.welcome {
-  margin-right: 20px;
-  margin-top: 35px;
-  float: right;
-  font-family: "Kalam", cursive;
-  color: #1d3557;
+h5 {
+  text-align: center;
 }

@@ -11,7 +11,6 @@ const {
  */
 const seed = async () => {
   try {
-    // console.log(Superhero)
     await db.sync({ force: true });
     const heroes = await Promise.all(
       createHeroes().map(superhero => {
@@ -59,26 +58,34 @@ function createUsers() {
 function createItemizedOrders(heroes, orders) {
   return [
     {
-      days: 5,
-      subtotal: 300,
+      days: 8,
+      startDate: new Date(Date.UTC(2022, 0, 12)),
+      endDate: new Date(Date.UTC(2022, 0, 20)),
+      subtotal: 480,
       superheroId: heroes[0].id,
       orderId: orders[0].id,
     },
     {
-      days: 5,
-      subtotal: 500,
+      days: 10,
+      startDate: new Date(Date.UTC(2022, 1, 10)),
+      endDate: new Date(Date.UTC(2022, 1, 20)),
+      subtotal: 1000,
       superheroId: heroes[1].id,
       orderId: orders[1].id,
     },
     {
-      days: 8,
-      subtotal: 800,
+      days: 10,
+      startDate: new Date(Date.UTC(2022, 3, 10)),
+      endDate: new Date(Date.UTC(2022, 3, 20)),
+      subtotal: 1000,
       superheroId: heroes[3].id,
       orderId: orders[2].id,
     },
     {
-      days: 1,
-      subtotal: 100,
+      days: 10,
+      startDate: new Date(Date.UTC(2022, 3, 10)),
+      endDate: new Date(Date.UTC(2022, 3, 20)),
+      subtotal: 1000,
       superheroId: heroes[2].id,
       orderId: orders[2].id,
     }

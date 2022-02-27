@@ -3,6 +3,11 @@ import { fetchSuperhero } from "../store/singleSuperhero";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { DateRangePicker } from 'react-date-range';
+import { Calendar } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+
 export class SingleSuperHero extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +15,9 @@ export class SingleSuperHero extends React.Component {
       days: 0,
       total: 0,
       added: false,
-      validUser: true
+      validUser: true,
+      startDate: new Date(),
+      endDate: new Date()
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,13 +36,6 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    //const token = window.localStorage.getItem('token');
-    // if(!token){
-    //   this.setState({
-    //     validUser: false
-    //   })
-    // }
-    // else {
       this.props.addToCart({
         superheroId: this.props.superhero.id,
         days: this.state.days,
@@ -45,10 +45,14 @@ export class SingleSuperHero extends React.Component {
         total: 0,
         added: true
       });
-    //}
   }
 
   render() {
+    const selectionRange = {
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      key: 'Selection'
+    }
     let bookAlert;
     if(this.state.added) {
       bookAlert = 
@@ -56,11 +60,6 @@ export class SingleSuperHero extends React.Component {
         {this.props.superhero.name} has been added to your cart!
       </div>
     }
-    // else if(!this.state.validUser) {
-    //   bookAlert = <div class="alert alert-danger" role="alert">
-    //   You must be logged in to book our Superheroes! <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
-    // </div>
-    // }
     else {
       bookAlert = null
     }
@@ -85,36 +84,20 @@ export class SingleSuperHero extends React.Component {
             <p>
               <b>COST</b>: {this.props.superhero.cost}
             </p>
-            <p>
-              <b>TOTAL</b>: {this.state.total}
-            </p>
-
-            <form className="form-control-sm" onSubmit={this.handleSubmit}>
-              <select
-                className="form-select"
-                value={this.state.days}
-                onChange={this.handleChange}
-              >
-                <option value="0">-SELECT DAY(S)-</option>
-                <option value="1">1 day</option>
-                <option value="2">2 days</option>
-                <option value="3">3 days</option>
-                <option value="4">4 days</option>
-                <option value="5">5 days</option>
-                <option value="6">6 days</option>
-                <option value="7">7 days</option>
-                <option value="8">8 days</option>
-                <option value="9">9 days</option>
-                <option value="10">10 days</option>
-              </select>
-
+            <span >
+                <b>TOTAL</b>: {this.state.total} 
               <input
-                className="book btn btn-primary mb-3"
-                type="submit"
-                value="Book"
-              />
+                  className="book btn btn-primary mb-3"
+                  id="bookBtn"
+                  type="submit"
+                  value="Book"
+                  onSubmit={this.handleSubmit}
+                />
+              </span>
+              <div>
+                <Calendar ranges={[selectionRange]} onChange={this.handleChange} />
+              </div>
               {bookAlert}
-            </form>
           </div>
         </div>
       </div>

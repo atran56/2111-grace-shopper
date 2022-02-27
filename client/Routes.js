@@ -6,7 +6,7 @@ import Cart from "./components/Cart";
 import EditSuperhero from "./components/EditSuperhero";
 
 import { Login, Signup } from "./components/AuthForm";
-import Home from "./components/Home.js";
+import Home from "./components/Home";
 import SingleSuperHero from "./components/SingleSuperHero";
 import { me } from "./store";
 import Confirmation from "./components/Confirmation";

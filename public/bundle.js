@@ -2097,7 +2097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Cart */ "./client/components/Cart.js");
 /* harmony import */ var _components_EditSuperhero__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/EditSuperhero */ "./client/components/EditSuperhero.js");
 /* harmony import */ var _components_AuthForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/AuthForm */ "./client/components/AuthForm.js");
-/* harmony import */ var _components_Home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Home */ "./client/components/Home.js");
+/* harmony import */ var _components_Home_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Home.js */ "./client/components/Home.js");
 /* harmony import */ var _components_SingleSuperHero__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/SingleSuperHero */ "./client/components/SingleSuperHero.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store */ "./client/store/index.js");
 /* harmony import */ var _components_Confirmation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Confirmation */ "./client/components/Confirmation.js");
@@ -2134,7 +2134,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/",
-      component: _components_Home__WEBPACK_IMPORTED_MODULE_6__["default"]
+      component: _components_Home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/superheroes/:id",
@@ -2170,7 +2170,7 @@ class Routes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       exact: true,
       path: "/",
-      component: _components_Home__WEBPACK_IMPORTED_MODULE_6__["default"]
+      component: _components_Home_js__WEBPACK_IMPORTED_MODULE_6__["default"]
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_13__.Route, {
       path: "/login",
       component: _components_AuthForm__WEBPACK_IMPORTED_MODULE_5__.Login
@@ -2400,7 +2400,7 @@ class AllSuperheroes extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   render() {
     const _isAdmin = this.props.isAdmin;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "album py-5 bg-light"
+      className: "album py-5"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -2822,15 +2822,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
-    const token = window.localStorage.getItem('token'); // if(!token) {
-    //   return (
-    //   <div>
-    //   <h1>0 Superheroes in your cart</h1>
-    //   <div class="alert alert-warning" role="alert">
-    //   Only members can book our Superheroes <Link to="/login">Please log in</Link> or <Link to="/signup">Create an account</Link>
-    //   </div>
-    //   </div>)
-    // }
+    const token = window.localStorage.getItem('token');
 
     if (this.props.cart.loading) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
@@ -3497,45 +3489,18 @@ const mapDispatch = (dispatch, {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Home": () => (/* binding */ Home),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _Carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Carousel */ "./client/components/Carousel.js");
+/* harmony import */ var _Carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Carousel */ "./client/components/Carousel.js");
 
 
 
-/**
- * COMPONENT
- */
-
-class Home extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
-  render() {
-    const {
-      email
-    } = this.props;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "container mt-3"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "row mt-1"
-    }, this.props.email ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "Welcome! You are logged in as: ", email, ".") : null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      className: "row mt-1"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Carousel__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
-  }
-
-}
-/**
- * CONTAINER
- */
-
-const mapState = state => {
-  return {
-    email: state.auth.email
-  };
+const Home = () => {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Carousel__WEBPACK_IMPORTED_MODULE_1__["default"], null);
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapState)(Home));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);
 
 /***/ }),
 
@@ -3561,11 +3526,16 @@ __webpack_require__.r(__webpack_exports__);
 const Navbar = ({
   handleClick,
   isLoggedIn,
-  isAdmin
-}) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
+  isAdmin,
+  email
+}) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
   className: "title"
-}, "Rent Your Superhero!"), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-  className: "navbar navbar-expand-sm navbar-light bg-light"
+}, "Rent-a-Superhero"), email ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h6", {
+  className: "welcome"
+}, "Welcome! You are logged in as: ", email) : null, isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  className: "nav-position"
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+  className: "navbar navbar-expand-sm nav-color"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
   className: "container-fluid"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -3586,7 +3556,10 @@ const Navbar = ({
     justifyContent: "space-around"
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-  className: "navbar-nav"
+  className: "navbar-nav",
+  style: {
+    fontSize: '18px'
+  }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -3609,13 +3582,15 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/cart"
-}, "Cart")), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+  class: "bi bi-cart4"
+}))), isAdmin ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/users"
 }, "View Users")) : null))))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
-  className: "navbar navbar-expand-sm navbar-light bg-light"
+  className: "navbar navbar-expand-sm nav-color nav-position"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
   className: "container-fluid"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -3636,7 +3611,10 @@ const Navbar = ({
     justifyContent: "space-around"
   }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
-  className: "navbar-nav"
+  className: "navbar-nav",
+  style: {
+    fontSize: '18px'
+  }
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
   className: "nav-item"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -3663,7 +3641,9 @@ const Navbar = ({
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
   className: "nav-link",
   href: "/cart"
-}, "Cart"))))))));
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+  class: "bi bi-cart4"
+})))))))));
 /**
  * CONTAINER
  */
@@ -3672,7 +3652,8 @@ const Navbar = ({
 const mapState = state => {
   return {
     isLoggedIn: !!state.auth.id,
-    isAdmin: state.auth.administrator
+    isAdmin: state.auth.administrator,
+    email: state.auth.email
   };
 };
 

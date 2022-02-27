@@ -3,13 +3,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../store";
 
-const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
+const Navbar = ({ handleClick, isLoggedIn, isAdmin , email}) => (
   <div>
-    <h3 className="title">Rent Your Superhero!</h3>
+      <p className="title">Rent-a-Superhero</p>
+      {email ? (
+              <h6 className="welcome">Welcome! You are logged in as: {email}</h6>
+            ) : null}
     {isLoggedIn ? (
-      <div>
+      <div className="nav-position">
         {/* The navbar will show these links after you log in */}
-        <nav className="navbar navbar-expand-sm navbar-light bg-light">
+        <nav className="navbar navbar-expand-sm nav-color">
           <div className="container-fluid">
             <button
               className="navbar-toggler"
@@ -27,7 +30,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               id="navbarNav"
               style={{ display: "flex", justifyContent: "space-around" }}
             >
-              <ul className="navbar-nav">
+              <ul className="navbar-nav" style={{fontSize: '18px'}}>
                 <li className="nav-item">
                   <a
                     className="nav-link active"
@@ -49,7 +52,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/cart">
-                    Cart
+                    <i class="bi bi-cart4"></i>
                   </a>
                 </li>
                 {isAdmin ? (
@@ -68,7 +71,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
       <div>
         {/* The navbar will show these links before you log in */}
 
-        <nav className="navbar navbar-expand-sm navbar-light bg-light">
+        <nav className="navbar navbar-expand-sm nav-color nav-position">
           <div className="container-fluid">
             <button
               className="navbar-toggler"
@@ -86,7 +89,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
               id="navbarNav"
               style={{ display: "flex", justifyContent: "space-around" }}
             >
-              <ul className="navbar-nav">
+              <ul className="navbar-nav" style={{fontSize: '18px'}}>
                 <li className="nav-item">
                   <a
                     className="nav-link active"
@@ -113,7 +116,7 @@ const Navbar = ({ handleClick, isLoggedIn, isAdmin }) => (
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="/cart">
-                    Cart
+                    <i class="bi bi-cart4"></i>
                   </a>
                 </li>
               </ul>
@@ -132,6 +135,7 @@ const mapState = (state) => {
   return {
     isLoggedIn: !!state.auth.id,
     isAdmin: state.auth.administrator,
+    email: state.auth.email
   };
 };
 

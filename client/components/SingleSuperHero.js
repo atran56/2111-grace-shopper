@@ -30,12 +30,12 @@ export class SingleSuperHero extends React.Component {
     console.log(ranges)
     const day = 1000 * 60 * 60 * 24;
     const difference = Math.round(ranges.selection.endDate.getTime()-ranges.selection.startDate.getTime())/(day);
-    const exactDifference = Number(difference.toFixed(0));
+    const exactDifference = Number(difference.toFixed(0)) + 1;
     await this.setState({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,
-      days: !exactDifference ? 1 : exactDifference,
-      total: !exactDifference ? this.props.superhero.superhero.cost : exactDifference * this.props.superhero.superhero.cost
+      days: exactDifference,
+      total: exactDifference * this.props.superhero.superhero.cost
     });
     console.log(this.state, difference)
   }

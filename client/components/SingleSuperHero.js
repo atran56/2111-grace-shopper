@@ -26,15 +26,18 @@ export class SingleSuperHero extends React.Component {
     this.props.fetchSuperhero(this.props.match.params.id);
   }
 
-  handleChange(ranges) {
+  async handleChange(ranges) {
+    console.log(ranges)
     const day = 1000 * 60 * 60 * 24;
     const difference = Math.round(ranges.selection.endDate.getTime()-ranges.selection.startDate.getTime())/(day);
-    this.setState({
+    const exactDifference = Number(difference.toFixed(0));
+    await this.setState({
       startDate: ranges.selection.startDate,
       endDate: ranges.selection.endDate,
-      days: difference,
-      total: difference * this.props.superhero.cost,
+      days: !exactDifference ? 1 : exactDifference,
+      total: !exactDifference ? this.props.superhero.superhero.cost : exactDifference * this.props.superhero.superhero.cost
     });
+    console.log(this.state, difference)
   }
 
   handleSubmit(evt) {

@@ -43,7 +43,9 @@ export class SingleSuperHero extends React.Component {
   handleSubmit(evt) {
     evt.preventDefault();
       this.props.addToCart({
-        superheroId: this.props.superhero.id,
+        superheroId: this.props.superhero.superhero.id,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
         days: this.state.days,
       });
       this.setState({
@@ -93,15 +95,9 @@ export class SingleSuperHero extends React.Component {
             <p>
               <b>COST</b>: {this.props.superhero.superhero.cost}
             </p>
-            <span >
+            <span>
                 <b>TOTAL</b>: {this.state.total} 
-              <input
-                  className="book btn btn-primary mb-3"
-                  id="bookBtn"
-                  type="submit"
-                  value="Book"
-                  onSubmit={this.handleSubmit}
-                />
+                <button type="button" id="bookBtn" value="Book" className="btn btn-primary" onClick={this.handleSubmit}>Book</button>
               </span>
               <div>
                 <DateRange ranges={[selectionRange]} minDate={new Date()} rangeColors={["#0c6efd"]} onChange={this.handleChange} />

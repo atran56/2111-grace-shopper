@@ -192,7 +192,7 @@ export default (state = initialState, action) => {
             item.superheroId === action.item.superheroId ? action.item : item
           )
           }, 
-           loading: false};
+          loading: false};
       default:
         return state;
     }

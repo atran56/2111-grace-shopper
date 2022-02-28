@@ -3746,7 +3746,9 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.props.addToCart({
-      superheroId: this.props.superhero.id,
+      superheroId: this.props.superhero.superhero.id,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
       days: this.state.days
     });
     this.setState({
@@ -3789,13 +3791,13 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       alt: this.props.superhero.superhero.name
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "col-6"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.superhero.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "STRENGTHS"), ": ", this.props.superhero.superhero.strengths), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "COST"), ": ", this.props.superhero.superhero.cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "TOTAL"), ": ", this.state.total, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-      className: "book btn btn-primary mb-3",
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.superhero.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "STRENGTHS"), ": ", this.props.superhero.superhero.strengths), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "COST"), ": ", this.props.superhero.superhero.cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "TOTAL"), ": ", this.state.total, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      type: "button",
       id: "bookBtn",
-      type: "submit",
       value: "Book",
-      onSubmit: this.handleSubmit
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.DateRange, {
+      className: "btn btn-primary",
+      onClick: this.handleSubmit
+    }, "Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.DateRange, {
       ranges: [selectionRange],
       minDate: new Date(),
       rangeColors: ["#0c6efd"],

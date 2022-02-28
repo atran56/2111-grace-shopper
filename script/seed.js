@@ -123,9 +123,12 @@ function createHeroes() {
       universe: "Marvel Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
       strengths: "Power, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
+      bookedDates: [
+        [
+          { value: new Date(Date.UTC(2022, 0, 2))},
+          { value: new Date(Date.UTC(2022, 0, 10))}
+        ]
+      ],
       cost: 400,
     },
     {
@@ -134,9 +137,6 @@ function createHeroes() {
       universe: "J. K. Rowling",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10878.jpg",
       strengths: "Power, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -145,9 +145,6 @@ function createHeroes() {
       universe: "George Lucas",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10560.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -156,9 +153,6 @@ function createHeroes() {
       universe: "N/A",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10484.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -167,9 +161,6 @@ function createHeroes() {
       universe: "Shueisha",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/1540.jpg",
       strengths: "Power, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -178,9 +169,6 @@ function createHeroes() {
       universe: "IDW Publishing",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10330.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -189,9 +177,6 @@ function createHeroes() {
       universe: "IDW Publishing",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10327.jpg",
       strengths: "Combat, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -200,9 +185,6 @@ function createHeroes() {
       universe: "IDW Publishing",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10329.jpg",
       strengths: "Combat, Durability",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -211,9 +193,6 @@ function createHeroes() {
       universe: "IDW Publishing",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10328.jpg",
       strengths: "Combat, Durability",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -222,9 +201,6 @@ function createHeroes() {
       universe: "George Lucas",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10454.jpg",
       strengths: "Power, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 400,
     },
     {
@@ -233,9 +209,6 @@ function createHeroes() {
       universe: "Dark Horse Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10430.jpg",
       strengths: "Durability, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -244,9 +217,6 @@ function createHeroes() {
       universe: "George Lucas",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10447.jpg",
       strengths: "Power, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -255,9 +225,6 @@ function createHeroes() {
       universe: "N/A",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10476.jpg",
       strengths: "Combat, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -266,9 +233,6 @@ function createHeroes() {
       universe: "N/A",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10590.jpg",
       strengths: "Strength, Durability",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
     {
@@ -277,9 +241,6 @@ function createHeroes() {
       universe: "George Lucas",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10456.jpg",
       strengths: "Combat, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -288,9 +249,6 @@ function createHeroes() {
       universe: "Marvel Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/78.jpg",
       strengths: "Strength, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -299,9 +257,6 @@ function createHeroes() {
       universe: "Dark Horse Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/813.jpg",
       strengths: "Durability, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -310,9 +265,6 @@ function createHeroes() {
       universe: "George Lucas",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10559.jpg",
       strengths: "Power, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -321,9 +273,6 @@ function createHeroes() {
       universe: "George Lucas",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10444.jpg",
       strengths: "Power, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -332,9 +281,6 @@ function createHeroes() {
       universe: "N/A",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/954.jpg",
       strengths: "Combat, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -343,9 +289,6 @@ function createHeroes() {
       universe: "Image Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/842.jpg",
       strengths: "Power, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -354,9 +297,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/247.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
     {
@@ -365,9 +305,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/161.jpg",
       strengths: "Durability, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 400,
     },
     {
@@ -376,9 +313,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/140.jpg",
       strengths: "Durability, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -387,9 +321,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/125.jpg",
       strengths: "Durability, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -398,9 +329,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/274.jpg",
       strengths: "Durability, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -409,9 +337,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/52.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
     {
@@ -420,9 +345,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/112.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 400,
     },
     {
@@ -431,9 +353,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/170.jpg",
       strengths: "Power, Speed",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -442,9 +361,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/814.jpg",
       strengths: "Intelligence, Power",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -453,9 +369,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/625.jpg",
       strengths: "Intelligence, Combat",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
     {
@@ -464,9 +377,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/325.jpg",
       strengths: "Durability, Power",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -475,9 +385,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/382.jpg",
       strengths: "Durability, Power",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -486,9 +393,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/125.jpg",
       strengths: "Durability, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 400,
     },
     {
@@ -497,9 +401,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/620.jpg",
       strengths: "Durability, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
     {
@@ -508,9 +409,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/137.jpg",
       strengths: "Combat, Strength",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 100,
     },
     {
@@ -519,9 +417,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/269.jpg",
       strengths: "Combat, Durability",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 200,
     },
     {
@@ -530,9 +425,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/1120.jpg",
       strengths: "Combat, Power",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 300,
     },
     {
@@ -541,9 +433,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/415.jpg",
       strengths: "Combat, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
     {
@@ -552,9 +441,6 @@ function createHeroes() {
       universe: "Marvel",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/10431.jpg",
       strengths: "Power, Intelligence",
-      availability: [
-        { value: new Date(Date.UTC(2022, 0, 2))},
-        { value: new Date(Date.UTC(2023, 0, 1))}],
       cost: 500,
     },
   ];

@@ -178,7 +178,6 @@ export default (state = initialState, action) => {
           ...state,
           cart: {
             ...state.cart,
-            // itemizedOrders: state.cart.itemizedOrders.push(action.item)
           },
           loading: false,
           superheroes: {...state.superheroes}

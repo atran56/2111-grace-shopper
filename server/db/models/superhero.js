@@ -23,8 +23,9 @@ const Superhero = db.define("superhero", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  availability: {
-    type: Sequelize.RANGE(Sequelize.DATEONLY),
+  bookedDates: {
+    type: Sequelize.ARRAY(Sequelize.RANGE(Sequelize.DATEONLY)),
+    allowNull: true,
   },
   cost: {
     type: Sequelize.INTEGER,

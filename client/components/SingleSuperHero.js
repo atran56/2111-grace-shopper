@@ -3,7 +3,7 @@ import { fetchSuperhero } from "../store/singleSuperhero";
 import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { DateRangePicker } from 'react-date-range';
+import { DateRange } from 'react-date-range';
 import { Calendar } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
@@ -27,10 +27,13 @@ export class SingleSuperHero extends React.Component {
     this.props.fetchSuperhero(this.props.match.params.id);
   }
 
-  handleChange(e) {
+  handleChange(ranges) {
+    console.log(ranges)
     this.setState({
-      days: e.target.value,
-      total: e.target.value * this.props.superhero.cost,
+      startDate: ranges.selection.startDate,
+      endDate: ranges.selection.endDate
+      // days: e.target.value,
+      // total: e.target.value * this.props.superhero.cost,
     });
   }
 
@@ -48,16 +51,19 @@ export class SingleSuperHero extends React.Component {
   }
 
   render() {
+    if (this.props.superhero.loading) {
+      return <p>Data is loading...</p>
+    }
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-      key: 'Selection'
+      key: 'selection'
     }
     let bookAlert;
     if(this.state.added) {
       bookAlert = 
       <div class="alert alert-success" role="alert">
-        {this.props.superhero.name} has been added to your cart!
+        {this.props.superhero.superhero.name} has been added to your cart!
       </div>
     }
     else {
@@ -67,22 +73,22 @@ export class SingleSuperHero extends React.Component {
       <div className="container singleSH">
         <div className="row">
           <h1>
-            {this.props.superhero.name} ({this.props.superhero.universe})
+            {this.props.superhero.superhero.name} ({this.props.superhero.superhero.universe})
           </h1>
           <div class="col-6">
             <img
               className="img-single"
-              src={this.props.superhero.image}
-              alt={this.props.superhero.name}
+              src={this.props.superhero.superhero.image}
+              alt={this.props.superhero.superhero.name}
             />
           </div>
           <div class="col-6">
-            <p>{this.props.superhero.bio}</p>
+            <p>{this.props.superhero.superhero.bio}</p>
             <p>
-              <b>STRENGTHS</b>: {this.props.superhero.strengths}
+              <b>STRENGTHS</b>: {this.props.superhero.superhero.strengths}
             </p>
             <p>
-              <b>COST</b>: {this.props.superhero.cost}
+              <b>COST</b>: {this.props.superhero.superhero.cost}
             </p>
             <span >
                 <b>TOTAL</b>: {this.state.total} 
@@ -95,7 +101,7 @@ export class SingleSuperHero extends React.Component {
                 />
               </span>
               <div>
-                <Calendar ranges={[selectionRange]} onChange={this.handleChange} />
+                <DateRange ranges={[selectionRange]} minDate={new Date()} rangeColors={["#0c6efd"]} onChange={this.handleChange} />
               </div>
               {bookAlert}
           </div>
@@ -107,6 +113,7 @@ export class SingleSuperHero extends React.Component {
 
 const mapState = (state) => ({
   superhero: state.singleSuperHero,
+  loading: state.loading
 });
 
 const mapDispatch = (dispatch) => ({

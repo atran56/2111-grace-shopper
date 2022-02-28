@@ -3730,10 +3730,13 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     this.props.fetchSuperhero(this.props.match.params.id);
   }
 
-  handleChange(e) {
+  handleChange(ranges) {
+    console.log(ranges);
     this.setState({
-      days: e.target.value,
-      total: e.target.value * this.props.superhero.cost
+      startDate: ranges.selection.startDate,
+      endDate: ranges.selection.endDate // days: e.target.value,
+      // total: e.target.value * this.props.superhero.cost,
+
     });
   }
 
@@ -3751,10 +3754,14 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
+    if (this.props.superhero.loading) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
+    }
+
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-      key: 'Selection'
+      key: 'selection'
     };
     let bookAlert;
 
@@ -3762,7 +3769,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         class: "alert alert-success",
         role: "alert"
-      }, this.props.superhero.name, " has been added to your cart!");
+      }, this.props.superhero.superhero.name, " has been added to your cart!");
     } else {
       bookAlert = null;
     }
@@ -3771,22 +3778,24 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "container singleSH"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "row"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.superhero.name, " (", this.props.superhero.universe, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.superhero.superhero.name, " (", this.props.superhero.superhero.universe, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       class: "col-6"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       className: "img-single",
-      src: this.props.superhero.image,
-      alt: this.props.superhero.name
+      src: this.props.superhero.superhero.image,
+      alt: this.props.superhero.superhero.name
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       class: "col-6"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "STRENGTHS"), ": ", this.props.superhero.strengths), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "COST"), ": ", this.props.superhero.cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "TOTAL"), ": ", this.state.total, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.superhero.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "STRENGTHS"), ": ", this.props.superhero.superhero.strengths), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "COST"), ": ", this.props.superhero.superhero.cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "TOTAL"), ": ", this.state.total, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       className: "book btn btn-primary mb-3",
       id: "bookBtn",
       type: "submit",
       value: "Book",
       onSubmit: this.handleSubmit
-    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.Calendar, {
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.DateRange, {
       ranges: [selectionRange],
+      minDate: new Date(),
+      rangeColors: ["#0c6efd"],
       onChange: this.handleChange
     })), bookAlert)));
   }
@@ -3794,7 +3803,8 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 }
 
 const mapState = state => ({
-  superhero: state.singleSuperHero
+  superhero: state.singleSuperHero,
+  loading: state.loading
 });
 
 const mapDispatch = dispatch => ({
@@ -4355,12 +4365,19 @@ const fetchSuperhero = id => {
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/superheroes/${id}`);
     dispatch(_setSuperhero(superhero));
   };
+};
+const initialState = {
+  loading: true,
+  superhero: {}
 }; // Subreducer
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((state = {}, action) => {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((state = initialState, action) => {
   switch (action.type) {
     case SET_SUPERHERO:
-      return action.superhero;
+      return {
+        loading: false,
+        superhero: action.superhero
+      };
 
     default:
       return state;

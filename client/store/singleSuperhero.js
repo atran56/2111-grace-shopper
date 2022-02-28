@@ -17,11 +17,15 @@ export const fetchSuperhero = id => {
   };
 };
 
+const initialState = {
+  loading: true,
+  superhero: {}
+}
 // Subreducer
-export default (state = {}, action) => {
+export default (state = initialState, action) => {
   switch (action.type) {
     case SET_SUPERHERO:
-      return action.superhero;
+      return {loading: false, superhero: action.superhero}
     default:
       return state;
   }

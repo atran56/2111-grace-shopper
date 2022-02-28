@@ -3706,7 +3706,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
  // main style file
 
  // theme css file
@@ -3731,12 +3730,13 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   handleChange(ranges) {
-    console.log(ranges);
+    const day = 1000 * 60 * 60 * 24;
+    const difference = Math.round(ranges.selection.endDate.getTime() - ranges.selection.startDate.getTime()) / day;
     this.setState({
       startDate: ranges.selection.startDate,
-      endDate: ranges.selection.endDate // days: e.target.value,
-      // total: e.target.value * this.props.superhero.cost,
-
+      endDate: ranges.selection.endDate,
+      days: difference,
+      total: difference * this.props.superhero.cost
     });
   }
 
@@ -3767,7 +3767,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     if (this.state.added) {
       bookAlert = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        class: "alert alert-success",
+        className: "alert alert-success",
         role: "alert"
       }, this.props.superhero.superhero.name, " has been added to your cart!");
     } else {
@@ -3779,13 +3779,13 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "row"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h1", null, this.props.superhero.superhero.name, " (", this.props.superhero.superhero.universe, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      class: "col-6"
+      className: "col-6"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
       className: "img-single",
       src: this.props.superhero.superhero.image,
       alt: this.props.superhero.superhero.name
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-      class: "col-6"
+      className: "col-6"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, this.props.superhero.superhero.bio), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "STRENGTHS"), ": ", this.props.superhero.superhero.strengths), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "COST"), ": ", this.props.superhero.superhero.cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("b", null, "TOTAL"), ": ", this.state.total, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
       className: "book btn btn-primary mb-3",
       id: "bookBtn",

@@ -4,7 +4,6 @@ import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { DateRange } from 'react-date-range';
-import { Calendar } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 
@@ -28,12 +27,13 @@ export class SingleSuperHero extends React.Component {
   }
 
   handleChange(ranges) {
-    console.log(ranges)
+    const day = 1000 * 60 * 60 * 24;
+    const difference = Math.round(ranges.selection.endDate.getTime()-ranges.selection.startDate.getTime())/(day);
     this.setState({
       startDate: ranges.selection.startDate,
-      endDate: ranges.selection.endDate
-      // days: e.target.value,
-      // total: e.target.value * this.props.superhero.cost,
+      endDate: ranges.selection.endDate,
+      days: difference,
+      total: difference * this.props.superhero.cost,
     });
   }
 
@@ -62,7 +62,7 @@ export class SingleSuperHero extends React.Component {
     let bookAlert;
     if(this.state.added) {
       bookAlert = 
-      <div class="alert alert-success" role="alert">
+      <div className="alert alert-success" role="alert">
         {this.props.superhero.superhero.name} has been added to your cart!
       </div>
     }
@@ -75,14 +75,14 @@ export class SingleSuperHero extends React.Component {
           <h1>
             {this.props.superhero.superhero.name} ({this.props.superhero.superhero.universe})
           </h1>
-          <div class="col-6">
+          <div className="col-6">
             <img
               className="img-single"
               src={this.props.superhero.superhero.image}
               alt={this.props.superhero.superhero.name}
             />
           </div>
-          <div class="col-6">
+          <div className="col-6">
             <p>{this.props.superhero.superhero.bio}</p>
             <p>
               <b>STRENGTHS</b>: {this.props.superhero.superhero.strengths}

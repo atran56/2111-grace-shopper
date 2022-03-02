@@ -24,7 +24,7 @@ const Superhero = db.define("superhero", {
     allowNull: false,
   },
   bookedDates: {
-    type: Sequelize.ARRAY(Sequelize.RANGE(Sequelize.DATEONLY)),
+    type: Sequelize.ARRAY(Sequelize.DATEONLY),
     allowNull: true,
   },
   cost: {

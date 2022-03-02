@@ -37,7 +37,6 @@ export class SingleSuperHero extends React.Component {
       days: exactDifference,
       total: exactDifference * this.props.superhero.superhero.cost
     });
-    console.log(this.state, difference)
   }
 
   handleSubmit(evt) {
@@ -59,6 +58,7 @@ export class SingleSuperHero extends React.Component {
     if (this.props.superhero.loading) {
       return <p>Data is loading...</p>
     }
+    console.log(this.props.superhero.superhero)
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
@@ -100,7 +100,7 @@ export class SingleSuperHero extends React.Component {
                 <button type="button" id="bookBtn" value="Book" className="btn btn-primary" onClick={this.handleSubmit}>Book</button>
               </span>
               <div>
-                <DateRange ranges={[selectionRange]} minDate={new Date()} rangeColors={["#0c6efd"]} onChange={this.handleChange} />
+                <DateRange ranges={[selectionRange]} minDate={new Date()} disabledDates={this.props.superhero.superhero.bookedDates ? this.props.superhero.superhero.bookedDates.map(date => {return new Date(date)}) : []} rangeColors={["#0c6efd"]} onChange={this.handleChange} />
               </div>
               {bookAlert}
           </div>

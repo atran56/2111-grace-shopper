@@ -3740,7 +3740,6 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       days: exactDifference,
       total: exactDifference * this.props.superhero.superhero.cost
     });
-    console.log(this.state, difference);
   }
 
   handleSubmit(evt) {
@@ -3763,6 +3762,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     }
 
+    console.log(this.props.superhero.superhero);
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
@@ -3800,6 +3800,9 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, "Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.DateRange, {
       ranges: [selectionRange],
       minDate: new Date(),
+      disabledDates: this.props.superhero.superhero.bookedDates ? this.props.superhero.superhero.bookedDates.map(date => {
+        return new Date(date);
+      }) : [],
       rangeColors: ["#0c6efd"],
       onChange: this.handleChange
     })), bookAlert)));
@@ -4144,8 +4147,7 @@ const initialState = {
 
     case ADD_CART_ITEM:
       return { ...state,
-        cart: { ...state.cart // itemizedOrders: state.cart.itemizedOrders.push(action.item)
-
+        cart: { ...state.cart
         },
         loading: false,
         superheroes: { ...state.superheroes

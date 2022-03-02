@@ -123,12 +123,7 @@ function createHeroes() {
       universe: "Marvel Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
       strengths: "Power, Strength",
-      bookedDates: [
-        [
-          { value: new Date(Date.UTC(2022, 0, 2))},
-          { value: new Date(Date.UTC(2022, 0, 10))}
-        ]
-      ],
+      bookedDates: [new Date(2022, 5, 2), new Date(2022, 5, 10)],
       cost: 400,
     },
     {

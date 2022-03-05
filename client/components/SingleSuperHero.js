@@ -31,8 +31,8 @@ export class SingleSuperHero extends React.Component {
     const difference = Math.round(ranges.selection.endDate.getTime()-ranges.selection.startDate.getTime())/(day);
     const exactDifference = Number(difference.toFixed(0)) + 1;
     await this.setState({
-      startDate: ranges.selection.startDate,
-      endDate: ranges.selection.endDate,
+      startDate: new Date(ranges.selection.startDate),
+      endDate: new Date(ranges.selection.endDate),
       days: exactDifference,
       total: exactDifference * this.props.superhero.superhero.cost
     });

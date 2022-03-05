@@ -13,7 +13,7 @@ router.get("/:superheroId", async (req, res, next) => {
           })
           dates = dates.join().split(",");
         if (dates.length >= 1) {
-            res.json(dates);
+            res.json({bookedDates: dates});
         }
         else {
             res.json()

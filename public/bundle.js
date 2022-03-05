@@ -3723,8 +3723,8 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     const difference = Math.round(ranges.selection.endDate.getTime() - ranges.selection.startDate.getTime()) / day;
     const exactDifference = Number(difference.toFixed(0)) + 1;
     await this.setState({
-      startDate: ranges.selection.startDate,
-      endDate: ranges.selection.endDate,
+      startDate: new Date(ranges.selection.startDate),
+      endDate: new Date(ranges.selection.endDate),
       days: exactDifference,
       total: exactDifference * this.props.superhero.superhero.cost
     });
@@ -3732,29 +3732,10 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-
-    Date.prototype.addDays = function (days) {
-      var date = new Date(this.valueOf());
-      date.setDate(date.getDate() + days);
-      return date;
-    };
-
-    function getDates(startDate, endDate) {
-      let dates = [];
-      let currentDate = startDate;
-
-      while (currentDate <= endDate) {
-        dates.push(new Date(currentDate));
-        currentDate = currentDate.addDays(1);
-      }
-
-      return dates;
-    }
-
-    getDates(this.state.startDate, this.state.endDate);
     this.props.addToCart({
       superheroId: this.props.superhero.superhero.id,
-      bookedDates: getDates(this.state.startDate, this.state.endDate),
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
       days: this.state.days
     });
     this.setState({
@@ -4053,7 +4034,7 @@ const deleteItem = item => {
   };
 };
 const addToCart = item => {
-  console.log("Adding to cart!!");
+  console.log("?", item);
   return async dispatch => {
     const token = window.localStorage.getItem('token');
 

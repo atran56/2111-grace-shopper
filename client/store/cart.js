@@ -94,8 +94,7 @@ export const deleteItem = (item) => {
   };
 };
 export const addToCart = (item) => {
-  console.log("Adding to cart!!");
-
+  console.log("?", item);
   return async dispatch => {
     const token = window.localStorage.getItem('token');
     if (!token) {

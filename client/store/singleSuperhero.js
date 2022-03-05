@@ -13,7 +13,8 @@ export const _setSuperhero = superhero => ({
 export const fetchSuperhero = id => {
   return async dispatch => {
     const { data: superhero } = await axios.get(`/api/superheroes/${id}`);
-    dispatch(_setSuperhero(superhero));
+    const { data: reservations} = await axios.get(`/api/reservations/${id}`);
+    dispatch(_setSuperhero({...superhero, ...reservations}));
   };
 };
 

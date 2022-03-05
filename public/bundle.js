@@ -3730,7 +3730,6 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   async handleChange(ranges) {
-    console.log(ranges);
     const day = 1000 * 60 * 60 * 24;
     const difference = Math.round(ranges.selection.endDate.getTime() - ranges.selection.startDate.getTime()) / day;
     const exactDifference = Number(difference.toFixed(0)) + 1;
@@ -3762,7 +3761,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     }
 
-    console.log(this.props.superhero.superhero);
+    console.log(this.props.superhero.superhero.bookedDates);
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
@@ -3800,9 +3799,9 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, "Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.DateRange, {
       ranges: [selectionRange],
       minDate: new Date(),
-      disabledDates: this.props.superhero.superhero.bookedDates ? this.props.superhero.superhero.bookedDates.map(date => {
+      disabledDates: this.props.superhero.superhero.bookedDates.map(date => {
         return new Date(date);
-      }) : [],
+      }),
       rangeColors: ["#0c6efd"],
       onChange: this.handleChange
     })), bookAlert)));
@@ -4370,7 +4369,12 @@ const fetchSuperhero = id => {
     const {
       data: superhero
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/superheroes/${id}`);
-    dispatch(_setSuperhero(superhero));
+    const {
+      data: reservations
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().get(`/api/reservations/${id}`);
+    dispatch(_setSuperhero({ ...superhero,
+      ...reservations
+    }));
   };
 };
 const initialState = {

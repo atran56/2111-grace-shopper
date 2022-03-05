@@ -40,6 +40,21 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    Date.prototype.addDays = function(days) {
+      var date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+    }
+    function getDates(startDate, endDate) {
+      let dates = [];
+      var currentDate = startDate;
+      while (currentDate <= endDate) {
+          dates.push(new Date (currentDate));
+          currentDate = currentDate.addDays(1);
+      }
+      console.log("did it work?", dates);
+  }
+  getDates(this.state.startDate, this.state.endDate)
       this.props.addToCart({
         superheroId: this.props.superhero.superhero.id,
         startDate: this.state.startDate,
@@ -57,7 +72,6 @@ export class SingleSuperHero extends React.Component {
     if (this.props.superhero.loading) {
       return <p>Data is loading...</p>
     }
-    console.log(this.props.superhero.superhero.bookedDates)
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
@@ -99,7 +113,7 @@ export class SingleSuperHero extends React.Component {
                 <button type="button" id="bookBtn" value="Book" className="btn btn-primary" onClick={this.handleSubmit}>Book</button>
               </span>
               <div>
-                <DateRange ranges={[selectionRange]} minDate={new Date()} disabledDates={this.props.superhero.superhero.bookedDates.map(date => {return new Date(date)})} rangeColors={["#0c6efd"]} onChange={this.handleChange} />
+                <DateRange ranges={[selectionRange]} minDate={new Date()} disabledDates={this.props.superhero.superhero.bookedDates ? this.props.superhero.superhero.bookedDates.map(date => {return new Date(date)}) : []} rangeColors={["#0c6efd"]} onChange={this.handleChange} />
               </div>
               {bookAlert}
           </div>

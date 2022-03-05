@@ -3743,6 +3743,26 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+
+    Date.prototype.addDays = function (days) {
+      var date = new Date(this.valueOf());
+      date.setDate(date.getDate() + days);
+      return date;
+    };
+
+    function getDates(startDate, endDate) {
+      let dates = [];
+      var currentDate = startDate;
+
+      while (currentDate <= endDate) {
+        dates.push(new Date(currentDate));
+        currentDate = currentDate.addDays(1);
+      }
+
+      console.log("did it work?", dates);
+    }
+
+    getDates(this.state.startDate, this.state.endDate);
     this.props.addToCart({
       superheroId: this.props.superhero.superhero.id,
       startDate: this.state.startDate,
@@ -3761,7 +3781,6 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     }
 
-    console.log(this.props.superhero.superhero.bookedDates);
     const selectionRange = {
       startDate: this.state.startDate,
       endDate: this.state.endDate,
@@ -3799,9 +3818,9 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     }, "Book")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_date_range__WEBPACK_IMPORTED_MODULE_4__.DateRange, {
       ranges: [selectionRange],
       minDate: new Date(),
-      disabledDates: this.props.superhero.superhero.bookedDates.map(date => {
+      disabledDates: this.props.superhero.superhero.bookedDates ? this.props.superhero.superhero.bookedDates.map(date => {
         return new Date(date);
-      }),
+      }) : [],
       rangeColors: ["#0c6efd"],
       onChange: this.handleChange
     })), bookAlert)));

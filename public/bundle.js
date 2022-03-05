@@ -3752,21 +3752,20 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 
     function getDates(startDate, endDate) {
       let dates = [];
-      var currentDate = startDate;
+      let currentDate = startDate;
 
       while (currentDate <= endDate) {
         dates.push(new Date(currentDate));
         currentDate = currentDate.addDays(1);
       }
 
-      console.log("did it work?", dates);
+      return dates;
     }
 
     getDates(this.state.startDate, this.state.endDate);
     this.props.addToCart({
       superheroId: this.props.superhero.superhero.id,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
+      bookedDates: getDates(this.state.startDate, this.state.endDate),
       days: this.state.days
     });
     this.setState({

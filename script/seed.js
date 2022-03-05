@@ -65,7 +65,7 @@ function createItemizedOrders(heroes, orders) {
   return [
     {
       days: 8,
-      startDate: new Date(Date.UTC(2022, 0, 12)),
+      bookedDates: [new Date(Date.UTC(2022, 0, 12))],
       endDate: new Date(Date.UTC(2022, 0, 20)),
       subtotal: 480,
       superheroId: heroes[0].id,
@@ -73,27 +73,10 @@ function createItemizedOrders(heroes, orders) {
     },
     {
       days: 10,
-      startDate: new Date(Date.UTC(2022, 1, 10)),
-      endDate: new Date(Date.UTC(2022, 1, 20)),
+      bookedDates: [new Date(Date.UTC(2022, 0, 12))],
       subtotal: 1000,
       superheroId: heroes[1].id,
       orderId: orders[1].id,
-    },
-    {
-      days: 10,
-      startDate: new Date(Date.UTC(2022, 3, 10)),
-      endDate: new Date(Date.UTC(2022, 3, 20)),
-      subtotal: 1000,
-      superheroId: heroes[3].id,
-      orderId: orders[2].id,
-    },
-    {
-      days: 10,
-      startDate: new Date(Date.UTC(2022, 3, 10)),
-      endDate: new Date(Date.UTC(2022, 3, 20)),
-      subtotal: 1000,
-      superheroId: heroes[2].id,
-      orderId: orders[2].id,
     }
   ];
 }

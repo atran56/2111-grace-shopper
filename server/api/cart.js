@@ -37,8 +37,7 @@ router.post("/", requireToken, async (req, res, next) => {
       //creating the new ItemizedOrder instance (new cart item)
       const newCartItem = await ItemizedOrder.create({
         days: req.body.data.days,
-        startDate: req.body.data.startDate,
-        endDate: req.body.data.endDate,
+        bookedDates: req.body.data.bookedDates,
         subtotal: req.body.data.days * hero.cost,
         orderId: cart[0].id,
         superheroId: hero.id,

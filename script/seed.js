@@ -1,8 +1,9 @@
 "use strict";
 
+const { user } = require("pg/lib/defaults");
 const {
   db,
-  models: { User, Superhero, Order, ItemizedOrder },
+  models: { User, Superhero, Order, ItemizedOrder, Reservation },
 } = require("../server/db");
 
 /**
@@ -30,6 +31,11 @@ const seed = async () => {
     await Promise.all(
       createItemizedOrders(heroes, orders).map(itemizedOrder => {
         return ItemizedOrder.create(itemizedOrder);
+      })
+    );
+    await Promise.all(
+      createReservations(heroes, users).map(reservation => {
+        return Reservation.create(reservation);
       })
     );
   } catch (err) {
@@ -92,6 +98,21 @@ function createItemizedOrders(heroes, orders) {
   ];
 }
 
+function createReservations(heroes, users) {
+  return [
+    {
+      bookedDates: [Date.UTC(2022, 4, 10), Date.UTC(2022, 4, 11), Date.UTC(2022, 4, 12)],
+      superheroId: heroes[0].id,
+      userId: users[0].id,
+    },
+    {
+      bookedDates: [Date.UTC(2022, 4, 10), Date.UTC(2022, 4, 11), Date.UTC(2022, 4, 12)],
+      superheroId: heroes[1].id,
+      userId: users[0].id,
+    }
+  ];
+}
+
 function createOrders(users) {
   return [
     {
@@ -123,7 +144,6 @@ function createHeroes() {
       universe: "Marvel Comics",
       image: "https://www.superherodb.com/pictures2/portraits/10/100/1285.jpg",
       strengths: "Power, Strength",
-      bookedDates: [new Date(2022, 5, 2), new Date(2022, 5, 10)],
       cost: 400,
     },
     {

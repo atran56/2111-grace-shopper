@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { fetchOrder } from "../store/order"
-import { createOrder } from "../store/orders"
 import { completeOrder } from "../store/order"
 import { Link } from "react-router-dom";
 import { fetchCart } from "../store/cart";
@@ -17,32 +16,25 @@ class CheckoutForm extends React.Component {
   }
 
   componentDidMount() {
-    console.log("CHECKOUT COMPONENT MOUNTING. this.props: ", this.props)
     this.props.fetchOrder(this.props.userId)
     this.props.fetchCart();
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log('THIS.PROPS.ORDER FROM HANDLESUBMIT: ', this.props.order)
     this.props.completeOrder({
       id: this.props.order.data.id,
       userId: this.props.order.data.userId,
       checkOut: true,
       totalDays: this.props.order.data.totalDays
     });
-    this.props.createOrder({
-      orderId: this.props.order.data.id,
-      totalDays: this.props.order.data.totalDays,
-      userId: this.props.userId,
-      checkOut: false
-    })
   }
 
   render() {
     if (this.props.cart.loading) {
       return <p>Data is loading...</p>;
     }
+    console.log("here",this.props.cart.cart)
     return (
         <div className="container">
           <div className="row mt-4">
@@ -163,13 +155,12 @@ class CheckoutForm extends React.Component {
 }
 
 const mapState = state => {
-  console.log("***STATE.AUTH:", state.auth)
   return {
     userId: state.auth.id,
     order: state.order,
-      cart: state.cart,
-      loading: state.loading,
-      superheroes: state.superheroes,
+    cart: state.cart,
+    loading: state.loading,
+    superheroes: state.superheroes,
   }
 }
 
@@ -177,8 +168,7 @@ const mapDispatch = (dispatch, {history}) => {
   return {
     fetchCart: () => dispatch(fetchCart()),
     fetchOrder: (id) => dispatch(fetchOrder(id)),
-    completeOrder: (order) => dispatch(completeOrder(order, history)),
-    createOrder: (order) => dispatch(createOrder(order)),
+    completeOrder: (order) => dispatch(completeOrder(order, history))
   };
 };
 

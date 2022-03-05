@@ -5,9 +5,12 @@ const ItemizedOrder = db.define("itemizedOrder", {
     days: {
       type: Sequelize.INTEGER,
     },
-    bookedDates: {
-      type: Sequelize.ARRAY(Sequelize.DATEONLY)
-    },
+    startDate: {
+      type: Sequelize.DATEONLY
+  },
+  endDate: {
+    type: Sequelize.DATEONLY
+},
     subtotal: {
       type: Sequelize.INTEGER,
     },

@@ -29,11 +29,6 @@ const seed = async () => {
       })
     );
     await Promise.all(
-      createItemizedOrders(heroes, orders).map(itemizedOrder => {
-        return ItemizedOrder.create(itemizedOrder);
-      })
-    );
-    await Promise.all(
       createReservations(heroes, users).map(reservation => {
         return Reservation.create(reservation);
       })
@@ -61,35 +56,23 @@ function createUsers() {
   ];
 }
 
-function createItemizedOrders(heroes, orders) {
-  return [
-    {
-      days: 8,
-      bookedDates: [new Date(Date.UTC(2022, 0, 12))],
-      endDate: new Date(Date.UTC(2022, 0, 20)),
-      subtotal: 480,
-      superheroId: heroes[0].id,
-      orderId: orders[0].id,
-    },
-    {
-      days: 10,
-      bookedDates: [new Date(Date.UTC(2022, 0, 12))],
-      subtotal: 1000,
-      superheroId: heroes[1].id,
-      orderId: orders[1].id,
-    }
-  ];
-}
-
 function createReservations(heroes, users) {
   return [
     {
-      bookedDates: [Date.UTC(2022, 4, 10), Date.UTC(2022, 4, 11), Date.UTC(2022, 4, 12)],
+      startDate: Date.UTC(2022, 4, 10),
+      endDate: Date.UTC(2022, 4, 12),
       superheroId: heroes[0].id,
       userId: users[0].id,
     },
     {
-      bookedDates: [Date.UTC(2022, 4, 10), Date.UTC(2022, 4, 11), Date.UTC(2022, 4, 12)],
+      startDate: Date.UTC(2022, 7, 10),
+      endDate: Date.UTC(2022, 7, 12),
+      superheroId: heroes[0].id,
+      userId: users[0].id,
+    },
+    {
+      startDate: Date.UTC(2022, 4, 10),
+      endDate: Date.UTC(2022, 4, 12),
       superheroId: heroes[1].id,
       userId: users[0].id,
     }

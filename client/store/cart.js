@@ -27,6 +27,13 @@ const updateCartItem = (item) => {
   };
 };
 
+
+
+//UPDATE!!!!!! NEED TO UPDATE TO NEW BOOKEDDATES FIELD!!!!!!!!!!!!
+
+
+
+
 const defaultCart = '{"totalDays":0, "checkOut":false, "itemizedOrders":[]}';
 
 // Thunks

@@ -2970,9 +2970,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/order */ "./client/store/order.js");
-/* harmony import */ var _store_orders__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/orders */ "./client/store/orders.js");
-/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
-
+/* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
 
 
 
@@ -2991,25 +2989,17 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   componentDidMount() {
-    console.log("CHECKOUT COMPONENT MOUNTING. this.props: ", this.props);
     this.props.fetchOrder(this.props.userId);
     this.props.fetchCart();
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    console.log('THIS.PROPS.ORDER FROM HANDLESUBMIT: ', this.props.order);
     this.props.completeOrder({
       id: this.props.order.data.id,
       userId: this.props.order.data.userId,
       checkOut: true,
       totalDays: this.props.order.data.totalDays
-    });
-    this.props.createOrder({
-      orderId: this.props.order.data.id,
-      totalDays: this.props.order.data.totalDays,
-      userId: this.props.userId,
-      checkOut: false
     });
   }
 
@@ -3018,6 +3008,7 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     }
 
+    console.log("here", this.props.cart.cart);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3259,7 +3250,6 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 }
 
 const mapState = state => {
-  console.log("***STATE.AUTH:", state.auth);
   return {
     userId: state.auth.id,
     order: state.order,
@@ -3273,10 +3263,9 @@ const mapDispatch = (dispatch, {
   history
 }) => {
   return {
-    fetchCart: () => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_4__.fetchCart)()),
+    fetchCart: () => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_3__.fetchCart)()),
     fetchOrder: id => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.fetchOrder)(id)),
-    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order, history)),
-    createOrder: order => dispatch((0,_store_orders__WEBPACK_IMPORTED_MODULE_3__.createOrder)(order))
+    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order, history))
   };
 };
 
@@ -3994,7 +3983,8 @@ const updateCartItem = item => {
     type: UPDATE_CART_ITEM,
     item
   };
-};
+}; //UPDATE!!!!!! NEED TO UPDATE TO NEW BOOKEDDATES FIELD!!!!!!!!!!!!
+
 
 const defaultCart = '{"totalDays":0, "checkOut":false, "itemizedOrders":[]}'; // Thunks
 

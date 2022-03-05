@@ -40,24 +40,10 @@ export class SingleSuperHero extends React.Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    Date.prototype.addDays = function(days) {
-      var date = new Date(this.valueOf());
-      date.setDate(date.getDate() + days);
-      return date;
-    }
-    function getDates(startDate, endDate) {
-      let dates = [];
-      let currentDate = startDate;
-      while (currentDate <= endDate) {
-          dates.push(new Date (currentDate));
-          currentDate = currentDate.addDays(1);
-      }
-      return dates
-  }
-  getDates(this.state.startDate, this.state.endDate)
       this.props.addToCart({
         superheroId: this.props.superhero.superhero.id,
-        bookedDates: getDates(this.state.startDate, this.state.endDate),
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
         days: this.state.days,
       });
       this.setState({

@@ -15,8 +15,10 @@ ItemizedOrder.belongsTo(Order)
 Order.hasMany(ItemizedOrder)
 Superhero.belongsToMany(Order, { through: ItemizedOrder })
 Order.belongsToMany(Superhero, { through: ItemizedOrder })
-Superhero.belongsToMany(User, { through: Reservation })
-User.belongsToMany(Superhero, { through: Reservation })
+Reservation.belongsTo(Order);
+Order.hasMany(Reservation);
+Reservation.belongsTo(User);
+User.hasMany(Reservation);
 
 
 module.exports = {

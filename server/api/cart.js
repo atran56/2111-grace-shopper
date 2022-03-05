@@ -30,14 +30,15 @@ router.get("/", requireToken, async (req, res, next) => {
 //add item to cart
 router.post("/", requireToken, async (req, res, next) => {
   try {
-      //finding the open cart that matches up to the userID (we will need to change this when we get the JWT token)
+      //finding the open cart that matches up to the userID 
       const cart = await Order.findOrCreate({ where: { userId: req.user.id, checkOut: false } });
       //finding the right superhero
       const hero = await Superhero.findByPk(req.body.data.superheroId);
       //creating the new ItemizedOrder instance (new cart item)
       const newCartItem = await ItemizedOrder.create({
         days: req.body.data.days,
-        bookedDates: req.body.data.bookedDates,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate,
         subtotal: req.body.data.days * hero.cost,
         orderId: cart[0].id,
         superheroId: hero.id,

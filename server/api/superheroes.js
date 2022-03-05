@@ -50,15 +50,4 @@ router.delete("/:id", async (req, res, next) => {
   }
 });
 
-//create patch route to edit the datesbooked field once an order is complete
-router.patch("/booking/:id", async (req, res, next) => {
-  try {
-    const bookedSuperhero = await Superhero.findByPk(req.params.id);
-    const updatedSuperhero = await bookedSuperhero.update({bookedDates: bookedSuperhero.dataValues.bookedDates.push(req.body[1])});
-    res.send(updatedSuperhero);
-  }
-  catch (error) {
-    next(error)
-  }
-})
 module.exports = router;

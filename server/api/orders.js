@@ -38,7 +38,7 @@ router.patch("/", async (req, res, next) => {
   try {
     const order = await Order.findOne({ where: { 
       userId: req.body.userId,
-    checkOut: false } });
+      checkOut: false } });
     await order.update({checkOut: req.body.checkOut})
     res.status(200).send(order);
   }

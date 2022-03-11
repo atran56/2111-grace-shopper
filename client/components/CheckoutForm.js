@@ -8,9 +8,6 @@ import { createReservation } from "../store/reservations";
 class CheckoutForm extends React.Component {
   constructor() {
     super();
-    this.state = {
-      checkOut: false
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,12 +22,10 @@ class CheckoutForm extends React.Component {
       orderId: this.props.cart.cart.id,
       cartItems: this.props.cart.cart.itemizedOrders
     })
-    // this.props.completeOrder({
-    //   id: this.props.order.data.id,
-    //   userId: this.props.order.data.userId,
-    //   checkOut: true,
-    //   totalDays: this.props.order.data.totalDays,
-    // });
+    this.props.completeOrder({
+      userId: this.props.userId,
+      checkOut: true,
+    });
   }
 
   render() {

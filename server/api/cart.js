@@ -9,7 +9,7 @@ const { updateOrder, orderBelongsToUser } = require("./helper");
 router.get("/", requireToken, async (req, res, next) => {
   const user = req.user
   try {
-    const userOrder = await Order.findAll({
+    const userOrder = await Order.findOrCreate({
       //eager loading to include the itemizedOrders
       include: {
         model: ItemizedOrder,

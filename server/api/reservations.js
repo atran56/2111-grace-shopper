@@ -23,11 +23,9 @@ router.get("/:superheroId", async (req, res, next) => {
       }
   });
 
-
 router.post("/", async (req, res, next) => {
   try {
     const reservations = req.body.cartItems;
-    console.log("API HERE", reservations)
     reservations.forEach(async reservation => {
       await Reservation.create({orderId: reservation.orderId, superheroId: reservation.superheroId, userId: req.body.userId, startDate: reservation.startDate, endDate: reservation.endDate})
     })

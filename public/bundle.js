@@ -2982,9 +2982,6 @@ __webpack_require__.r(__webpack_exports__);
 class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
-    this.state = {
-      checkOut: false
-    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -2998,12 +2995,11 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       userId: this.props.userId,
       orderId: this.props.cart.cart.id,
       cartItems: this.props.cart.cart.itemizedOrders
-    }); // this.props.completeOrder({
-    //   id: this.props.order.data.id,
-    //   userId: this.props.order.data.userId,
-    //   checkOut: true,
-    //   totalDays: this.props.order.data.totalDays,
-    // });
+    });
+    this.props.completeOrder({
+      userId: this.props.userId,
+      checkOut: true
+    });
   }
 
   render() {
@@ -4266,10 +4262,7 @@ const completeOrder = (order, history) => {
   return async dispatch => {
     const {
       data
-    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders", order);
-    const {
-      reservation
-    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/reservations/", order);
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/orders", order);
     history.push("/confirmation");
     dispatch(_completedOrder(data));
   };

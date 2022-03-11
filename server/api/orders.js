@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 const {
-  models: { Order },
+  models: { Order, ItemizedOrder },
 } = require("../db");
 
 module.exports = router;
@@ -9,7 +9,12 @@ module.exports = router;
 router.get("/:id", async (req, res, next) => {
   try {
     console.log("REQ.PARAMS: ", req.params)
-    const order = await Order.findOne({ where: { 
+    const order = await Order.findOne({
+      include: {
+        model: ItemizedOrder,
+        as: "itemizedOrders",
+      },
+      where: { 
       userId: req.params.id,
     checkOut: false } });
     res.json(order);
@@ -19,24 +24,22 @@ router.get("/:id", async (req, res, next) => {
 })
 
 // After new user creation and checkout: create new empty order
-router.post("/", async (req, res, next) => {
-  try {
-    const newOrder = await Order.create(req.body);
-    res.status(201).send(newOrder);
-  } catch (err) {
-    next(err);
-  }
-});
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const newOrder = await Order.create(req.body);
+//     res.status(201).send(newOrder);
+//   } catch (err) {
+//     next(err);
+//   }
+// });
 
 // After checkout: update order status to TRUE
-router.put("/", async (req, res, next) => {
+router.patch("/", async (req, res, next) => {
   try {
-    console.log("**REQ.BODY FROM REDUX", req.body)
     const order = await Order.findOne({ where: { 
       userId: req.body.userId,
     checkOut: false } });
-    console.log("ORDER HERE", order)
-    await order.update(req.body)
+    await order.update({checkOut: req.body.checkOut})
     res.status(200).send(order);
   }
   catch (error) {

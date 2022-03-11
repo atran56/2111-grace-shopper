@@ -9,8 +9,9 @@ import singleSuperHero from "./singleSuperhero";
 import users from "./users"
 import orders from "./orders"
 import order from "./order"
+import reservations from "./reservations";
 
-const reducer = combineReducers({ auth, superheroes, singleSuperHero, cart, users, orders, order });
+const reducer = combineReducers({ auth, superheroes, singleSuperHero, cart, users, orders, order, reservations });
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

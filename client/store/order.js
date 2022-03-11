@@ -33,6 +33,7 @@ export const fetchOrder = (id) => {
 export const completeOrder = (order, history) => {
     return async (dispatch) => {
       const { data } = await axios.put("/api/orders", order);
+      const { reservation } = await axios.post("/api/reservations/", order);
       history.push("/confirmation")
       dispatch(_completedOrder(data));
     };

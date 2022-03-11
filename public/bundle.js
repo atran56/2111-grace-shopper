@@ -2971,6 +2971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store_order__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/order */ "./client/store/order.js");
 /* harmony import */ var _store_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/cart */ "./client/store/cart.js");
+/* harmony import */ var _store_reservations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/reservations */ "./client/store/reservations.js");
 
 
 
@@ -2982,25 +2983,27 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   constructor() {
     super();
     this.state = {
-      userId: 0,
       checkOut: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchOrder(this.props.userId);
     this.props.fetchCart();
   }
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.completeOrder({
-      id: this.props.order.data.id,
-      userId: this.props.order.data.userId,
-      checkOut: true,
-      totalDays: this.props.order.data.totalDays
-    });
+    this.props.createReservation({
+      userId: this.props.userId,
+      orderId: this.props.cart.cart.id,
+      cartItems: this.props.cart.cart.itemizedOrders
+    }); // this.props.completeOrder({
+    //   id: this.props.order.data.id,
+    //   userId: this.props.order.data.userId,
+    //   checkOut: true,
+    //   totalDays: this.props.order.data.totalDays,
+    // });
   }
 
   render() {
@@ -3008,7 +3011,7 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "Data is loading...");
     }
 
-    console.log("here", this.props.cart.cart);
+    console.log(this.props);
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
       className: "container"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -3252,7 +3255,6 @@ class CheckoutForm extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
 const mapState = state => {
   return {
     userId: state.auth.id,
-    order: state.order,
     cart: state.cart,
     loading: state.loading,
     superheroes: state.superheroes
@@ -3264,8 +3266,8 @@ const mapDispatch = (dispatch, {
 }) => {
   return {
     fetchCart: () => dispatch((0,_store_cart__WEBPACK_IMPORTED_MODULE_3__.fetchCart)()),
-    fetchOrder: id => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.fetchOrder)(id)),
-    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order, history))
+    completeOrder: order => dispatch((0,_store_order__WEBPACK_IMPORTED_MODULE_2__.completeOrder)(order, history)),
+    createReservation: cart => dispatch((0,_store_reservations__WEBPACK_IMPORTED_MODULE_4__.createReservation)(cart))
   };
 };
 
@@ -4171,10 +4173,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.logout),
 /* harmony export */   "me": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.me)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./client/store/auth.js");
 /* harmony import */ var _superheroes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./superheroes */ "./client/store/superheroes.js");
@@ -4183,6 +4185,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./users */ "./client/store/users.js");
 /* harmony import */ var _orders__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./orders */ "./client/store/orders.js");
 /* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./order */ "./client/store/order.js");
+/* harmony import */ var _reservations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./reservations */ "./client/store/reservations.js");
 
 
 
@@ -4194,19 +4197,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_9__.combineReducers)({
+
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_10__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
   superheroes: _superheroes__WEBPACK_IMPORTED_MODULE_3__["default"],
   singleSuperHero: _singleSuperhero__WEBPACK_IMPORTED_MODULE_5__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_4__["default"],
   users: _users__WEBPACK_IMPORTED_MODULE_6__["default"],
   orders: _orders__WEBPACK_IMPORTED_MODULE_7__["default"],
-  order: _order__WEBPACK_IMPORTED_MODULE_8__["default"]
+  order: _order__WEBPACK_IMPORTED_MODULE_8__["default"],
+  reservations: _reservations__WEBPACK_IMPORTED_MODULE_9__["default"]
 });
-const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_9__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_10__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_10__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_11__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_9__.createStore)(reducer, middleware);
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_10__.createStore)(reducer, middleware);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 
@@ -4262,6 +4267,9 @@ const completeOrder = (order, history) => {
     const {
       data
     } = await axios__WEBPACK_IMPORTED_MODULE_0___default().put("/api/orders", order);
+    const {
+      reservation
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/reservations/", order);
     history.push("/confirmation");
     dispatch(_completedOrder(data));
   };
@@ -4326,6 +4334,53 @@ function orders(state = [], action) {
       return state;
   }
 }
+
+/***/ }),
+
+/***/ "./client/store/reservations.js":
+/*!**************************************!*\
+  !*** ./client/store/reservations.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "createReservation": () => (/* binding */ createReservation),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+ //TYPES
+
+const CREATE_RESERVATION = "CREATE_RESERVATION"; //ACTIONS
+
+const _createReservation = reservation => {
+  return {
+    type: CREATE_RESERVATION,
+    reservation
+  };
+}; //THUNKS
+
+
+const createReservation = cart => {
+  return async dispatch => {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/reservations", cart);
+    dispatch(_createReservation(data));
+  };
+}; //REDUCER
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((state = {}, action) => {
+  switch (action.type) {
+    case CREATE_RESERVATION:
+      return action.reservation;
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 

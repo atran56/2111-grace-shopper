@@ -24,15 +24,18 @@ router.get("/:superheroId", async (req, res, next) => {
   });
 
 
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const bookedDates = {type: 'bookedDates', dates: req.body.bookedDates}
-//     await Reservation.create({superheroId: req.body.superheroId, userId: req.body.userId, bookedDates: bookedDates});
-//     res.status(200).send();
-//   }
-//   catch (error) {
-//     next(error)
-//   }
-// })
+router.post("/", async (req, res, next) => {
+  try {
+    const reservations = req.body.cartItems;
+    console.log("API HERE", reservations)
+    reservations.forEach(async reservation => {
+      await Reservation.create({orderId: reservation.orderId, superheroId: reservation.superheroId, userId: req.body.userId, startDate: reservation.startDate, endDate: reservation.endDate})
+    })
+    res.status(200).send();
+  }
+  catch (error) {
+    next(error)
+  }
+})
 
 module.exports = router;

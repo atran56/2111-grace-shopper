@@ -3962,8 +3962,7 @@ const updateCartItem = item => {
     type: UPDATE_CART_ITEM,
     item
   };
-}; //UPDATE!!!!!! NEED TO UPDATE TO NEW BOOKEDDATES FIELD!!!!!!!!!!!!
-
+};
 
 const defaultCart = '{"totalDays":0, "checkOut":false, "itemizedOrders":[]}'; // Thunks
 
@@ -4169,19 +4168,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "logout": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.logout),
 /* harmony export */   "me": () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_2__.me)
 /* harmony export */ });
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
+/* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./client/store/auth.js");
 /* harmony import */ var _superheroes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./superheroes */ "./client/store/superheroes.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cart */ "./client/store/cart.js");
 /* harmony import */ var _singleSuperhero__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./singleSuperhero */ "./client/store/singleSuperhero.js");
 /* harmony import */ var _users__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./users */ "./client/store/users.js");
-/* harmony import */ var _orders__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./orders */ "./client/store/orders.js");
-/* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./order */ "./client/store/order.js");
-/* harmony import */ var _reservations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./reservations */ "./client/store/reservations.js");
+/* harmony import */ var _order__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./order */ "./client/store/order.js");
+/* harmony import */ var _reservations__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reservations */ "./client/store/reservations.js");
 
 
 
@@ -4193,21 +4191,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_10__.combineReducers)({
+const reducer = (0,redux__WEBPACK_IMPORTED_MODULE_9__.combineReducers)({
   auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
   superheroes: _superheroes__WEBPACK_IMPORTED_MODULE_3__["default"],
   singleSuperHero: _singleSuperhero__WEBPACK_IMPORTED_MODULE_5__["default"],
   cart: _cart__WEBPACK_IMPORTED_MODULE_4__["default"],
   users: _users__WEBPACK_IMPORTED_MODULE_6__["default"],
-  orders: _orders__WEBPACK_IMPORTED_MODULE_7__["default"],
-  order: _order__WEBPACK_IMPORTED_MODULE_8__["default"],
-  reservations: _reservations__WEBPACK_IMPORTED_MODULE_9__["default"]
+  order: _order__WEBPACK_IMPORTED_MODULE_7__["default"],
+  reservations: _reservations__WEBPACK_IMPORTED_MODULE_8__["default"]
 });
-const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_10__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_11__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
+const middleware = (0,redux_devtools_extension__WEBPACK_IMPORTED_MODULE_1__.composeWithDevTools)((0,redux__WEBPACK_IMPORTED_MODULE_9__.applyMiddleware)(redux_thunk__WEBPACK_IMPORTED_MODULE_10__["default"], (0,redux_logger__WEBPACK_IMPORTED_MODULE_0__.createLogger)({
   collapsed: true
 })));
-const store = (0,redux__WEBPACK_IMPORTED_MODULE_10__.createStore)(reducer, middleware);
+const store = (0,redux__WEBPACK_IMPORTED_MODULE_9__.createStore)(reducer, middleware);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 
@@ -4275,53 +4271,6 @@ function order(state = {}, action) {
 
     case COMPLETE_ORDER:
       return action.order;
-
-    default:
-      return state;
-  }
-}
-
-/***/ }),
-
-/***/ "./client/store/orders.js":
-/*!********************************!*\
-  !*** ./client/store/orders.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "createOrder": () => (/* binding */ createOrder),
-/* harmony export */   "default": () => (/* binding */ orders)
-/* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
- //TYPES
-
-const CREATE_ORDER = "CREATE_ORDER"; //ACTIONS
-
-const _createdOrder = order => {
-  return {
-    type: CREATE_ORDER,
-    order
-  };
-}; //THUNKS
-
-
-const createOrder = order => {
-  return async dispatch => {
-    const {
-      data
-    } = await axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/orders", order);
-    dispatch(_createdOrder(data));
-  };
-}; //REDUCER
-
-function orders(state = [], action) {
-  switch (action.type) {
-    case CREATE_ORDER:
-      return [...state, action.order];
 
     default:
       return state;

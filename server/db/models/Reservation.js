@@ -13,6 +13,7 @@ const Reservation = db.define("reservation", {
     },
 })
 Reservation.getDates = function(startDate, endDate) {
+    console.log(startDate, endDate)
     var start = new Date(startDate);
     var end = new Date(endDate);
     Date.prototype.addDays = function(days) {

@@ -11,7 +11,7 @@ router.get("/:superheroId", async (req, res, next) => {
           reservations.forEach(reservation => {
             dates.push(Reservation.getDates(reservation.startDate, reservation.endDate))
           })
-          dates = dates.join().split(",");
+          dates = [].concat.apply([], dates);
         if (dates.length >= 1) {
             res.json({bookedDates: dates});
         }

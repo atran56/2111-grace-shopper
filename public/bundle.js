@@ -2822,6 +2822,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
   }
 
   render() {
+    console.log(this.props.cart);
     const token = window.localStorage.getItem('token');
 
     if (this.props.cart.loading) {
@@ -2857,11 +2858,14 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       className: "col-sm-4"
     }, "Superhero"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
       scope: "col",
-      className: "col-sm-3"
+      className: "col-sm-2"
     }, "Price per Day"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
       scope: "col",
-      className: "col-sm-3"
-    }, "Number of Days Booked"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+      className: "col-sm-2"
+    }, "Start Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
+      scope: "col",
+      className: "col-sm-2"
+    }, "End Date"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
       scope: "col",
       className: "col-sm-1"
     }, "Total"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("th", {
@@ -2878,32 +2882,7 @@ class Cart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         height: "150px",
         borderRadius: "50%"
       }
-    }), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", this.props.cart.superheroes[item.superheroId].cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-      className: this.props.cart.superheroes[item.superheroId].id,
-      onChange: this.handleChange
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: item.days
-    }, item.days), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "1"
-    }, "1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "2"
-    }, "2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "3"
-    }, "3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "4"
-    }, "4"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "5"
-    }, "5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "6"
-    }, "6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "7"
-    }, "7"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "8"
-    }, "8"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "9"
-    }, "9"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
-      value: "10"
-    }, "10"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", parseFloat(item.subtotal).toFixed(2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    }), " ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", this.props.cart.superheroes[item.superheroId].cost), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, item.startDate), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, item.endDate.toString()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, "$", parseFloat(item.subtotal).toFixed(2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
       type: "button",
       onClick: () => this.props.deleteItem({
         orderId: item.orderId,
@@ -4034,7 +4013,6 @@ const deleteItem = item => {
 const addToCart = item => {
   return async dispatch => {
     const token = window.localStorage.getItem('token');
-    console.log("?", token);
 
     if (!token) {
       const {

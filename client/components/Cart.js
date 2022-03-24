@@ -44,6 +44,7 @@ class Cart extends React.Component {
     })
   }
   render() {
+    console.log(this.props.cart)
     const token = window.localStorage.getItem('token');
     if (this.props.cart.loading) {
       return <p>Data is loading...</p>
@@ -76,11 +77,14 @@ class Cart extends React.Component {
                 <th scope="col" className="col-sm-4">
                   Superhero
                 </th>
-                <th scope="col" className="col-sm-3">
+                <th scope="col" className="col-sm-2">
                   Price per Day
                 </th>
-                <th scope="col" className="col-sm-3">
-                  Number of Days Booked
+                <th scope="col" className="col-sm-2">
+                  Start Date
+                </th>
+                <th scope="col" className="col-sm-2">
+                  End Date
                 </th>
                 <th scope="col" className="col-sm-1">
                   Total
@@ -105,26 +109,8 @@ class Cart extends React.Component {
                     /> </Link >
                   </th>
                   <td>${this.props.cart.superheroes[item.superheroId].cost}</td>
-                  <td>
-                    <select
-                      className={
-                        this.props.cart.superheroes[item.superheroId].id
-                      }
-                      onChange={this.handleChange}
-                    >
-                      <option value={item.days}>{item.days}</option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
-                    </select>
-                  </td>
+                  <td>{item.startDate}</td>
+                  <td>{item.endDate.toString()}</td>
                   <td>${parseFloat(item.subtotal).toFixed(2)}</td>
                   <td>
                     <button

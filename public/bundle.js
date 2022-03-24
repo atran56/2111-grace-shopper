@@ -3543,7 +3543,7 @@ const Navbar = ({
   isAdmin
 }) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h3", {
   className: "title"
-}, "Rent Your Superhero!"), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
+}, "Rent A Superhero!"), isLoggedIn ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("nav", {
   className: "navbar navbar-expand-sm navbar-light bg-light"
 }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
   className: "container-fluid"
@@ -3786,6 +3786,7 @@ class SingleSuperHero extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
       ranges: [selectionRange],
       minDate: new Date(),
       disabledDates: this.props.superhero.superhero.bookedDates ? this.props.superhero.superhero.bookedDates.map(date => {
+        console.log(new Date(date));
         return new Date(date);
       }) : [],
       rangeColors: ["#0c6efd"],
@@ -4031,9 +4032,9 @@ const deleteItem = item => {
   };
 };
 const addToCart = item => {
-  console.log("?", item);
   return async dispatch => {
     const token = window.localStorage.getItem('token');
+    console.log("?", token);
 
     if (!token) {
       const {

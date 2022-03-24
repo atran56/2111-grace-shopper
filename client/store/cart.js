@@ -87,9 +87,9 @@ export const deleteItem = (item) => {
   };
 };
 export const addToCart = (item) => {
-  console.log("?", item);
   return async dispatch => {
     const token = window.localStorage.getItem('token');
+    console.log("?", token);
     if (!token) {
         const {data: superhero} = await axios.get(`/api/superheroes/${item.superheroId}`);
         const days = parseInt(item.days)

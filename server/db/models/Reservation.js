@@ -3,17 +3,16 @@ const db = require("../db");
 
 const Reservation = db.define("reservation", {
     startDate: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
     },
     endDate: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
     },
     superheroId: {
         type: Sequelize.INTEGER
     },
 })
 Reservation.getDates = function(startDate, endDate) {
-    console.log(startDate, endDate)
     var start = new Date(startDate);
     var end = new Date(endDate);
     Date.prototype.addDays = function(days) {

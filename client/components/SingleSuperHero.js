@@ -4,7 +4,6 @@ import { addToCart } from "../store/cart";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { DateRange } from 'react-date-range';
-import moment from 'moment-timezone'
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 

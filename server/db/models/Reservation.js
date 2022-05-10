@@ -12,6 +12,9 @@ const Reservation = db.define("reservation", {
         type: Sequelize.INTEGER
     },
 })
+
+//this .getDates method was created to return an array of all the dates between startDate and endDate
+//we need this array in order to display each superhero's booked/disabled dates on their calendar
 Reservation.getDates = function(startDate, endDate) {
     var start = new Date(startDate);
     var end = new Date(endDate);
